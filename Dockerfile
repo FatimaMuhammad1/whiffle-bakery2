@@ -12,5 +12,10 @@ COPY . .
 # Expose port (Back4App requires the app to listen on the port defined by the $PORT env var or default to 8080)
 EXPOSE 8080
 
-# Run the FastAPI application
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "${PORT:-8080}"]
+# Add a shell script to resolve $PORT and run uvicorn
+RUN echo '#!/bin/sh' > /start.sh \
+    && echo 'exec uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8080}' >> /start.sh \
+    && chmod +x /start.sh
+
+# Use the shell script as the entrypoint
+CMD ["/start.sh"]
