@@ -14,7 +14,8 @@ EXPOSE 8080
 
 # Add a shell script to resolve $PORT and run uvicorn
 RUN echo '#!/bin/sh' > /start.sh \
-    && echo 'exec uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8080}' >> /start.sh \
+    && echo 'PORT=${PORT:-8080}' >> /start.sh \
+    && echo 'exec uvicorn app.main:app --host 0.0.0.0 --port $PORT' >> /start.sh \
     && chmod +x /start.sh
 
 # Use the shell script as the entrypoint
