@@ -1,0 +1,199 @@
+/* ==================== GLOBAL STYLES ==================== */
+/* Tailwind directives, font imports, CSS variables, and base styles */
+/* ========================================================= */
+
+@import '@fontsource/cormorant-garamond/600.css';
+@import '@fontsource/cormorant-garamond/700.css';
+@import '@fontsource/manrope/400.css';
+@import '@fontsource/manrope/500.css';
+@import '@fontsource/manrope/600.css';
+@import '@fontsource/manrope/700.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---- CSS Custom Properties (Design Tokens) ---- */
+@layer base {
+  :root {
+    --background: 35 40% 98%;
+    --foreground: 20 20% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 20 20% 12%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 20 20% 12%;
+
+    --primary: 16 55% 42%;
+    --primary-foreground: 35 40% 98%;
+
+    --secondary: 35 50% 92%;
+    --secondary-foreground: 16 55% 30%;
+
+    --muted: 30 15% 92%;
+    --muted-foreground: 20 10% 45%;
+
+    --accent: 340 50% 80%;
+    --accent-foreground: 340 40% 25%;
+
+    --border: 30 15% 88%;
+    --input: 30 15% 88%;
+    --ring: 16 55% 42%;
+
+    --radius: 1.5rem;
+
+    /* Whiffle custom tokens (Static brand colors) */
+    --cream: 35 60% 94%;
+    --chocolate: 20 47% 24%;
+    --chocolate-light: 20 35% 35%;
+    --warm-brown: 16 55% 42%;
+    --soft-pink: 340 100% 86%;
+    --warm-bg: 35 40% 98%;
+
+    --font-heading: 'Cormorant Garamond', 'Times New Roman', serif;
+    --font-body: 'Manrope', 'Helvetica Neue', sans-serif;
+  }
+
+  .dark {
+    /* "Warm Cocoa & Rose" Theme */
+    --background: 20 30% 15%; 
+    --foreground: 35 45% 92%;
+
+    --card: 20 25% 20%;
+    --card-foreground: 35 45% 92%;
+
+    --popover: 20 25% 20%;
+    --popover-foreground: 35 45% 92%;
+
+    --primary: 15 60% 70%; 
+    --primary-foreground: 20 30% 15%;
+
+    --secondary: 20 20% 22%; 
+    --secondary-foreground: 15 60% 90%;
+
+    --muted: 20 15% 25%; 
+    --muted-foreground: 35 15% 70%;
+
+    --accent: 340 40% 55%;
+    --accent-foreground: 340 100% 98%;
+
+    --border: 20 20% 25%;
+    --input: 20 20% 25%;
+    --ring: 15 60% 70%;
+
+    /* Keep brand colors stable but allow them to adapt slightly if needed */
+    --chocolate-light: 20 25% 30%;
+    --warm-bg: 20 30% 15%;
+  }
+}
+
+/* ---- Base Element Styles ---- */
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html.dark {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body);
+    line-height: 1.72;
+    letter-spacing: 0;
+    font-weight: 500;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    background-image: radial-gradient(ellipse at 50% 0%, hsl(var(--primary) / 0.1) 0%, transparent 80%);
+    background-attachment: fixed;
+    transition: background-color 0.8s cubic-bezier(0.4, 0, 0.2, 1), 
+                color 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    font-weight: 600;
+  }
+
+  p, li, input, textarea, select, button {
+    font-family: var(--font-body);
+  }
+
+  h1, h2 {
+    font-weight: 700;
+  }
+
+  ::selection {
+    background: hsl(var(--primary) / 0.3);
+    color: hsl(var(--foreground));
+  }
+}
+
+/* ---- Utility Classes ---- */
+@layer utilities {
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: hsl(var(--primary) / 0.05);
+    border-radius: 8px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: hsl(var(--primary) / 0.2);
+    border-radius: 8px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary) / 0.4);
+  }
+
+  .flourish-border {
+    position: relative;
+  }
+
+  .flourish-border::before {
+    content: "";
+    position: absolute;
+    inset: 12px;
+    border: 1px solid hsl(var(--primary) / 0.15);
+    border-radius: 1.5rem;
+    pointer-events: none;
+  }
+
+  .warm-grain {
+    background-image:
+      radial-gradient(circle at 20% 20%, hsl(var(--accent) / 0.08) 0, transparent 30%),
+      radial-gradient(circle at 80% 0%, hsl(var(--secondary) / 0.3) 0, transparent 35%),
+      linear-gradient(180deg, hsl(var(--background)), hsl(var(--background)));
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.25em] text-primary;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .section-divider {
+    @apply w-24 h-1 bg-primary/20 rounded-full mx-auto my-12;
+  }
+}
+/* ==================== END GLOBAL STYLES ==================== */

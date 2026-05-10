@@ -1,0 +1,699 @@
+{
+  "info": {
+    "_postman_id": "whiffle-bakery-api-v1",
+    "name": "Whiffle Bakery API",
+    "description": "Full test suite for the Whiffle Bakery FastAPI backend.\n\n**Base URL:** `http://localhost:8000`\n\n**Auth flow:**\n1. `POST /auth/signup` → copy the `otp` from the response\n2. `POST /auth/verify-otp` → verify your email\n3. `POST /auth/login` → sets an HttpOnly cookie automatically\n4. All protected endpoints (`GET /auth/me`) use that cookie\n\n**Note:** Postman automatically stores and sends the `access_token` HttpOnly cookie once you log in.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000",
+      "type": "string"
+    },
+    {
+      "key": "api_v1",
+      "value": "{{base_url}}/api/v1",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "🏥 System",
+      "item": [
+        {
+          "name": "Root",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/",
+              "host": ["{{base_url}}"],
+              "path": [""]
+            },
+            "description": "Welcome message and docs link."
+          },
+          "response": []
+        },
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/health",
+              "host": ["{{base_url}}"],
+              "path": ["health"]
+            },
+            "description": "Returns DB + Redis connectivity status. Expect `status: ok` when both services are up."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "🔐 Auth",
+      "item": [
+        {
+          "name": "1. Signup",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const res = pm.response.json();",
+                  "if (res.otp) {",
+                  "    pm.collectionVariables.set('otp_code', res.otp);",
+                  "    pm.collectionVariables.set('user_email', pm.request.body ? JSON.parse(pm.request.body.raw).email : '');",
+                  "    console.log('OTP saved:', res.otp);",
+                  "}",
+                  "pm.test('Status 201', () => pm.response.to.have.status(201));"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"testuser@example.com\",\n  \"username\": \"testuser\",\n  \"password\": \"SecurePass123!\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{api_v1}}/auth/signup",
+              "host": ["{{api_v1}}"],
+              "path": ["auth", "signup"]
+            },
+            "description": "Register a new user.\n\n**Auto-saves:** `otp_code` and `user_email` collection variables for the next step.\n\nThe response includes the OTP code (demo mode — in production this would be emailed)."
+          },
+          "response": []
+        },
+        {
+          "name": "2. Verify OTP",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Has message', () => {",
+                  "    const res = pm.response.json();",
+                  "    pm.expect(res.message).to.include('verified');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{user_email}}\",\n  \"code\": \"{{otp_code}}\",\n  \"purpose\": \"email_verify\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{api_v1}}/auth/verify-otp",
+              "host": ["{{api_v1}}"],
+              "path": ["auth", "verify-otp"]
+            },
+            "description": "Verify the OTP sent during signup.\n\nUses `{{otp_code}}` and `{{user_email}}` saved from the Signup request.\n\n**purpose values:** `email_verify` | `password_reset`"
+          },
+          "response": []
+        },
+        {
+          "name": "3. Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Cookie set', () => {",
+                  "    const cookie = pm.cookies.get('access_token');",
+                  "    pm.expect(cookie).to.not.be.undefined;",
+                  "    console.log('Cookie received. Protected routes are now accessible.');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"testuser@example.com\",\n  \"password\": \"SecurePass123!\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{api_v1}}/auth/login",
+              "host": ["{{api_v1}}"],
+              "path": ["auth", "login"]
+            },
+            "description": "Authenticate and receive an HttpOnly `access_token` cookie.\n\nPostman automatically stores and sends this cookie on subsequent requests.\n\n⚠️ Make sure **\"Save cookies\"** is enabled in Postman settings."
+          },
+          "response": []
+        },
+        {
+          "name": "4. Get Current User (Protected)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Has user fields', () => {",
+                  "    const res = pm.response.json();",
+                  "    pm.expect(res).to.have.property('id');",
+                  "    pm.expect(res).to.have.property('email');",
+                  "    pm.expect(res).to.have.property('username');",
+                  "    pm.expect(res.is_verified).to.be.true;",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{api_v1}}/auth/me",
+              "host": ["{{api_v1}}"],
+              "path": ["auth", "me"]
+            },
+            "description": "Returns the authenticated user's profile.\n\n🔒 **Requires:** Valid `access_token` cookie (set automatically after Login)."
+          },
+          "response": []
+        },
+        {
+          "name": "5. Logout",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Logged out', () => {",
+                  "    const res = pm.response.json();",
+                  "    pm.expect(res.message).to.include('logged out');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{api_v1}}/auth/logout",
+              "host": ["{{api_v1}}"],
+              "path": ["auth", "logout"]
+            },
+            "description": "Clears the `access_token` HttpOnly cookie. After this, protected routes will return 401."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "🗂️ Categories",
+      "item": [
+        {
+          "name": "List All Categories",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Is array', () => {",
+                  "    pm.expect(pm.response.json()).to.be.an('array');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{api_v1}}/categories/",
+              "host": ["{{api_v1}}"],
+              "path": ["categories", ""]
+            },
+            "description": "Returns all product categories."
+          },
+          "response": []
+        },
+        {
+          "name": "Create Category",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 201', () => pm.response.to.have.status(201));",
+                  "const res = pm.response.json();",
+                  "if (res.id) {",
+                  "    pm.collectionVariables.set('category_id', res.id);",
+                  "    console.log('Category ID saved:', res.id);",
+                  "}",
+                  "pm.test('Has id', () => pm.expect(res).to.have.property('id'));"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Cakes\",\n  \"slug\": \"cakes\",\n  \"description\": \"Beautiful layered cakes for every occasion\",\n  \"image_url\": \"https://example.com/images/cakes.jpg\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{api_v1}}/categories/",
+              "host": ["{{api_v1}}"],
+              "path": ["categories", ""]
+            },
+            "description": "Create a new product category.\n\n**Auto-saves** `category_id` for use in the Products folder.\n\nAll fields except `name` and `slug` are optional."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "🧁 Products",
+      "item": [
+        {
+          "name": "List Products",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Has items and total', () => {",
+                  "    const res = pm.response.json();",
+                  "    pm.expect(res).to.have.property('items');",
+                  "    pm.expect(res).to.have.property('total');",
+                  "    pm.expect(res.items).to.be.an('array');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{api_v1}}/products/?skip=0&limit=20",
+              "host": ["{{api_v1}}"],
+              "path": ["products", ""],
+              "query": [
+                {
+                  "key": "skip",
+                  "value": "0",
+                  "description": "Pagination offset (default: 0)"
+                },
+                {
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Max items to return (1-100, default: 20)"
+                },
+                {
+                  "key": "category_id",
+                  "value": "",
+                  "description": "Filter by category ID (optional)",
+                  "disabled": true
+                }
+              ]
+            },
+            "description": "Retrieve a paginated list of products.\n\n**Query params:**\n- `skip` (int) — offset, default 0\n- `limit` (int) — max 100, default 20\n- `category_id` (int, optional) — filter by category"
+          },
+          "response": []
+        },
+        {
+          "name": "List Products (Filtered by Category)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{api_v1}}/products/?category_id={{category_id}}&skip=0&limit=20",
+              "host": ["{{api_v1}}"],
+              "path": ["products", ""],
+              "query": [
+                {
+                  "key": "category_id",
+                  "value": "{{category_id}}",
+                  "description": "Uses category_id saved from Create Category"
+                },
+                {
+                  "key": "skip",
+                  "value": "0"
+                },
+                {
+                  "key": "limit",
+                  "value": "20"
+                }
+              ]
+            },
+            "description": "Filter products by `category_id`. Uses `{{category_id}}` auto-saved from Create Category."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Product by Slug",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 200 or 404', () => {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 404]);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{api_v1}}/products/chocolate-layer-cake",
+              "host": ["{{api_v1}}"],
+              "path": ["products", "chocolate-layer-cake"]
+            },
+            "description": "Retrieve a single product by its URL slug.\n\n✏️ Replace `chocolate-layer-cake` with an actual slug from your database."
+          },
+          "response": []
+        },
+        {
+          "name": "Create Product",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 201', () => pm.response.to.have.status(201));",
+                  "const res = pm.response.json();",
+                  "if (res.id) {",
+                  "    pm.collectionVariables.set('product_id', res.id);",
+                  "    pm.collectionVariables.set('product_slug', res.slug);",
+                  "    console.log('Product ID saved:', res.id, '| Slug saved:', res.slug);",
+                  "}",
+                  "pm.test('Has id and slug', () => {",
+                  "    pm.expect(res).to.have.property('id');",
+                  "    pm.expect(res).to.have.property('slug');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Chocolate Layer Cake\",\n  \"slug\": \"chocolate-layer-cake\",\n  \"description\": \"Rich 3-layer chocolate cake with ganache frosting\",\n  \"price\": 29.99,\n  \"stock_quantity\": 15,\n  \"image_url\": \"https://example.com/images/choc-cake.jpg\",\n  \"is_available\": true,\n  \"category_id\": {{category_id}}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{api_v1}}/products/",
+              "host": ["{{api_v1}}"],
+              "path": ["products", ""]
+            },
+            "description": "Create a new product.\n\nUses `{{category_id}}` auto-saved from Create Category.\n\n**Auto-saves** `product_id` and `product_slug` for Update/Delete requests."
+          },
+          "response": []
+        },
+        {
+          "name": "Update Product",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Price updated', () => {",
+                  "    const res = pm.response.json();",
+                  "    pm.expect(res.price).to.equal(34.99);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"price\": 34.99,\n  \"stock_quantity\": 10,\n  \"description\": \"Updated: Rich 3-layer chocolate cake — now with extra ganache!\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{api_v1}}/products/{{product_id}}",
+              "host": ["{{api_v1}}"],
+              "path": ["products", "{{product_id}}"]
+            },
+            "description": "Partially update a product. All fields are optional.\n\nUses `{{product_id}}` auto-saved from Create Product.\n\nOnly send the fields you want to change."
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Product",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 204', () => pm.response.to.have.status(204));"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{api_v1}}/products/{{product_id}}",
+              "host": ["{{api_v1}}"],
+              "path": ["products", "{{product_id}}"]
+            },
+            "description": "Delete a product by ID. Returns `204 No Content` on success.\n\nUses `{{product_id}}` auto-saved from Create Product."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "❌ Error Cases",
+      "item": [
+        {
+          "name": "Login with wrong password",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 401', () => pm.response.to.have.status(401));"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"testuser@example.com\",\n  \"password\": \"WrongPassword!\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{api_v1}}/auth/login",
+              "host": ["{{api_v1}}"],
+              "path": ["auth", "login"]
+            },
+            "description": "Expects `401 Unauthorized`."
+          },
+          "response": []
+        },
+        {
+          "name": "Get /me without cookie (401)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 401', () => pm.response.to.have.status(401));"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Cookie",
+                "value": "",
+                "description": "Intentionally empty to force 401"
+              }
+            ],
+            "url": {
+              "raw": "{{api_v1}}/auth/me",
+              "host": ["{{api_v1}}"],
+              "path": ["auth", "me"]
+            },
+            "description": "Hit the protected `/auth/me` without a valid cookie. Expects `401 Unauthorized`."
+          },
+          "response": []
+        },
+        {
+          "name": "Get non-existent product (404)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 404', () => pm.response.to.have.status(404));"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{api_v1}}/products/this-slug-does-not-exist",
+              "host": ["{{api_v1}}"],
+              "path": ["products", "this-slug-does-not-exist"]
+            },
+            "description": "Expects `404 Not Found`."
+          },
+          "response": []
+        },
+        {
+          "name": "Signup with duplicate email (400)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status 400 or 409', () => {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([400, 409]);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"testuser@example.com\",\n  \"username\": \"anotheruser\",\n  \"password\": \"SecurePass123!\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{api_v1}}/auth/signup",
+              "host": ["{{api_v1}}"],
+              "path": ["auth", "signup"]
+            },
+            "description": "Re-use an existing email to confirm duplicate registration is rejected."
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
