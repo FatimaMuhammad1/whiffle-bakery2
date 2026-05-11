@@ -1,9 +1,10 @@
 """
 app/database.py
 ───────────────
-Async SQLAlchemy engine, session factory, and dependency.
-Uses asyncpg as the driver for PostgreSQL.
+Async SQLAlchemy engine, session factory, and FastAPI dependency.
+Supabase-ready (asyncpg + SSL support).
 """
+
 from typing import AsyncGenerator
 
 from sqlalchemy.ext.asyncio import (
@@ -16,15 +17,10 @@ from sqlalchemy import text
 from app.config import settings
 
 
-# ── Database URL Conversion ───────────────────────────────────────────────────
-# WHY: Neon and many hosting providers provide DATABASE_URL in this format:
-#      postgresql://user:password@host/dbname
-#
-# But SQLAlchemy's async engine with asyncpg requires:
-#      postgresql+asyncpg://user:password@host/dbname
-#
-# This converts the URL automatically so you can keep a standard DATABASE_URL
-# in your .env file and deployment settings.
+# ─────────────────────────────────────────────────────────────
+# DATABASE URL FIX
+# ─────────────────────────────────────────────────────────────
+# Convert standard Postgres URL → asyncpg URL
 DATABASE_URL = settings.DATABASE_URL
 
 if DATABASE_URL.startswith("postgresql://"):
@@ -35,35 +31,47 @@ if DATABASE_URL.startswith("postgresql://"):
     )
 
 
-# ── Engine ────────────────────────────────────────────────────────────────────
-# WHY: We use create_async_engine because FastAPI is asynchronous.
-# A synchronous database driver would block the server while waiting for
-# database responses, which is a splendid way to make everything slower.
+# ─────────────────────────────────────────────────────────────
+# ENGINE
+# ─────────────────────────────────────────────────────────────
+# Supabase REQUIREMENT: SSL must be enabled or connections fail randomly.
 engine = create_async_engine(
     DATABASE_URL,
-    echo=settings.DEBUG,      # Logs SQL statements in development.
-    pool_size=10,             # Keeps 10 persistent connections ready.
-    max_overflow=20,          # Allows 20 extra temporary connections.
-    pool_pre_ping=True,       # Checks connections before using them.
+    echo=settings.DEBUG,
+
+    # Connection pool (keep small for Supabase free tier)
+    pool_size=3,
+    max_overflow=5,
+
+    # Prevent stale connections (important for cloud DBs)
+    pool_pre_ping=True,
+
+    # Supabase SSL fix
+    connect_args={
+        "ssl": "require"
+    },
 )
 
 
-# ── Session Factory ───────────────────────────────────────────────────────────
-# WHY: Creates AsyncSession objects used to communicate with the database.
+# ─────────────────────────────────────────────────────────────
+# SESSION FACTORY
+# ─────────────────────────────────────────────────────────────
 AsyncSessionLocal = async_sessionmaker(
     bind=engine,
     class_=AsyncSession,
-    expire_on_commit=False,   # Keeps loaded objects usable after commit.
+    expire_on_commit=False,
     autoflush=False,
     autocommit=False,
 )
 
 
-# ── Dependency ────────────────────────────────────────────────────────────────
+# ─────────────────────────────────────────────────────────────
+# FASTAPI DEPENDENCY
+# ─────────────────────────────────────────────────────────────
 async def get_db() -> AsyncGenerator[AsyncSession, None]:
     """
-    FastAPI dependency that provides one database session per request.
-    Automatically commits on success and rolls back on failure.
+    Provides a database session per request.
+    Auto-commits on success, rolls back on error.
     """
     async with AsyncSessionLocal() as session:
         try:
@@ -76,10 +84,12 @@ async def get_db() -> AsyncGenerator[AsyncSession, None]:
             await session.close()
 
 
-# ── Health Check Helper ───────────────────────────────────────────────────────
+# ─────────────────────────────────────────────────────────────
+# HEALTH CHECK
+# ─────────────────────────────────────────────────────────────
 async def check_db_connection() -> bool:
     """
-    Returns True if the database is reachable.
+    Simple DB connectivity test.
     """
     try:
         async with AsyncSessionLocal() as session:
