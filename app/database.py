@@ -1,8 +1,7 @@
 """
 app/database.py
 ───────────────
-Async SQLAlchemy engine, session factory, and FastAPI dependency.
-Supabase-ready (asyncpg + SSL support).
+Async SQLAlchemy setup for Supabase (POOLER compatible).
 """
 
 from typing import AsyncGenerator
@@ -17,12 +16,12 @@ from sqlalchemy import text
 from app.config import settings
 
 
-# ─────────────────────────────────────────────────────────────
-# DATABASE URL FIX
-# ─────────────────────────────────────────────────────────────
-# Convert standard Postgres URL → asyncpg URL
+# ─────────────────────────────────────────────
+# DATABASE URL
+# ─────────────────────────────────────────────
 DATABASE_URL = settings.DATABASE_URL
 
+# Ensure asyncpg driver
 if DATABASE_URL.startswith("postgresql://"):
     DATABASE_URL = DATABASE_URL.replace(
         "postgresql://",
@@ -31,31 +30,28 @@ if DATABASE_URL.startswith("postgresql://"):
     )
 
 
-# ─────────────────────────────────────────────────────────────
-# ENGINE
-# ─────────────────────────────────────────────────────────────
-# Supabase REQUIREMENT: SSL must be enabled or connections fail randomly.
+# ─────────────────────────────────────────────
+# ENGINE (Supabase-safe config)
+# ─────────────────────────────────────────────
 engine = create_async_engine(
     DATABASE_URL,
     echo=settings.DEBUG,
 
-    # Connection pool (keep small for Supabase free tier)
+    # IMPORTANT: Supabase free tier friendly pool
     pool_size=3,
     max_overflow=5,
-
-    # Prevent stale connections (important for cloud DBs)
     pool_pre_ping=True,
 
-    # Supabase SSL fix
+    # REQUIRED for Supabase
     connect_args={
         "ssl": "require"
     },
 )
 
 
-# ─────────────────────────────────────────────────────────────
+# ─────────────────────────────────────────────
 # SESSION FACTORY
-# ─────────────────────────────────────────────────────────────
+# ─────────────────────────────────────────────
 AsyncSessionLocal = async_sessionmaker(
     bind=engine,
     class_=AsyncSession,
@@ -65,14 +61,10 @@ AsyncSessionLocal = async_sessionmaker(
 )
 
 
-# ─────────────────────────────────────────────────────────────
+# ─────────────────────────────────────────────
 # FASTAPI DEPENDENCY
-# ─────────────────────────────────────────────────────────────
+# ─────────────────────────────────────────────
 async def get_db() -> AsyncGenerator[AsyncSession, None]:
-    """
-    Provides a database session per request.
-    Auto-commits on success, rolls back on error.
-    """
     async with AsyncSessionLocal() as session:
         try:
             yield session
@@ -84,13 +76,10 @@ async def get_db() -> AsyncGenerator[AsyncSession, None]:
             await session.close()
 
 
-# ─────────────────────────────────────────────────────────────
+# ─────────────────────────────────────────────
 # HEALTH CHECK
-# ─────────────────────────────────────────────────────────────
+# ─────────────────────────────────────────────
 async def check_db_connection() -> bool:
-    """
-    Simple DB connectivity test.
-    """
     try:
         async with AsyncSessionLocal() as session:
             await session.execute(text("SELECT 1"))

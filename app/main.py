@@ -1,15 +1,9 @@
 """
 app/main.py
 ────────────
-FastAPI application entry point.
-
-Responsibilities:
-- Create the FastAPI app instance
-- Configure CORS middleware
-- Register all routers (added Day 2+)
-- Lifespan handler: connect/disconnect DB and Redis on startup/shutdown
-- Expose /health endpoint
+FastAPI entry point (clean + production-safe)
 """
+
 from contextlib import asynccontextmanager
 from typing import AsyncGenerator
 
@@ -25,73 +19,57 @@ from app.redis_client import check_redis_connection, init_redis, close_redis
 # ── Lifespan ──────────────────────────────────────────────────────────────────
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
-    """
-    Runs on startup (before yield) and shutdown (after yield).
-    
-    WHY: Using a lifespan handler is the modern way to manage resources in FastAPI. 
-    It ensures that connections to Redis and DB are opened once when the app starts 
-    and closed gracefully when it stops, preventing resource leaks.
-    """
     print(f"Starting {settings.APP_NAME} v{settings.APP_VERSION} [{settings.ENVIRONMENT}]")
 
-    # Initialize Redis
+    # Redis init
     try:
         await init_redis()
         print("Redis connected")
     except Exception as e:
-        # WHY: We catch the error so the server can still start even if Redis is down, 
-        # though some features (OTP, caching) will be degraded.
         print(f"Redis connection failed: {e}")
 
-    # Verify PostgreSQL
-    db_ok = await check_db_connection()
-    if db_ok:
-        print("PostgreSQL connected")
-    else:
-        # WHY: We warn the developer immediately if the database is unreachable 
-        # to avoid confusing 500 errors later.
-        print("PostgreSQL connection failed — check DATABASE_URL")
+    # DB check
+    try:
+        db_ok = await check_db_connection()
+        print("PostgreSQL connected" if db_ok else "PostgreSQL connection failed")
+    except Exception as e:
+        print(f"DB error: {e}")
 
-    yield  # ← application runs here
+    yield
 
-    # Shutdown
-    # WHY: Closing Redis connection pool on shutdown prevents 'hanging' processes 
-    # and ensures all buffered data is handled.
     await close_redis()
     print("Shutdown complete")
 
 
-# ── App Instance ──────────────────────────────────────────────────────────────
+# ── App ───────────────────────────────────────────────────────────────────────
 app = FastAPI(
     title=settings.APP_NAME,
     version=settings.APP_VERSION,
-    description="Production-style bakery backend: auth, products, orders, wishlist & more.",
-    # WHY: We hide the Swagger UI in production for security (preventing API footprint discovery).
+    description="Production-style bakery backend",
     docs_url="/docs" if not settings.is_production else None,
     redoc_url="/redoc" if not settings.is_production else None,
     lifespan=lifespan,
 )
 
-
 app.add_middleware(GZipMiddleware, minimum_size=1000)
 
+
 # ── CORS ──────────────────────────────────────────────────────────────────────
-# WHY: CORS (Cross-Origin Resource Sharing) is a security feature that prevents 
-# malicious websites from making requests to our API. We explicitly allow our 
-# frontend URLs here.
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.cors_origins,  # WHY: .cors_origins parses the CSV string into a proper list.
-    allow_credentials=True,               # WHY: Required because we use HTTP-only cookies for authentication.
+    allow_origins=settings.cors_origins,
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
 
 # ── Routers ───────────────────────────────────────────────────────────────────
-from app.routers import products, categories, auth, orders, reminders, contact, wishlists, reviews, newsletter, recipes
+from app.routers import (
+    products, categories, auth, orders, reminders,
+    contact, wishlists, reviews, newsletter, recipes
+)
 
-# We'll use /api/v1 as our base prefix
 app.include_router(auth.router, prefix="/api/v1")
 app.include_router(categories.router, prefix="/api/v1")
 app.include_router(products.router, prefix="/api/v1")
@@ -104,20 +82,14 @@ app.include_router(newsletter.router, prefix="/api/v1")
 app.include_router(recipes.router, prefix="/api/v1")
 
 
-# ── Health Check ──────────────────────────────────────────────────────────────
+# ── Health ────────────────────────────────────────────────────────────────────
 @app.get("/health", tags=["System"])
-async def health_check() -> dict:
-    """
-    Returns the operational status of the application and its dependencies.
-    Used by load balancers and monitoring tools.
-    """
+async def health_check():
     db_ok = await check_db_connection()
     redis_ok = await check_redis_connection()
 
-    status = "ok" if (db_ok and redis_ok) else "degraded"
-
     return {
-        "status": status,
+        "status": "ok" if (db_ok and redis_ok) else "degraded",
         "version": settings.APP_VERSION,
         "environment": settings.ENVIRONMENT,
         "services": {
@@ -127,7 +99,6 @@ async def health_check() -> dict:
     }
 
 
-# ── Root ──────────────────────────────────────────────────────────────────────
 @app.get("/", tags=["System"])
-async def root() -> dict:
+async def root():
     return {"message": f"Welcome to {settings.APP_NAME}", "docs": "/docs"}
