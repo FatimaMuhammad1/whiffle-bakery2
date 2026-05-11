@@ -6,8 +6,6 @@ Pydantic schemas for Product models.
 from datetime import datetime
 from typing import Optional, List
 from pydantic import BaseModel, Field, ConfigDict
-from sqlalchemy import Integer
-from sqlalchemy.orm import Mapped, mapped_column
 from app.schemas.category import CategoryRead
 
 
@@ -20,7 +18,7 @@ class ProductBase(BaseModel):
     image_url: Optional[str] = Field(None, max_length=500)
     images: List[str] = Field(default_factory=list)
     is_available: bool = True
-    review_count: Mapped[int] = mapped_column(Integer, default=0, nullable=False)
+    review_count: int = Field(default=0, ge=0)
     category_id: Optional[int] = None
 
 
