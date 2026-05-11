@@ -15,25 +15,45 @@ from sqlalchemy import text
 
 from app.config import settings
 
+
+# ── Database URL Conversion ───────────────────────────────────────────────────
+# WHY: Neon and many hosting providers provide DATABASE_URL in this format:
+#      postgresql://user:password@host/dbname
+#
+# But SQLAlchemy's async engine with asyncpg requires:
+#      postgresql+asyncpg://user:password@host/dbname
+#
+# This converts the URL automatically so you can keep a standard DATABASE_URL
+# in your .env file and deployment settings.
+DATABASE_URL = settings.DATABASE_URL
+
+if DATABASE_URL.startswith("postgresql://"):
+    DATABASE_URL = DATABASE_URL.replace(
+        "postgresql://",
+        "postgresql+asyncpg://",
+        1,
+    )
+
+
 # ── Engine ────────────────────────────────────────────────────────────────────
-# WHY: We use create_async_engine because FastAPI is an async framework. 
-# Using a synchronous driver (like psycopg2) would block the entire server 
-# while waiting for the database to respond.
+# WHY: We use create_async_engine because FastAPI is asynchronous.
+# A synchronous database driver would block the server while waiting for
+# database responses, which is a splendid way to make everything slower.
 engine = create_async_engine(
-    settings.DATABASE_URL,
-    echo=settings.DEBUG,          # WHY: Logs SQL in development to help debug slow or incorrect queries.
-    pool_size=10,                 # WHY: Keeps a 'pool' of 10 ready-to-use connections to avoid the cost of connecting every time.
-    max_overflow=20,              # WHY: Allows temporarily creating 20 more connections if traffic spikes.
-    pool_pre_ping=True,           # WHY: Checks if a connection is still alive before using it (prevents 'server closed' errors).
+    DATABASE_URL,
+    echo=settings.DEBUG,      # Logs SQL statements in development.
+    pool_size=10,             # Keeps 10 persistent connections ready.
+    max_overflow=20,          # Allows 20 extra temporary connections.
+    pool_pre_ping=True,       # Checks connections before using them.
 )
 
+
 # ── Session Factory ───────────────────────────────────────────────────────────
-# WHY: This is the factory that creates 'Session' objects. 
-# A session is basically a "transaction" or a conversation with the database.
+# WHY: Creates AsyncSession objects used to communicate with the database.
 AsyncSessionLocal = async_sessionmaker(
     bind=engine,
     class_=AsyncSession,
-    expire_on_commit=False,       # WHY: Prevents SQLAlchemy from wiping local data after a commit, saving extra DB calls.
+    expire_on_commit=False,   # Keeps loaded objects usable after commit.
     autoflush=False,
     autocommit=False,
 )
@@ -42,29 +62,25 @@ AsyncSessionLocal = async_sessionmaker(
 # ── Dependency ────────────────────────────────────────────────────────────────
 async def get_db() -> AsyncGenerator[AsyncSession, None]:
     """
-    FastAPI dependency that provides a database session per request.
-    
-    WHY: This pattern (Unit of Work) ensures that every API request gets its own 
-    isolated transaction and that the connection is ALWAYS returned to the pool 
-    even if the code crashes.
+    FastAPI dependency that provides one database session per request.
+    Automatically commits on success and rolls back on failure.
     """
     async with AsyncSessionLocal() as session:
         try:
             yield session
-            # WHY: We automatically commit if the request finishes successfully.
             await session.commit()
         except Exception:
-            # WHY: We rollback if ANY error occurs during the request to keep data consistent.
             await session.rollback()
             raise
         finally:
-            # WHY: Explicitly closing the session ensures we don't leak database connections.
             await session.close()
 
 
-# ── Health check helper ───────────────────────────────────────────────────────
+# ── Health Check Helper ───────────────────────────────────────────────────────
 async def check_db_connection() -> bool:
-    """Returns True if the database is reachable."""
+    """
+    Returns True if the database is reachable.
+    """
     try:
         async with AsyncSessionLocal() as session:
             await session.execute(text("SELECT 1"))
