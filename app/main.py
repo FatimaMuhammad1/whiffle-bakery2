@@ -73,19 +73,17 @@ app = FastAPI(
 )
 
 
-app.add_middleware(GZipMiddleware, minimum_size=1000)
-
 # ── CORS ──────────────────────────────────────────────────────────────────────
-# WHY: CORS (Cross-Origin Resource Sharing) is a security feature that prevents 
-# malicious websites from making requests to our API. We explicitly allow our 
-# frontend URLs here.
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=settings.cors_origins,  # WHY: .cors_origins parses the CSV string into a proper list.
-    allow_credentials=True,               # WHY: Required because we use HTTP-only cookies for authentication.
+# WHY: CORSMiddleware should be added as the LAST middleware (so it's the FIRST 
+# to run on the request) to handle preflight OPTIONS requests correctly.
+    allow_origin_regex=r"https?://(localhost|127\.0\.0\.1)(:\d+)?",
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+    expose_headers=["*"],
 )
+
+# app.add_middleware(GZipMiddleware, minimum_size=1000)  # Temporarily disabled to debug 400s
 
 
 # ── Routers ───────────────────────────────────────────────────────────────────
