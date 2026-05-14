@@ -18,19 +18,15 @@ import {
   RefreshCcw,
   CheckCircle2,
   XCircle,
-  Truck,
-  BookOpen,
-  Settings
+  Truck
 } from "lucide-react";
-import { api, type BackendProduct, type BackendOrder, type BackendUser, type BackendRecipe } from "@/lib/api";
+import { api, type BackendProduct, type BackendOrder, type BackendUser } from "@/lib/api";
 import { format } from "date-fns";
 import { toast } from "sonner";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toFrontendProduct } from "@/lib/productAdapter";
-import { cn } from "@/lib/utils";
 import ProductModal from "@/components/ProductModal";
 import OrderDetailsModal from "@/components/OrderDetailsModal";
-import RecipeModal from "@/components/RecipeModal";
 
 import { 
   BarChart, 
@@ -47,7 +43,6 @@ const AdminDashboard = () => {
   // ... existing state ...
   const [products, setProducts] = useState<BackendProduct[]>([]);
   const [orders, setOrders] = useState<BackendOrder[]>([]);
-  const [recipes, setRecipes] = useState<BackendRecipe[]>([]);
   const [users, setUsers] = useState<BackendUser[]>([]);
   const [categories, setCategories] = useState<{ id: number; name: string }[]>([]);
   const [loading, setLoading] = useState(true);
@@ -56,9 +51,6 @@ const AdminDashboard = () => {
   const [selectedProduct, setSelectedProduct] = useState<BackendProduct | null>(null);
   const [selectedOrder, setSelectedOrder] = useState<BackendOrder | null>(null);
   const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
-  
-  const [isRecipeModalOpen, setIsRecipeModalOpen] = useState(false);
-  const [selectedRecipe, setSelectedRecipe] = useState<BackendRecipe | null>(null);
 
   // Process data for the sales chart
   const salesData = (() => {
@@ -99,18 +91,16 @@ const AdminDashboard = () => {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const [prodRes, orderRes, userRes, catRes, recipeRes] = await Promise.all([
+      const [prodRes, orderRes, catRes, userRes] = await Promise.all([
         api.getProducts({ limit: 100 }),
-        api.getOrders(),
-        api.getUsers(),
+        api.getOrders(), 
         api.getCategories(),
-        api.getRecipes()
+        api.getUsers(),
       ]);
       setProducts(prodRes.items);
       setOrders(orderRes);
-      setUsers(userRes);
       setCategories(catRes);
-      setRecipes(recipeRes);
+      setUsers(userRes);
     } catch (error) {
       console.error("Dashboard fetch error:", error);
       toast.error("Failed to load dashboard data");
@@ -148,17 +138,6 @@ const AdminDashboard = () => {
       toast.success("Order deleted");
     } catch {
       toast.error("Failed to delete order");
-    }
-  };
-
-  const handleDeleteRecipe = async (recipeId: number) => {
-    if (!confirm("Are you sure you want to delete this recipe?")) return;
-    try {
-      await api.deleteRecipe(recipeId);
-      setRecipes(prev => prev.filter(r => r.id !== recipeId));
-      toast.success("Recipe deleted");
-    } catch {
-      toast.error("Failed to delete recipe");
     }
   };
 
@@ -252,12 +231,6 @@ const AdminDashboard = () => {
               >
                 <Users size={18} className="mr-2" /> Customers
               </TabsTrigger>
-              <TabsTrigger 
-                value="recipes" 
-                className="rounded-[1.5rem] px-8 py-3 data-[state=active]:bg-chocolate data-[state=active]:text-cream font-heading font-bold text-chocolate transition-all"
-              >
-                <BookOpen size={18} className="mr-2" /> Recipes
-              </TabsTrigger>
             </TabsList>
           </div>
 
@@ -322,84 +295,6 @@ const AdminDashboard = () => {
                         </div>
                       ))}
                    </div>
-                </div>
-             </div>
-          </TabsContent>
-
-          <TabsContent value="recipes" className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
-             <div className="bg-white p-6 rounded-[3rem] border border-border shadow-sm">
-                <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-8">
-                  <h3 className="font-heading text-xl font-bold text-chocolate">Artisan Recipes</h3>
-                  <button 
-                    onClick={() => {
-                      setSelectedRecipe(null);
-                      setIsRecipeModalOpen(true);
-                    }}
-                    className="w-full md:w-auto px-6 py-3 rounded-2xl bg-chocolate text-cream font-heading font-bold hover:opacity-90 transition-all shadow-lg shadow-chocolate/20 flex items-center justify-center gap-2"
-                  >
-                    <Plus size={18} /> New Recipe
-                  </button>
-                </div>
-
-                <div className="overflow-x-auto">
-                  <table className="w-full">
-                    <thead>
-                      <tr className="bg-secondary/10">
-                        <th className="py-4 px-4 rounded-l-2xl font-heading font-bold text-chocolate text-xs text-left">Recipe</th>
-                        <th className="py-4 px-4 font-heading font-bold text-chocolate text-xs text-left">Difficulty</th>
-                        <th className="py-4 px-4 font-heading font-bold text-chocolate text-xs text-left">Prep/Cook</th>
-                        <th className="py-4 px-4 rounded-r-2xl font-heading font-bold text-chocolate text-xs text-right">Actions</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-border/50">
-                      {recipes.map(recipe => (
-                        <tr key={recipe.id} className="hover:bg-secondary/10 transition-colors">
-                          <td className="py-5 px-4">
-                            <div className="flex items-center gap-3">
-                              {recipe.image_url && (
-                                <img src={recipe.image_url} alt={recipe.title} className="w-10 h-10 rounded-lg object-cover border border-border" />
-                              )}
-                              <div>
-                                <p className="font-body font-bold text-chocolate text-sm">{recipe.title}</p>
-                                <p className="text-[10px] text-muted-foreground">/{recipe.slug}</p>
-                              </div>
-                            </div>
-                          </td>
-                          <td className="py-5 px-4">
-                            <span className={cn(
-                              "px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-tighter",
-                              recipe.difficulty === 'beginner' ? 'bg-emerald-50 text-emerald-600' :
-                              recipe.difficulty === 'advanced' ? 'bg-rose-50 text-rose-600' : 'bg-amber-50 text-amber-600'
-                            )}>
-                              {recipe.difficulty}
-                            </span>
-                          </td>
-                          <td className="py-5 px-4 font-body text-xs text-muted-foreground">
-                            {recipe.prep_time} / {recipe.cook_time}
-                          </td>
-                          <td className="py-5 px-4 text-right">
-                             <div className="flex items-center justify-end gap-2">
-                                <button 
-                                  onClick={() => {
-                                    setSelectedRecipe(recipe);
-                                    setIsRecipeModalOpen(true);
-                                  }}
-                                  className="p-2 rounded-lg bg-white border border-border text-chocolate hover:bg-primary hover:text-white transition-all shadow-sm"
-                                >
-                                  <Settings size={16} />
-                                </button>
-                                <button 
-                                  onClick={() => handleDeleteRecipe(recipe.id)}
-                                  className="p-2 rounded-lg bg-white border border-border text-rose-500 hover:bg-rose-500 hover:text-white transition-all shadow-sm"
-                                >
-                                  <Trash2 size={16} />
-                                </button>
-                             </div>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
                 </div>
              </div>
           </TabsContent>
@@ -620,13 +515,6 @@ const AdminDashboard = () => {
         isOpen={isOrderModalOpen}
         onClose={() => setIsOrderModalOpen(false)}
         order={selectedOrder}
-      />
-
-      <RecipeModal 
-        isOpen={isRecipeModalOpen}
-        onClose={() => setIsRecipeModalOpen(false)}
-        onSave={fetchData}
-        recipe={selectedRecipe}
       />
     </div>
   );

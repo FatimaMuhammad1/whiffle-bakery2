@@ -21,6 +21,19 @@ export type BackendProduct = {
   category?: BackendCategory | null;
 };
 
+export type BackendRecipe = {
+  id: number;
+  title: string;
+  slug: string;
+  description: string;
+  content: string;
+  image_url: string | null;
+  prep_time: string | null;
+  cook_time: string | null;
+  difficulty: string;
+  servings: number | null;
+};
+
 export type BackendUser = {
   id: string;
   email: string;
@@ -119,19 +132,6 @@ export interface Review {
   content: string;
   created_at: string;
 }
-
-export type BackendRecipe = {
-  id: number;
-  title: string;
-  slug: string;
-  description: string;
-  content: string;
-  image_url?: string;
-  prep_time?: string;
-  cook_time?: string;
-  difficulty: string;
-  servings?: number;
-};
 
 export const api = {
   getProducts: (params?: { categoryId?: number; q?: string; limit?: number; skip?: number }) => {
@@ -241,29 +241,8 @@ export const api = {
       method: "DELETE",
     }),
 
-  // Recipes
-  getRecipes: () =>
-    requestJson<BackendRecipe[]>("/recipes/"),
-
-  getRecipeBySlug: (slug: string) =>
-    requestJson<BackendRecipe>(`/recipes/${encodeURIComponent(slug)}`),
-
-  createRecipe: (recipe: Partial<BackendRecipe>) =>
-    requestJson<BackendRecipe>("/recipes/", {
-      method: "POST",
-      body: JSON.stringify(recipe),
-    }),
-
-  updateRecipe: (id: number, recipe: Partial<BackendRecipe>) =>
-    requestJson<BackendRecipe>(`/recipes/${id}`, {
-      method: "PATCH",
-      body: JSON.stringify(recipe),
-    }),
-
-  deleteRecipe: (id: number) =>
-    requestJson<void>(`/recipes/${id}`, {
-      method: "DELETE",
-    }),
+  getRecipes: () => requestJson<BackendRecipe[]>("/recipes/"),
+  getRecipeBySlug: (slug: string) => requestJson<BackendRecipe>(`/recipes/${slug}`),
 
   subscribeNewsletter: (email: string) =>
     requestJson<{ message: string }>("/newsletter/subscribe", {
