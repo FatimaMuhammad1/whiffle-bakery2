@@ -51,6 +51,8 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
         # WHY: We warn the developer immediately if the database is unreachable 
         # to avoid confusing 500 errors later.
         print("PostgreSQL connection failed — check DATABASE_URL")
+    
+    print(f"CORS Allowed Origins: {settings.cors_origins}")
 
     yield  # ← application runs here
 
