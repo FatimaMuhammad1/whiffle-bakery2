@@ -1,4 +1,4 @@
-import { X, Package, Truck, User, Calendar, DollarSign, MapPin } from "lucide-react";
+import { X, Package, Truck, User, Calendar, DollarSign, MapPin, ShoppingBag } from "lucide-react";
 import { type BackendOrder } from "@/lib/api";
 import { format } from "date-fns";
 
@@ -140,5 +140,4 @@ const OrderDetailsModal = ({ isOpen, onClose, order }: OrderDetailsModalProps) =
   );
 };
 
-import { ShoppingBag } from "lucide-react";
 export default OrderDetailsModal;

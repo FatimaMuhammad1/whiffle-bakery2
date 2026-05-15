@@ -76,6 +76,8 @@ app = FastAPI(
 # ── CORS ──────────────────────────────────────────────────────────────────────
 # WHY: CORSMiddleware should be added as the LAST middleware (so it's the FIRST 
 # to run on the request) to handle preflight OPTIONS requests correctly.
+app.add_middleware(
+    CORSMiddleware,
     allow_origin_regex=r"https?://(localhost|127\.0\.0\.1)(:\d+)?",
     allow_credentials=True,
     allow_methods=["*"],

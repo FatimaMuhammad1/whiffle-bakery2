@@ -410,7 +410,7 @@ const AdminDashboard = () => {
                           <td className="py-5">
                              <div className="flex items-center gap-2">
                                <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-[10px] font-bold text-primary">
-                                 {order.shipping_address?.full_name?.split(' ').map((n: string) => n[0]).join('')}
+                                 {(order.shipping_address?.full_name || "Guest").split(' ').map((n: string) => n[0]).join('')}
                                </div>
                                <p className="font-body text-sm text-chocolate">{order.shipping_address?.full_name}</p>
                              </div>
