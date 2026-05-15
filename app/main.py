@@ -78,7 +78,7 @@ app = FastAPI(
 # to run on the request) to handle preflight OPTIONS requests correctly.
 app.add_middleware(
     CORSMiddleware,
-    allow_origin_regex=r"https?://(localhost|127\.0\.0\.1)(:\d+)?",
+    allow_origins=settings.cors_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -125,6 +125,17 @@ async def health_check() -> dict:
             "redis": "ok" if redis_ok else "unreachable",
         },
     }
+
+
+# ── Leapcell Health Checks ───────────────────────────────────────────────────
+@app.get("/kaithhealthcheck", tags=["System"], include_in_schema=False)
+@app.get("/kaithheathcheck", tags=["System"], include_in_schema=False)
+async def leapcell_health_check():
+    """
+    Specific health check endpoints required by the Leapcell deployment proxy.
+    Handles both the correct spelling and the observed typo in logs.
+    """
+    return {"status": "ok"}
 
 
 # ── Root ──────────────────────────────────────────────────────────────────────
