@@ -13,9 +13,9 @@ async def verify_captcha(token: str) -> bool:
     This protects our checkout endpoint from automated 'brute-force' orders 
     or card-testing attacks.
     """
-    if not token or token == "bypass-v3":
-        # WHY: Allow the hardcoded bypass token from the frontend to work 
-        # in production until real reCAPTCHA is implemented.
+    if settings.is_development and (not token or token == "bypass-v3"):
+        # WHY: In development, we allow bypassing CAPTCHA if no token is provided 
+        # to make testing in the local environment or Postman easier.
         return True
             
     async with httpx.AsyncClient() as client:
