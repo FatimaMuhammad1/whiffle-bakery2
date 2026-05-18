@@ -27,6 +27,10 @@ async def create_payment_intent(
     Amount must be provided in cents.
     """
     try:
+        from app.config import settings
+        if not settings.STRIPE_SECRET_KEY:
+            raise ValueError("STRIPE_SECRET_KEY is not configured on the server. Please set it in your environment variables.")
+
         intent = await PaymentService.create_payment_intent(payload.amount)
         return {"client_secret": intent.client_secret}
     except Exception as e:

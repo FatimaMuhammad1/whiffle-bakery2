@@ -151,8 +151,8 @@ const Checkout = () => {
       api.createPaymentIntent(amountInCents)
         .then(res => setClientSecret(res.client_secret))
         .catch(err => {
-          console.error(err);
-          toast.error("Failed to initialize payment system.");
+          console.error("Payment initialization error:", err);
+          toast.error(`Payment initialization failed: ${err instanceof Error ? err.message : String(err)}. Check your backend configuration.`);
         });
     }
   }, [items, finalTotal, isAuthenticated]);
