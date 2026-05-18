@@ -49,7 +49,6 @@ export const products: Product[] = [
   "backendId": 2,
   "name": "Non-Stick Loaf Pan",
   "price": 12.99,
-  "image": "/assets/products/non-stick-loaf-pan.jpg",
   "category": "Bakeware",
   "brand": "Whiffle",
   "rating": 4.0,
@@ -61,14 +60,14 @@ export const products: Product[] = [
     "popular",
     "recommend"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/assets/products/non-stick-loaf-pan.jpg"
 },
   {
   "id": "round-cake-tin-8inch",
   "backendId": 3,
   "name": "Round Cake Tin 8-inch",
   "price": 9.99,
-  "image": "/assets/products/round-cake-tin-8inch.jpg",
   "category": "Bakeware",
   "brand": "BakeRight",
   "rating": 4.1,
@@ -78,14 +77,14 @@ export const products: Product[] = [
   "tags": [
     "essential"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/assets/products/round-cake-tin-8inch.jpg"
 },
   {
   "id": "muffin-tray-12cup",
   "backendId": 4,
   "name": "Muffin Tray 12-Cup",
   "price": 14.49,
-  "image": "/assets/products/muffin-tray-12cup.jpg",
   "category": "Bakeware",
   "brand": "SweetCraft",
   "rating": 4.2,
@@ -95,14 +94,14 @@ export const products: Product[] = [
   "tags": [
     "essential"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/assets/products/muffin-tray-12cup.jpg"
 },
   {
   "id": "square-brownie-pan",
   "backendId": 5,
   "name": "Square Brownie Pan",
   "price": 11.99,
-  "image": "/assets/products/square-brownie-pan.jpeg",
   "category": "Bakeware",
   "brand": "ProBake",
   "rating": 4.3,
@@ -112,14 +111,14 @@ export const products: Product[] = [
   "tags": [
     "essential"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/assets/products/square-brownie-pan.jpeg"
 },
   {
   "id": "springform-pan-9inch",
   "backendId": 6,
   "name": "Springform Pan 9-inch",
   "price": 15.99,
-  "image": "/assets/products/springform-pan-9inch.jpg",
   "category": "Bakeware",
   "brand": "KitchenPro",
   "rating": 4.4,
@@ -130,14 +129,14 @@ export const products: Product[] = [
     "essential",
     "popular"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/assets/products/springform-pan-9inch.jpg"
 },
   {
   "id": "bundt-pan-classic",
   "backendId": 7,
   "name": "Bundt Pan Classic",
   "price": 18.99,
-  "image": "/assets/products/bundt-pan-classic.jpg",
   "category": "Bakeware",
   "brand": "ArtisanBake",
   "rating": 4.5,
@@ -148,14 +147,14 @@ export const products: Product[] = [
     "essential",
     "recommend"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/assets/products/bundt-pan-classic.jpg"
 },
   {
   "id": "sheet-pan-half-size",
   "backendId": 8,
   "name": "Sheet Pan Half-Size",
   "price": 10.99,
-  "image": "/assets/products/sheet-pan-half-size.jpeg",
   "category": "Bakeware",
   "brand": "Baker's Choice",
   "rating": 4.6,
@@ -165,14 +164,14 @@ export const products: Product[] = [
   "tags": [
     "essential"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/assets/products/sheet-pan-half-size.jpeg"
 },
   {
   "id": "mini-loaf-pan-set",
   "backendId": 9,
   "name": "Mini Loaf Pan Set x4",
   "price": 16.99,
-  "image": "/assets/products/mini-loaf-pan-set.jpeg",
   "category": "Bakeware",
   "brand": "CakeMaster",
   "rating": 4.7,
@@ -182,14 +181,14 @@ export const products: Product[] = [
   "tags": [
     "essential"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/assets/products/mini-loaf-pan-set.jpeg"
 },
   {
   "id": "tart-pan-removable-base",
   "backendId": 10,
   "name": "Tart Pan with Removable Base",
   "price": 13.49,
-  "image": "/product/tart-pan-removable-base.jpeg",
   "category": "Bakeware",
   "brand": "Whiffle",
   "rating": 4.8,
@@ -200,14 +199,14 @@ export const products: Product[] = [
     "essential",
     "popular"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/product/Tart_pan_removable_base_202605091300.jpeg"
 },
   {
   "id": "silicone-muffin-mould",
   "backendId": 11,
   "name": "Silicone Muffin Mould",
   "price": 8.99,
-  "image": "/assets/products/silicone-muffin-mould.jpeg",
   "category": "Bakeware",
   "brand": "BakeRight",
   "rating": 4.9,
@@ -217,14 +216,14 @@ export const products: Product[] = [
   "tags": [
     "essential"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/assets/products/silicone-muffin-mould.jpeg"
 },
   {
   "id": "pizza-stone",
   "backendId": 12,
   "name": "Pizza Stone",
   "price": 24.99,
-  "image": "/assets/products/pizza-stone.jpeg",
   "category": "Bakeware",
   "brand": "SweetCraft",
   "rating": 5.0,
@@ -235,14 +234,14 @@ export const products: Product[] = [
     "essential",
     "recommend"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/assets/products/pizza-stone.jpeg"
 },
   {
   "id": "bread-cloche",
   "backendId": 13,
   "name": "Bread Cloche",
   "price": 34.99,
-  "image": "/product/bread-cloche.jpeg",
   "category": "Bakeware",
   "brand": "ProBake",
   "rating": 4.0,
@@ -259,7 +258,6 @@ export const products: Product[] = [
   "backendId": 14,
   "name": "Cast Iron Skillet 10-inch",
   "price": 29.99,
-  "image": "/product/cast-iron-skillet-10inch.jpeg",
   "category": "Bakeware",
   "brand": "KitchenPro",
   "rating": 4.1,
@@ -277,7 +275,6 @@ export const products: Product[] = [
   "backendId": 15,
   "name": "Pullman Loaf Pan with Lid",
   "price": 22.99,
-  "image": "/assets/products/pullman-loaf-pan-lid.jpeg",
   "category": "Bakeware",
   "brand": "ArtisanBake",
   "rating": 4.2,
@@ -287,14 +284,14 @@ export const products: Product[] = [
   "tags": [
     "essential"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/assets/products/pullman-loaf-pan-lid.jpeg"
 },
   {
   "id": "ceramic-pie-dish",
   "backendId": 16,
   "name": "Ceramic Pie Dish",
   "price": 17.49,
-  "image": "/assets/products/ceramic-pie-dish.jpeg",
   "category": "Bakeware",
   "brand": "Baker's Choice",
   "rating": 4.3,
@@ -304,14 +301,14 @@ export const products: Product[] = [
   "tags": [
     "essential"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/assets/products/ceramic-pie-dish.jpeg"
 },
   {
   "id": "angel-food-cake-pan",
   "backendId": 17,
   "name": "Angel Food Cake Pan",
   "price": 14.99,
-  "image": "/assets/products/angel-food-cake-pan.jpeg",
   "category": "Bakeware",
   "brand": "CakeMaster",
   "rating": 4.4,
@@ -322,14 +319,14 @@ export const products: Product[] = [
     "essential",
     "recommend"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/assets/products/angel-food-cake-pan.jpeg"
 },
   {
   "id": "ramekins-set-6",
   "backendId": 18,
   "name": "Ramekins Set of 6",
   "price": 19.99,
-  "image": "/assets/products/ramekins-set-6.jpeg",
   "category": "Bakeware",
   "brand": "Whiffle",
   "rating": 4.5,
@@ -340,14 +337,14 @@ export const products: Product[] = [
     "essential",
     "popular"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/assets/products/ramekins-set-6.jpeg"
 },
   {
   "id": "madeline-pan",
   "backendId": 19,
   "name": "Madeline Pan",
   "price": 12.49,
-  "image": "/assets/products/madeline-pan.jpeg",
   "category": "Bakeware",
   "brand": "BakeRight",
   "rating": 4.6,
@@ -357,14 +354,14 @@ export const products: Product[] = [
   "tags": [
     "essential"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/assets/products/madeline-pan.jpeg"
 },
   {
   "id": "strong-white-bread-flour-1kg",
   "backendId": 20,
   "name": "Strong White Bread Flour 1kg",
   "price": 3.49,
-  "image": "/assets/products/strong-white-bread-flour-1kg.jpeg",
   "category": "Ingredients",
   "brand": "SweetCraft",
   "rating": 4.7,
@@ -374,14 +371,14 @@ export const products: Product[] = [
   "tags": [
     "essential"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/assets/products/strong-white-bread-flour-1kg.jpeg"
 },
   {
   "id": "self-raising-flour-1-5kg",
   "backendId": 21,
   "name": "Self-Raising Flour 1.5kg",
   "price": 3.29,
-  "image": "/assets/products/self-raising-flour-1-5kg.jpg",
   "category": "Ingredients",
   "brand": "ProBake",
   "rating": 4.8,
@@ -391,14 +388,14 @@ export const products: Product[] = [
   "tags": [
     "essential"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/assets/products/self-raising-flour-1-5kg.jpg"
 },
   {
   "id": "caster-sugar-1kg",
   "backendId": 22,
   "name": "Caster Sugar 1kg",
   "price": 2.49,
-  "image": "/product/caster-sugar-1kg.jpeg",
   "category": "Ingredients",
   "brand": "KitchenPro",
   "rating": 4.9,
@@ -417,7 +414,6 @@ export const products: Product[] = [
   "backendId": 23,
   "name": "Dark Muscovado Sugar 500g",
   "price": 2.99,
-  "image": "/product/dark-muscovado-sugar-500g.jpeg",
   "category": "Ingredients",
   "brand": "ArtisanBake",
   "rating": 5.0,
@@ -427,14 +423,14 @@ export const products: Product[] = [
   "tags": [
     "essential"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/product/Dark_Muscovado_Sugar_500g_202605091238.jpeg"
 },
   {
   "id": "unsalted-butter-250g",
   "backendId": 24,
   "name": "Unsalted Butter Blocks 250g",
   "price": 2.79,
-  "image": "/product/unsalted-butter-250g.jpeg",
   "category": "Ingredients",
   "brand": "Baker's Choice",
   "rating": 4.0,
@@ -451,7 +447,6 @@ export const products: Product[] = [
   "backendId": 25,
   "name": "Cocoa Powder 250g",
   "price": 3.99,
-  "image": "/assets/products/cocoa-powder-250g.jpeg",
   "category": "Ingredients",
   "brand": "CakeMaster",
   "rating": 4.1,
@@ -461,14 +456,14 @@ export const products: Product[] = [
   "tags": [
     "essential"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/assets/products/cocoa-powder-250g.jpeg"
 },
   {
   "id": "vanilla-bean-paste-100ml",
   "backendId": 26,
   "name": "Vanilla Bean Paste 100ml",
   "price": 6.99,
-  "image": "/assets/products/vanilla-bean-paste-100ml.jpeg",
   "category": "Ingredients",
   "brand": "Whiffle",
   "rating": 4.2,
@@ -479,14 +474,14 @@ export const products: Product[] = [
     "essential",
     "popular"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/assets/products/vanilla-bean-paste-100ml.jpeg"
 },
   {
   "id": "active-dry-yeast-100g",
   "backendId": 27,
   "name": "Active Dry Yeast 100g",
   "price": 3.49,
-  "image": "/assets/products/active-dry-yeast-100g.jpeg",
   "category": "Ingredients",
   "brand": "BakeRight",
   "rating": 4.3,
@@ -497,14 +492,14 @@ export const products: Product[] = [
     "essential",
     "recommend"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/assets/products/active-dry-yeast-100g.jpeg"
 },
   {
   "id": "baking-powder-200g",
   "backendId": 28,
   "name": "Baking Powder 200g",
   "price": 2.19,
-  "image": "/product/baking-powder-200g.jpeg",
   "category": "Ingredients",
   "brand": "SweetCraft",
   "rating": 4.4,
@@ -514,14 +509,14 @@ export const products: Product[] = [
   "tags": [
     "essential"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/product/Baking_Powder_200g_logo_202605091239.jpeg"
 },
   {
   "id": "bicarbonate-of-soda-200g",
   "backendId": 29,
   "name": "Bicarbonate of Soda 200g",
   "price": 1.99,
-  "image": "/product/bicarbonate-of-soda-200g.jpeg",
   "category": "Ingredients",
   "brand": "ProBake",
   "rating": 4.5,
@@ -531,14 +526,14 @@ export const products: Product[] = [
   "tags": [
     "essential"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/product/Bicarbonate_of_Soda_200g_202605091240.jpeg"
 },
   {
   "id": "almond-flour-500g",
   "backendId": 30,
   "name": "Almond Flour 500g",
   "price": 7.99,
-  "image": "/assets/products/almond-flour-500g.jpeg",
   "category": "Ingredients",
   "brand": "KitchenPro",
   "rating": 4.6,
@@ -549,14 +544,14 @@ export const products: Product[] = [
     "essential",
     "popular"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/assets/products/almond-flour-500g.jpeg"
 },
   {
   "id": "dark-chocolate-chips-300g",
   "backendId": 31,
   "name": "Dark Chocolate Chips 300g",
   "price": 4.49,
-  "image": "/assets/products/dark-chocolate-chips-300g.jpg",
   "category": "Ingredients",
   "brand": "ArtisanBake",
   "rating": 4.7,
@@ -566,14 +561,14 @@ export const products: Product[] = [
   "tags": [
     "essential"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/assets/products/dark-chocolate-chips-300g.jpg"
 },
   {
   "id": "white-chocolate-chips-300g",
   "backendId": 32,
   "name": "White Chocolate Chips 300g",
   "price": 4.49,
-  "image": "/product/white-chocolate-chips-300g.jpeg",
   "category": "Ingredients",
   "brand": "Baker's Choice",
   "rating": 4.8,
@@ -584,14 +579,14 @@ export const products: Product[] = [
     "essential",
     "recommend"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/product/White_Chocolate_Chips_300g_logo_202605091240.jpeg"
 },
   {
   "id": "honey-500g",
   "backendId": 33,
   "name": "Honey 500g",
   "price": 5.99,
-  "image": "/product/honey-500g.jpeg",
   "category": "Ingredients",
   "brand": "CakeMaster",
   "rating": 4.9,
@@ -601,14 +596,14 @@ export const products: Product[] = [
   "tags": [
     "essential"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/product/Honey_500g_ingredient_product_202605091241.jpeg"
 },
   {
   "id": "maple-syrup-250ml",
   "backendId": 34,
   "name": "Maple Syrup 250ml",
   "price": 6.49,
-  "image": "/product/maple-syrup-250ml.jpeg",
   "category": "Ingredients",
   "brand": "Whiffle",
   "rating": 5.0,
@@ -619,14 +614,14 @@ export const products: Product[] = [
     "essential",
     "popular"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/product/Maple_syrup_250ml_logo_202605091241.jpeg"
 },
   {
   "id": "cream-of-tartar-75g",
   "backendId": 35,
   "name": "Cream of Tartar 75g",
   "price": 2.49,
-  "image": "/product/cream-of-tartar-75g.jpeg",
   "category": "Ingredients",
   "brand": "BakeRight",
   "rating": 4.0,
@@ -636,14 +631,14 @@ export const products: Product[] = [
   "tags": [
     "essential"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/product/Cream_of_Tartar_75g_logo_202605091241.jpeg"
 },
   {
   "id": "flaked-almonds-200g",
   "backendId": 36,
   "name": "Flaked Almonds 200g",
   "price": 3.29,
-  "image": "/product/flaked-almonds-200g.jpeg",
   "category": "Ingredients",
   "brand": "SweetCraft",
   "rating": 4.1,
@@ -653,14 +648,14 @@ export const products: Product[] = [
   "tags": [
     "essential"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/product/Flaked_Almonds_200g_logo_202605091241.jpeg"
 },
   {
   "id": "desiccated-coconut-200g",
   "backendId": 37,
   "name": "Desiccated Coconut 200g",
   "price": 2.49,
-  "image": "/product/desiccated-coconut-200g.jpeg",
   "category": "Ingredients",
   "brand": "ProBake",
   "rating": 4.2,
@@ -671,14 +666,14 @@ export const products: Product[] = [
     "essential",
     "recommend"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/product/Desiccated_coconut_200g_logo_202605091242.jpeg"
 },
   {
   "id": "offset-spatula-8inch",
   "backendId": 38,
   "name": "Offset Spatula 8-inch",
   "price": 7.99,
-  "image": "/product/offset-spatula-8inch.jpeg",
   "category": "Decorating Tools",
   "brand": "KitchenPro",
   "rating": 4.3,
@@ -696,7 +691,6 @@ export const products: Product[] = [
   "backendId": 39,
   "name": "Piping Bag Set 20pcs",
   "price": 9.99,
-  "image": "/assets/products/piping-bag-set-20pcs.jpg",
   "category": "Decorating Tools",
   "brand": "ArtisanBake",
   "rating": 4.4,
@@ -706,14 +700,14 @@ export const products: Product[] = [
   "tags": [
     "essential"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/assets/products/piping-bag-set-20pcs.jpg"
 },
   {
   "id": "turntable-cake-stand",
   "backendId": 40,
   "name": "Turntable Cake Stand",
   "price": 19.99,
-  "image": "/assets/products/turntable-cake-stand.jpg",
   "category": "Decorating Tools",
   "brand": "Baker's Choice",
   "rating": 4.5,
@@ -723,14 +717,14 @@ export const products: Product[] = [
   "tags": [
     "essential"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/assets/products/turntable-cake-stand.jpg"
 },
   {
   "id": "bench-scraper-stainless",
   "backendId": 41,
   "name": "Bench Scraper Stainless",
   "price": 5.99,
-  "image": "/product/bench-scraper-stainless.jpeg",
   "category": "Decorating Tools",
   "brand": "CakeMaster",
   "rating": 4.6,
@@ -747,7 +741,6 @@ export const products: Product[] = [
   "backendId": 42,
   "name": "Fondant Smoother",
   "price": 6.49,
-  "image": "/assets/products/fondant-smoother.jpg",
   "category": "Decorating Tools",
   "brand": "Whiffle",
   "rating": 4.7,
@@ -759,14 +752,14 @@ export const products: Product[] = [
     "popular",
     "recommend"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/assets/products/fondant-smoother.jpg"
 },
   {
   "id": "cookie-cutter-set-20pcs",
   "backendId": 43,
   "name": "Cookie Cutter Set 20pcs",
   "price": 12.99,
-  "image": "/assets/products/cookie-cutter-set-20pcs.jpg",
   "category": "Decorating Tools",
   "brand": "BakeRight",
   "rating": 4.8,
@@ -776,14 +769,14 @@ export const products: Product[] = [
   "tags": [
     "essential"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/assets/products/cookie-cutter-set-20pcs.jpg"
 },
   {
   "id": "nozzle-tip-set-24pcs",
   "backendId": 44,
   "name": "Nozzle Tip Set 24pcs",
   "price": 14.99,
-  "image": "/product/nozzle-tip-set-24pcs.jpeg",
   "category": "Decorating Tools",
   "brand": "SweetCraft",
   "rating": 4.9,
@@ -793,14 +786,14 @@ export const products: Product[] = [
   "tags": [
     "essential"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/product/Nozzle_tip_set_24pcs_202605091246.jpeg"
 },
   {
   "id": "cake-leveller",
   "backendId": 45,
   "name": "Cake Leveller",
   "price": 8.49,
-  "image": "/product/cake-leveller.jpeg",
   "category": "Decorating Tools",
   "brand": "ProBake",
   "rating": 5.0,
@@ -810,14 +803,14 @@ export const products: Product[] = [
   "tags": [
     "essential"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/product/Cake_Leveller_decorating_tool_202605091246.jpeg"
 },
   {
   "id": "food-colouring-gel-set-12",
   "backendId": 46,
   "name": "Food Colouring Gel Set 12",
   "price": 15.99,
-  "image": "/assets/products/food-colouring-gel-set-12.jpg",
   "category": "Decorating Tools",
   "brand": "KitchenPro",
   "rating": 4.0,
@@ -828,14 +821,14 @@ export const products: Product[] = [
     "essential",
     "popular"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/assets/products/food-colouring-gel-set-12.jpg"
 },
   {
   "id": "edible-gold-dust-5g",
   "backendId": 47,
   "name": "Edible Gold Dust 5g",
   "price": 4.99,
-  "image": "/product/edible-gold-dust-5g.jpeg",
   "category": "Decorating Tools",
   "brand": "ArtisanBake",
   "rating": 4.1,
@@ -846,14 +839,14 @@ export const products: Product[] = [
     "essential",
     "recommend"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/product/Edible_Gold_Dust_5g_202605091246.jpeg"
 },
   {
   "id": "cake-decorating-comb-set",
   "backendId": 48,
   "name": "Cake Decorating Comb Set",
   "price": 7.99,
-  "image": "/assets/products/cake-decorating-comb-set.jpeg",
   "category": "Decorating Tools",
   "brand": "Baker's Choice",
   "rating": 4.2,
@@ -863,14 +856,14 @@ export const products: Product[] = [
   "tags": [
     "essential"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/assets/products/cake-decorating-comb-set.jpeg"
 },
   {
   "id": "palette-knife-straight",
   "backendId": 49,
   "name": "Palette Knife Straight",
   "price": 5.49,
-  "image": "/product/palette-knife-straight.jpeg",
   "category": "Decorating Tools",
   "brand": "CakeMaster",
   "rating": 4.3,
@@ -880,14 +873,14 @@ export const products: Product[] = [
   "tags": [
     "essential"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/product/Palette_Knife_Straight_decoratin\u2026_202605091247.jpeg"
 },
   {
   "id": "silicone-mould-roses",
   "backendId": 50,
   "name": "Silicone Mould Roses",
   "price": 6.99,
-  "image": "/assets/products/silicone-mould-roses.jpeg",
   "category": "Decorating Tools",
   "brand": "Whiffle",
   "rating": 4.4,
@@ -898,14 +891,14 @@ export const products: Product[] = [
     "essential",
     "popular"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/assets/products/silicone-mould-roses.jpeg"
 },
   {
   "id": "stencil-set-geometric",
   "backendId": 51,
   "name": "Stencil Set Geometric",
   "price": 8.99,
-  "image": "/product/stencil-set-geometric.jpeg",
   "category": "Decorating Tools",
   "brand": "BakeRight",
   "rating": 4.5,
@@ -915,14 +908,14 @@ export const products: Product[] = [
   "tags": [
     "essential"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/product/Stencil_Set_Geometric_Decorating\u2026_202605091247.jpeg"
 },
   {
   "id": "pastry-brush-silicone",
   "backendId": 52,
   "name": "Pastry Brush Silicone",
   "price": 4.99,
-  "image": "/product/pastry-brush-silicone.jpeg",
   "category": "Decorating Tools",
   "brand": "SweetCraft",
   "rating": 4.6,
@@ -933,14 +926,14 @@ export const products: Product[] = [
     "essential",
     "recommend"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/product/Pastry_brush_silicone_decorating\u2026_202605091247.jpeg"
 },
   {
   "id": "cake-drum-10inch",
   "backendId": 53,
   "name": "Cake Drum 10-inch",
   "price": 3.99,
-  "image": "/product/cake-drum-10inch.jpeg",
   "category": "Decorating Tools",
   "brand": "ProBake",
   "rating": 4.7,
@@ -957,7 +950,6 @@ export const products: Product[] = [
   "backendId": 54,
   "name": "Ribbon Crimper Tool",
   "price": 5.49,
-  "image": "/product/ribbon-crimper-tool.jpeg",
   "category": "Decorating Tools",
   "brand": "KitchenPro",
   "rating": 4.8,
@@ -968,14 +960,14 @@ export const products: Product[] = [
     "essential",
     "popular"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/product/Ribbon_Crimper_Tool_202605091247.jpeg"
 },
   {
   "id": "lustre-spray-silver",
   "backendId": 55,
   "name": "Lustre Spray Silver",
   "price": 6.99,
-  "image": "/product/lustre-spray-silver.jpeg",
   "category": "Decorating Tools",
   "brand": "ArtisanBake",
   "rating": 4.9,
@@ -985,14 +977,14 @@ export const products: Product[] = [
   "tags": [
     "essential"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/product/Lustre_Spray_Silver_decorating_tool_202605091247.jpeg"
 },
   {
   "id": "bakers-apron-canvas",
   "backendId": 56,
   "name": "Baker's Apron Canvas",
   "price": 24.99,
-  "image": "/assets/products/bakers-apron-canvas.jpg",
   "category": "Accessories",
   "brand": "Baker's Choice",
   "rating": 5.0,
@@ -1002,14 +994,14 @@ export const products: Product[] = [
   "tags": [
     "essential"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/assets/products/bakers-apron-canvas.jpg"
 },
   {
   "id": "digital-kitchen-scale-5kg",
   "backendId": 57,
   "name": "Digital Kitchen Scale 5kg",
   "price": 19.99,
-  "image": "/product/digital-kitchen-scale-5kg.jpeg",
   "category": "Accessories",
   "brand": "CakeMaster",
   "rating": 4.0,
@@ -1020,14 +1012,14 @@ export const products: Product[] = [
     "essential",
     "recommend"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/product/Digital_kitchen_scale_5kg_202605091251.jpeg"
 },
   {
   "id": "kitchen-timer-mechanical",
   "backendId": 58,
   "name": "Kitchen Timer Mechanical",
   "price": 8.99,
-  "image": "/product/kitchen-timer-mechanical.jpeg",
   "category": "Accessories",
   "brand": "Whiffle",
   "rating": 4.1,
@@ -1038,14 +1030,14 @@ export const products: Product[] = [
     "essential",
     "popular"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/product/Kitchen_Timer_Mechanical_Accesso\u2026_202605091251.jpeg"
 },
   {
   "id": "oven-thermometer",
   "backendId": 59,
   "name": "Oven Thermometer",
   "price": 7.49,
-  "image": "/product/oven-thermometer.jpeg",
   "category": "Accessories",
   "brand": "BakeRight",
   "rating": 4.2,
@@ -1062,7 +1054,6 @@ export const products: Product[] = [
   "backendId": 60,
   "name": "Stand Mixer Splash Guard",
   "price": 14.99,
-  "image": "/product/stand-mixer-splash-guard.jpeg",
   "category": "Accessories",
   "brand": "SweetCraft",
   "rating": 4.3,
@@ -1072,14 +1063,14 @@ export const products: Product[] = [
   "tags": [
     "essential"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/product/Stand_Mixer_Splash_Guard_Accesso\u2026_202605091252.jpeg"
 },
   {
   "id": "silicone-baking-mat-set",
   "backendId": 61,
   "name": "Silicone Baking Mat Set x2",
   "price": 12.99,
-  "image": "/src/assets/products/silicone-baking-mat-set.jpg",
   "category": "Accessories",
   "brand": "ProBake",
   "rating": 4.4,
@@ -1089,14 +1080,14 @@ export const products: Product[] = [
   "tags": [
     "essential"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/src/assets/products/silicone-baking-mat-set.jpg"
 },
   {
   "id": "dough-scraper-plastic",
   "backendId": 62,
   "name": "Dough Scraper Plastic",
   "price": 3.49,
-  "image": "/src/assets/products/dough-scraper-plastic.jpeg",
   "category": "Accessories",
   "brand": "KitchenPro",
   "rating": 4.5,
@@ -1108,14 +1099,14 @@ export const products: Product[] = [
     "popular",
     "recommend"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/src/assets/products/dough-scraper-plastic.jpeg"
 },
   {
   "id": "rolling-pin-french-tapered",
   "backendId": 63,
   "name": "Rolling Pin French Tapered",
   "price": 11.99,
-  "image": "/src/assets/products/rolling-pin-french-tapered.jpg",
   "category": "Accessories",
   "brand": "ArtisanBake",
   "rating": 4.6,
@@ -1125,14 +1116,14 @@ export const products: Product[] = [
   "tags": [
     "essential"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/src/assets/products/rolling-pin-french-tapered.jpg"
 },
   {
   "id": "whisks-set-of-3",
   "backendId": 64,
   "name": "Whisks Set of 3",
   "price": 13.99,
-  "image": "/src/assets/products/whisks-set-of-3.jpg",
   "category": "Accessories",
   "brand": "Baker's Choice",
   "rating": 4.7,
@@ -1142,14 +1133,14 @@ export const products: Product[] = [
   "tags": [
     "essential"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/src/assets/products/whisks-set-of-3.jpg"
 },
   {
   "id": "cooling-rack-set-x2",
   "backendId": 65,
   "name": "Cooling Rack Set x2",
   "price": 11.49,
-  "image": "/src/assets/products/cooling-rack-set-x2.jpg",
   "category": "Accessories",
   "brand": "CakeMaster",
   "rating": 4.8,
@@ -1159,14 +1150,14 @@ export const products: Product[] = [
   "tags": [
     "essential"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/src/assets/products/cooling-rack-set-x2.jpg"
 },
   {
   "id": "dough-proofer-box",
   "backendId": 66,
   "name": "Dough Proofer Box",
   "price": 39.99,
-  "image": "/product/dough-proofer-box.jpeg",
   "category": "Accessories",
   "brand": "Whiffle",
   "rating": 4.9,
@@ -1177,14 +1168,14 @@ export const products: Product[] = [
     "essential",
     "popular"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/product/Dough_Proofer_Box_accessories_202605091252.jpeg"
 },
   {
   "id": "bench-flour-duster",
   "backendId": 67,
   "name": "Bench Flour Duster",
   "price": 9.99,
-  "image": "/product/bench-flour-duster.jpeg",
   "category": "Accessories",
   "brand": "BakeRight",
   "rating": 5.0,
@@ -1195,14 +1186,14 @@ export const products: Product[] = [
     "essential",
     "recommend"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/product/Bench_Flour_Duster_Accessories_202605091252.jpeg"
 },
   {
   "id": "instant-read-thermometer",
   "backendId": 68,
   "name": "Instant-Read Thermometer",
   "price": 19.99,
-  "image": "/product/instant-read-thermometer.jpeg",
   "category": "Accessories",
   "brand": "SweetCraft",
   "rating": 4.0,
@@ -1219,7 +1210,6 @@ export const products: Product[] = [
   "backendId": 69,
   "name": "Pastry Mat Silicone XL",
   "price": 14.49,
-  "image": "/product/pastry-mat-silicone-xl.jpeg",
   "category": "Accessories",
   "brand": "ProBake",
   "rating": 4.1,
@@ -1229,14 +1219,14 @@ export const products: Product[] = [
   "tags": [
     "essential"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/product/Pastry_Mat_Silicone_XL_202605091252.jpeg"
 },
   {
   "id": "bread-lame-and-cover",
   "backendId": 70,
   "name": "Bread Lame & Cover",
   "price": 11.99,
-  "image": "/src/assets/products/bread-lame-and-cover.jpeg",
   "category": "Accessories",
   "brand": "KitchenPro",
   "rating": 4.2,
@@ -1247,14 +1237,14 @@ export const products: Product[] = [
     "essential",
     "popular"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/src/assets/products/bread-lame-and-cover.jpeg"
 },
   {
   "id": "cake-box-set-10pcs",
   "backendId": 71,
   "name": "Cake Box Set 10pcs",
   "price": 8.99,
-  "image": "/product/cake-box-set-10pcs.jpeg",
   "category": "Accessories",
   "brand": "ArtisanBake",
   "rating": 4.3,
@@ -1264,14 +1254,14 @@ export const products: Product[] = [
   "tags": [
     "essential"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/product/Cake_Box_Set_10pcs_202605091252.jpeg"
 },
   {
   "id": "bread-bakers-bundle",
   "backendId": 72,
   "name": "Bread Baker's Bundle",
   "price": 49.99,
-  "image": "/src/assets/products/bread-bakers-bundle.jpg",
   "category": "Bundles",
   "brand": "Baker's Choice",
   "rating": 4.4,
@@ -1282,14 +1272,14 @@ export const products: Product[] = [
     "essential",
     "recommend"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/src/assets/products/bread-bakers-bundle.jpg"
 },
   {
   "id": "cake-decorator-bundle",
   "backendId": 73,
   "name": "Cake Decorator Bundle",
   "price": 54.99,
-  "image": "/product/cake-decorator-bundle.jpeg",
   "category": "Bundles",
   "brand": "CakeMaster",
   "rating": 4.5,
@@ -1306,7 +1296,6 @@ export const products: Product[] = [
   "backendId": 74,
   "name": "Weekend Baker Bundle",
   "price": 44.99,
-  "image": "/product/weekend-baker-bundle.jpeg",
   "category": "Bundles",
   "brand": "Whiffle",
   "rating": 4.6,
@@ -1317,14 +1306,14 @@ export const products: Product[] = [
     "essential",
     "popular"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/product/Weekend_Baker_Bundle_logo_202605091255.jpeg"
 },
   {
   "id": "chocolate-lover-bundle",
   "backendId": 75,
   "name": "Chocolate Lover Bundle",
   "price": 29.99,
-  "image": "/src/assets/products/chocolate-lover-bundle.jpg",
   "category": "Bundles",
   "brand": "BakeRight",
   "rating": 4.7,
@@ -1334,14 +1323,14 @@ export const products: Product[] = [
   "tags": [
     "essential"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/src/assets/products/chocolate-lover-bundle.jpg"
 },
   {
   "id": "cookie-baking-bundle",
   "backendId": 76,
   "name": "Cookie Baking Bundle",
   "price": 34.99,
-  "image": "/src/assets/products/cookie-baking-bundle.jpg",
   "category": "Bundles",
   "brand": "SweetCraft",
   "rating": 4.8,
@@ -1351,14 +1340,14 @@ export const products: Product[] = [
   "tags": [
     "essential"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/src/assets/products/cookie-baking-bundle.jpg"
 },
   {
   "id": "sourdough-starter-bundle",
   "backendId": 77,
   "name": "Sourdough Starter Bundle",
   "price": 89.99,
-  "image": "/product/sourdough-starter-bundle.jpeg",
   "category": "Bundles",
   "brand": "ProBake",
   "rating": 4.9,
@@ -1376,7 +1365,6 @@ export const products: Product[] = [
   "backendId": 78,
   "name": "Cupcake Party Bundle",
   "price": 39.99,
-  "image": "/src/assets/products/cupcake-party-bundle.jpeg",
   "category": "Bundles",
   "brand": "KitchenPro",
   "rating": 5.0,
@@ -1387,14 +1375,14 @@ export const products: Product[] = [
     "essential",
     "popular"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/src/assets/products/cupcake-party-bundle.jpeg"
 },
   {
   "id": "french-patisserie-bundle",
   "backendId": 79,
   "name": "French Patisserie Bundle",
   "price": 59.99,
-  "image": "/product/french-patisserie-bundle.jpeg",
   "category": "Bundles",
   "brand": "ArtisanBake",
   "rating": 4.0,
@@ -1411,7 +1399,6 @@ export const products: Product[] = [
   "backendId": 80,
   "name": "Gluten-Free Baking Bundle",
   "price": 49.99,
-  "image": "/product/gluten-free-baking-bundle.jpeg",
   "category": "Bundles",
   "brand": "Baker's Choice",
   "rating": 4.1,
@@ -1428,7 +1415,6 @@ export const products: Product[] = [
   "backendId": 81,
   "name": "Holiday Baking Bundle",
   "price": 44.99,
-  "image": "/product/holiday-baking-bundle.jpeg",
   "category": "Bundles",
   "brand": "CakeMaster",
   "rating": 4.2,
@@ -1445,7 +1431,6 @@ export const products: Product[] = [
   "backendId": 82,
   "name": "Pastry Chef Bundle",
   "price": 52.99,
-  "image": "/product/pastry-chef-bundle.jpeg",
   "category": "Bundles",
   "brand": "Whiffle",
   "rating": 4.3,
@@ -1464,7 +1449,6 @@ export const products: Product[] = [
   "backendId": 83,
   "name": "Everyday Baking Bundle",
   "price": 38.99,
-  "image": "/product/everyday-baking-bundle.jpeg",
   "category": "Bundles",
   "brand": "BakeRight",
   "rating": 4.4,
@@ -1481,7 +1465,6 @@ export const products: Product[] = [
   "backendId": 84,
   "name": "Fondant Artist Bundle",
   "price": 47.99,
-  "image": "/product/fondant-artist-bundle.jpeg",
   "category": "Bundles",
   "brand": "SweetCraft",
   "rating": 4.5,
@@ -1491,14 +1474,14 @@ export const products: Product[] = [
   "tags": [
     "essential"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/product/Fondant_Artist_Bundle_logo_202605091256.jpeg"
 },
   {
   "id": "pizza-night-bundle",
   "backendId": 85,
   "name": "Pizza Night Bundle",
   "price": 59.99,
-  "image": "/product/pizza-night-bundle.jpeg",
   "category": "Bundles",
   "brand": "ProBake",
   "rating": 4.6,
@@ -1515,7 +1498,6 @@ export const products: Product[] = [
   "backendId": 86,
   "name": "Gift Baker Bundle",
   "price": 69.99,
-  "image": "/product/gift-baker-bundle.jpeg",
   "category": "Bundles",
   "brand": "KitchenPro",
   "rating": 4.7,
@@ -1533,7 +1515,6 @@ export const products: Product[] = [
   "backendId": 87,
   "name": "Complete Beginner Baking Kit",
   "price": 79.99,
-  "image": "/src/assets/products/complete-beginner-baking-kit.jpg",
   "category": "Starter Kits",
   "brand": "ArtisanBake",
   "rating": 4.8,
@@ -1544,14 +1525,14 @@ export const products: Product[] = [
     "essential",
     "recommend"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/src/assets/products/complete-beginner-baking-kit.jpg"
 },
   {
   "id": "kids-baking-starter-kit",
   "backendId": 88,
   "name": "Kids Baking Starter Kit",
   "price": 34.99,
-  "image": "/src/assets/products/kids-baking-starter-kit.jpg",
   "category": "Starter Kits",
   "brand": "Baker's Choice",
   "rating": 4.9,
@@ -1561,14 +1542,14 @@ export const products: Product[] = [
   "tags": [
     "essential"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/src/assets/products/kids-baking-starter-kit.jpg"
 },
   {
   "id": "bread-baking-starter-kit",
   "backendId": 89,
   "name": "Bread Baking Starter Kit",
   "price": 44.99,
-  "image": "/product/bread-baking-starter-kit.jpeg",
   "category": "Starter Kits",
   "brand": "CakeMaster",
   "rating": 5.0,
@@ -1578,14 +1559,14 @@ export const products: Product[] = [
   "tags": [
     "essential"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/product/Bread_Baking_Starter_Kit_202605091258.jpeg"
 },
   {
   "id": "cake-baking-starter-kit",
   "backendId": 90,
   "name": "Cake Baking Starter Kit",
   "price": 39.99,
-  "image": "/product/cake-baking-starter-kit.jpeg",
   "category": "Starter Kits",
   "brand": "Whiffle",
   "rating": 4.0,
@@ -1596,14 +1577,14 @@ export const products: Product[] = [
     "essential",
     "popular"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/product/Cake_Baking_Starter_Kit_Logo_202605091258.jpeg"
 },
   {
   "id": "cookie-baking-starter-kit",
   "backendId": 91,
   "name": "Cookie Baking Starter Kit",
   "price": 29.99,
-  "image": "/product/cookie-baking-starter-kit.jpeg",
   "category": "Starter Kits",
   "brand": "BakeRight",
   "rating": 4.1,
@@ -1613,14 +1594,14 @@ export const products: Product[] = [
   "tags": [
     "essential"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/product/Cookie_Baking_Starter_Kit_202605091258.jpeg"
 },
   {
   "id": "sourdough-starter-kit",
   "backendId": 92,
   "name": "Sourdough Starter Kit",
   "price": 59.99,
-  "image": "/src/assets/products/sourdough-starter-kit.jpg",
   "category": "Starter Kits",
   "brand": "SweetCraft",
   "rating": 4.2,
@@ -1631,14 +1612,14 @@ export const products: Product[] = [
     "essential",
     "recommend"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/src/assets/products/sourdough-starter-kit.jpg"
 },
   {
   "id": "cupcake-starter-kit",
   "backendId": 93,
   "name": "Cupcake Starter Kit",
   "price": 34.99,
-  "image": "/src/assets/products/cupcake-starter-kit.jpg",
   "category": "Starter Kits",
   "brand": "ProBake",
   "rating": 4.3,
@@ -1648,14 +1629,14 @@ export const products: Product[] = [
   "tags": [
     "essential"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/src/assets/products/cupcake-starter-kit.jpg"
 },
   {
   "id": "french-pastry-starter-kit",
   "backendId": 94,
   "name": "French Pastry Starter Kit",
   "price": 49.99,
-  "image": "/product/french-pastry-starter-kit.jpeg",
   "category": "Starter Kits",
   "brand": "KitchenPro",
   "rating": 4.4,
@@ -1666,14 +1647,14 @@ export const products: Product[] = [
     "essential",
     "popular"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/product/French_Pastry_Starter_Kit_202605091259.jpeg"
 },
   {
   "id": "healthy-baking-starter-kit",
   "backendId": 95,
   "name": "Healthy Baking Starter Kit",
   "price": 44.99,
-  "image": "/product/healthy-baking-starter-kit.jpeg",
   "category": "Starter Kits",
   "brand": "ArtisanBake",
   "rating": 4.5,
@@ -1683,14 +1664,14 @@ export const products: Product[] = [
   "tags": [
     "essential"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/product/Healthy_Baking_Starter_Kit_202605091259.jpeg"
 },
   {
   "id": "decoration-starter-kit",
   "backendId": 96,
   "name": "Decoration Starter Kit",
   "price": 44.99,
-  "image": "/src/assets/products/decoration-starter-kit.jpg",
   "category": "Starter Kits",
   "brand": "Baker's Choice",
   "rating": 4.6,
@@ -1700,14 +1681,14 @@ export const products: Product[] = [
   "tags": [
     "essential"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/src/assets/products/decoration-starter-kit.jpg"
 },
   {
   "id": "gluten-free-starter-kit",
   "backendId": 97,
   "name": "Gluten-Free Starter Kit",
   "price": 49.99,
-  "image": "/src/assets/products/gluten-free-starter-kit.jpeg",
   "category": "Starter Kits",
   "brand": "CakeMaster",
   "rating": 4.7,
@@ -1718,14 +1699,14 @@ export const products: Product[] = [
     "essential",
     "recommend"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/src/assets/products/gluten-free-starter-kit.jpeg"
 },
   {
   "id": "cheesecake-starter-kit",
   "backendId": 98,
   "name": "Cheesecake Starter Kit",
   "price": 39.99,
-  "image": "/src/assets/products/cheesecake-starter-kit.jpeg",
   "category": "Starter Kits",
   "brand": "Whiffle",
   "rating": 4.8,
@@ -1736,14 +1717,14 @@ export const products: Product[] = [
     "essential",
     "popular"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/src/assets/products/cheesecake-starter-kit.jpeg"
 },
   {
   "id": "vegan-baking-starter-kit",
   "backendId": 99,
   "name": "Vegan Baking Starter Kit",
   "price": 44.99,
-  "image": "/src/assets/products/vegan-baking-starter-kit.jpeg",
   "category": "Starter Kits",
   "brand": "BakeRight",
   "rating": 4.9,
@@ -1753,14 +1734,14 @@ export const products: Product[] = [
   "tags": [
     "essential"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/src/assets/products/vegan-baking-starter-kit.jpeg"
 },
   {
   "id": "pizza-starter-kit",
   "backendId": 100,
   "name": "Pizza Starter Kit",
   "price": 49.99,
-  "image": "/product/pizza-starter-kit.jpeg",
   "category": "Starter Kits",
   "brand": "SweetCraft",
   "rating": 5.0,
@@ -1770,14 +1751,14 @@ export const products: Product[] = [
   "tags": [
     "essential"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/product/Pizza_Starter_Kit_Gift-Wrapped_202605091300.jpeg"
 },
   {
   "id": "gift-wrapped-starter-kit",
   "backendId": 101,
   "name": "Gift-Wrapped Starter Kit",
   "price": 89.99,
-  "image": "/product/gift-wrapped-starter-kit.jpeg",
   "category": "Starter Kits",
   "brand": "ProBake",
   "rating": 4.0,
