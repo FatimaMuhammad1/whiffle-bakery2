@@ -200,7 +200,7 @@ export const products: Product[] = [
     "popular"
   ],
   "inStock": true,
-  "image": "/product/Tart_pan_removable_base_202605091300.jpeg"
+  "image": "/assets/products/Tart_pan_removable_base_202605091300.jpeg"
 },
   {
   "id": "silicone-muffin-mould",
@@ -251,7 +251,8 @@ export const products: Product[] = [
   "tags": [
     "essential"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/assets/products/Bakeware__Bread_Cloche_202605091301.jpeg"
 },
   {
   "id": "cast-iron-skillet-10inch",
@@ -268,7 +269,8 @@ export const products: Product[] = [
     "essential",
     "popular"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/assets/products/Cast_Iron_Skillet_10-inch_202605091301.jpeg"
 },
   {
   "id": "pullman-loaf-pan-lid",
@@ -424,7 +426,7 @@ export const products: Product[] = [
     "essential"
   ],
   "inStock": true,
-  "image": "/product/Dark_Muscovado_Sugar_500g_202605091238.jpeg"
+  "image": "/assets/products/Dark_Muscovado_Sugar_500g_202605091238.jpeg"
 },
   {
   "id": "unsalted-butter-250g",
@@ -440,7 +442,8 @@ export const products: Product[] = [
   "tags": [
     "essential"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/assets/products/Unsalted_Butter_Blocks_250g_202605091239.jpeg"
 },
   {
   "id": "cocoa-powder-250g",
@@ -510,7 +513,7 @@ export const products: Product[] = [
     "essential"
   ],
   "inStock": true,
-  "image": "/product/Baking_Powder_200g_logo_202605091239.jpeg"
+  "image": "/assets/products/Baking_Powder_200g_logo_202605091239.jpeg"
 },
   {
   "id": "bicarbonate-of-soda-200g",
@@ -527,7 +530,7 @@ export const products: Product[] = [
     "essential"
   ],
   "inStock": true,
-  "image": "/product/Bicarbonate_of_Soda_200g_202605091240.jpeg"
+  "image": "/assets/products/Bicarbonate_of_Soda_200g_202605091240.jpeg"
 },
   {
   "id": "almond-flour-500g",
@@ -580,7 +583,7 @@ export const products: Product[] = [
     "recommend"
   ],
   "inStock": true,
-  "image": "/product/White_Chocolate_Chips_300g_logo_202605091240.jpeg"
+  "image": "/assets/products/White_Chocolate_Chips_300g_logo_202605091240.jpeg"
 },
   {
   "id": "honey-500g",
@@ -597,7 +600,7 @@ export const products: Product[] = [
     "essential"
   ],
   "inStock": true,
-  "image": "/product/Honey_500g_ingredient_product_202605091241.jpeg"
+  "image": "/assets/products/Honey_500g_ingredient_product_202605091241.jpeg"
 },
   {
   "id": "maple-syrup-250ml",
@@ -615,7 +618,7 @@ export const products: Product[] = [
     "popular"
   ],
   "inStock": true,
-  "image": "/product/Maple_syrup_250ml_logo_202605091241.jpeg"
+  "image": "/assets/products/Maple_syrup_250ml_logo_202605091241.jpeg"
 },
   {
   "id": "cream-of-tartar-75g",
@@ -632,7 +635,7 @@ export const products: Product[] = [
     "essential"
   ],
   "inStock": true,
-  "image": "/product/Cream_of_Tartar_75g_logo_202605091241.jpeg"
+  "image": "/assets/products/Cream_of_Tartar_75g_logo_202605091241.jpeg"
 },
   {
   "id": "flaked-almonds-200g",
@@ -649,7 +652,7 @@ export const products: Product[] = [
     "essential"
   ],
   "inStock": true,
-  "image": "/product/Flaked_Almonds_200g_logo_202605091241.jpeg"
+  "image": "/assets/products/Flaked_Almonds_200g_logo_202605091241.jpeg"
 },
   {
   "id": "desiccated-coconut-200g",
@@ -667,7 +670,7 @@ export const products: Product[] = [
     "recommend"
   ],
   "inStock": true,
-  "image": "/product/Desiccated_coconut_200g_logo_202605091242.jpeg"
+  "image": "/assets/products/Desiccated_coconut_200g_logo_202605091242.jpeg"
 },
   {
   "id": "offset-spatula-8inch",
@@ -684,7 +687,8 @@ export const products: Product[] = [
     "essential",
     "popular"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/assets/products/8-inch_offset_spatula_decorating_202605091243.jpeg"
 },
   {
   "id": "piping-bag-set-20pcs",
@@ -734,7 +738,8 @@ export const products: Product[] = [
   "tags": [
     "essential"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/assets/products/Stainless_steel_bench_scraper_202605091246.jpeg"
 },
   {
   "id": "fondant-smoother",
@@ -787,7 +792,7 @@ export const products: Product[] = [
     "essential"
   ],
   "inStock": true,
-  "image": "/product/Nozzle_tip_set_24pcs_202605091246.jpeg"
+  "image": "/assets/products/Nozzle_tip_set_24pcs_202605091246.jpeg"
 },
   {
   "id": "cake-leveller",
@@ -804,7 +809,7 @@ export const products: Product[] = [
     "essential"
   ],
   "inStock": true,
-  "image": "/product/Cake_Leveller_decorating_tool_202605091246.jpeg"
+  "image": "/assets/products/Cake_Leveller_decorating_tool_202605091246.jpeg"
 },
   {
   "id": "food-colouring-gel-set-12",
@@ -840,7 +845,7 @@ export const products: Product[] = [
     "recommend"
   ],
   "inStock": true,
-  "image": "/product/Edible_Gold_Dust_5g_202605091246.jpeg"
+  "image": "/assets/products/Edible_Gold_Dust_5g_202605091246.jpeg"
 },
   {
   "id": "cake-decorating-comb-set",
@@ -874,7 +879,7 @@ export const products: Product[] = [
     "essential"
   ],
   "inStock": true,
-  "image": "/product/Palette_Knife_Straight_decoratin\u2026_202605091247.jpeg"
+  "image": "/assets/products/Palette_Knife_Straight_decoratin\u2026_202605091247.jpeg"
 },
   {
   "id": "silicone-mould-roses",
@@ -909,7 +914,7 @@ export const products: Product[] = [
     "essential"
   ],
   "inStock": true,
-  "image": "/product/Stencil_Set_Geometric_Decorating\u2026_202605091247.jpeg"
+  "image": "/assets/products/Stencil_Set_Geometric_Decorating\u2026_202605091247.jpeg"
 },
   {
   "id": "pastry-brush-silicone",
@@ -927,7 +932,7 @@ export const products: Product[] = [
     "recommend"
   ],
   "inStock": true,
-  "image": "/product/Pastry_brush_silicone_decorating\u2026_202605091247.jpeg"
+  "image": "/assets/products/Pastry_brush_silicone_decorating\u2026_202605091247.jpeg"
 },
   {
   "id": "cake-drum-10inch",
@@ -961,7 +966,7 @@ export const products: Product[] = [
     "popular"
   ],
   "inStock": true,
-  "image": "/product/Ribbon_Crimper_Tool_202605091247.jpeg"
+  "image": "/assets/products/Ribbon_Crimper_Tool_202605091247.jpeg"
 },
   {
   "id": "lustre-spray-silver",
@@ -978,7 +983,7 @@ export const products: Product[] = [
     "essential"
   ],
   "inStock": true,
-  "image": "/product/Lustre_Spray_Silver_decorating_tool_202605091247.jpeg"
+  "image": "/assets/products/Lustre_Spray_Silver_decorating_tool_202605091247.jpeg"
 },
   {
   "id": "bakers-apron-canvas",
@@ -1013,7 +1018,7 @@ export const products: Product[] = [
     "recommend"
   ],
   "inStock": true,
-  "image": "/product/Digital_kitchen_scale_5kg_202605091251.jpeg"
+  "image": "/assets/products/Digital_kitchen_scale_5kg_202605091251.jpeg"
 },
   {
   "id": "kitchen-timer-mechanical",
@@ -1031,7 +1036,7 @@ export const products: Product[] = [
     "popular"
   ],
   "inStock": true,
-  "image": "/product/Kitchen_Timer_Mechanical_Accesso\u2026_202605091251.jpeg"
+  "image": "/assets/products/Kitchen_Timer_Mechanical_Accesso\u2026_202605091251.jpeg"
 },
   {
   "id": "oven-thermometer",
@@ -1064,7 +1069,7 @@ export const products: Product[] = [
     "essential"
   ],
   "inStock": true,
-  "image": "/product/Stand_Mixer_Splash_Guard_Accesso\u2026_202605091252.jpeg"
+  "image": "/assets/products/Stand_Mixer_Splash_Guard_Accesso\u2026_202605091252.jpeg"
 },
   {
   "id": "silicone-baking-mat-set",
@@ -1169,7 +1174,7 @@ export const products: Product[] = [
     "popular"
   ],
   "inStock": true,
-  "image": "/product/Dough_Proofer_Box_accessories_202605091252.jpeg"
+  "image": "/assets/products/Dough_Proofer_Box_accessories_202605091252.jpeg"
 },
   {
   "id": "bench-flour-duster",
@@ -1187,7 +1192,7 @@ export const products: Product[] = [
     "recommend"
   ],
   "inStock": true,
-  "image": "/product/Bench_Flour_Duster_Accessories_202605091252.jpeg"
+  "image": "/assets/products/Bench_Flour_Duster_Accessories_202605091252.jpeg"
 },
   {
   "id": "instant-read-thermometer",
@@ -1220,7 +1225,7 @@ export const products: Product[] = [
     "essential"
   ],
   "inStock": true,
-  "image": "/product/Pastry_Mat_Silicone_XL_202605091252.jpeg"
+  "image": "/assets/products/Pastry_Mat_Silicone_XL_202605091252.jpeg"
 },
   {
   "id": "bread-lame-and-cover",
@@ -1255,7 +1260,7 @@ export const products: Product[] = [
     "essential"
   ],
   "inStock": true,
-  "image": "/product/Cake_Box_Set_10pcs_202605091252.jpeg"
+  "image": "/assets/products/Cake_Box_Set_10pcs_202605091252.jpeg"
 },
   {
   "id": "bread-bakers-bundle",
@@ -1289,7 +1294,8 @@ export const products: Product[] = [
   "tags": [
     "essential"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/assets/products/Create_bundles_for_Cake_Decorator_202605091255.jpeg"
 },
   {
   "id": "weekend-baker-bundle",
@@ -1307,7 +1313,7 @@ export const products: Product[] = [
     "popular"
   ],
   "inStock": true,
-  "image": "/product/Weekend_Baker_Bundle_logo_202605091255.jpeg"
+  "image": "/assets/products/Weekend_Baker_Bundle_logo_202605091255.jpeg"
 },
   {
   "id": "chocolate-lover-bundle",
@@ -1358,7 +1364,8 @@ export const products: Product[] = [
     "essential",
     "recommend"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/assets/products/Create_Sourdough_Starter_Bundle_202605091256.jpeg"
 },
   {
   "id": "cupcake-party-bundle",
@@ -1392,7 +1399,8 @@ export const products: Product[] = [
   "tags": [
     "essential"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/assets/products/Create_French_Patisserie_Bundle_202605091256.jpeg"
 },
   {
   "id": "gluten-free-baking-bundle",
@@ -1408,7 +1416,8 @@ export const products: Product[] = [
   "tags": [
     "essential"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/assets/products/Create_Gluten-Free_Baking_Bundle_202605091256.jpeg"
 },
   {
   "id": "holiday-baking-bundle",
@@ -1442,7 +1451,8 @@ export const products: Product[] = [
     "popular",
     "recommend"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/assets/products/Create_pastry_chef_bundle_logo_202605091256.jpeg"
 },
   {
   "id": "everyday-baking-bundle",
@@ -1475,7 +1485,7 @@ export const products: Product[] = [
     "essential"
   ],
   "inStock": true,
-  "image": "/product/Fondant_Artist_Bundle_logo_202605091256.jpeg"
+  "image": "/assets/products/Fondant_Artist_Bundle_logo_202605091256.jpeg"
 },
   {
   "id": "pizza-night-bundle",
@@ -1508,7 +1518,8 @@ export const products: Product[] = [
     "essential",
     "popular"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/assets/products/Create_bundles_Gift_Baker_Bundle_202605091256.jpeg"
 },
   {
   "id": "complete-beginner-baking-kit",
@@ -1560,7 +1571,7 @@ export const products: Product[] = [
     "essential"
   ],
   "inStock": true,
-  "image": "/product/Bread_Baking_Starter_Kit_202605091258.jpeg"
+  "image": "/assets/products/Bread_Baking_Starter_Kit_202605091258.jpeg"
 },
   {
   "id": "cake-baking-starter-kit",
@@ -1578,7 +1589,7 @@ export const products: Product[] = [
     "popular"
   ],
   "inStock": true,
-  "image": "/product/Cake_Baking_Starter_Kit_Logo_202605091258.jpeg"
+  "image": "/assets/products/Cake_Baking_Starter_Kit_Logo_202605091258.jpeg"
 },
   {
   "id": "cookie-baking-starter-kit",
@@ -1595,7 +1606,7 @@ export const products: Product[] = [
     "essential"
   ],
   "inStock": true,
-  "image": "/product/Cookie_Baking_Starter_Kit_202605091258.jpeg"
+  "image": "/assets/products/Cookie_Baking_Starter_Kit_202605091258.jpeg"
 },
   {
   "id": "sourdough-starter-kit",
@@ -1648,7 +1659,7 @@ export const products: Product[] = [
     "popular"
   ],
   "inStock": true,
-  "image": "/product/French_Pastry_Starter_Kit_202605091259.jpeg"
+  "image": "/assets/products/French_Pastry_Starter_Kit_202605091259.jpeg"
 },
   {
   "id": "healthy-baking-starter-kit",
@@ -1665,7 +1676,7 @@ export const products: Product[] = [
     "essential"
   ],
   "inStock": true,
-  "image": "/product/Healthy_Baking_Starter_Kit_202605091259.jpeg"
+  "image": "/assets/products/Healthy_Baking_Starter_Kit_202605091259.jpeg"
 },
   {
   "id": "decoration-starter-kit",
@@ -1752,7 +1763,7 @@ export const products: Product[] = [
     "essential"
   ],
   "inStock": true,
-  "image": "/product/Pizza_Starter_Kit_Gift-Wrapped_202605091300.jpeg"
+  "image": "/assets/products/Pizza_Starter_Kit_Gift-Wrapped_202605091300.jpeg"
 },
   {
   "id": "gift-wrapped-starter-kit",
@@ -1768,6 +1779,7 @@ export const products: Product[] = [
   "tags": [
     "essential"
   ],
-  "inStock": true
+  "inStock": true,
+  "image": "/assets/products/Pizza_Starter_Kit_Gift-Wrapped_202605091300.jpeg"
 },
 ];

@@ -60,24 +60,41 @@ export const products: Product[] = [
         backend_id = i + 2  # Database IDs start at 2
         category_name = cat_map.get(cat_slug, "Uncategorized")
         
-        # Check if local image exists in public/product
+        # Check if local image exists in public/assets/products
         local_img = None
         for ext in [".jpeg", ".jpg", ".png"]:
-            rel_path = f"whiffle-bakery1/public/product/{slug}{ext}"
+            rel_path = f"whiffle-bakery1/public/assets/products/{slug}{ext}"
             abs_path = os.path.join("d:/project/Bakery-whiffly-FINAL", rel_path)
             if os.path.exists(abs_path):
-                local_img = f"/product/{slug}{ext}"
+                local_img = f"/assets/products/{slug}{ext}"
                 break
                 
-        # If no image found, check if there's any file in the folder that starts with the slug (case insensitive)
+        # If no exact match, check if there's a file containing all words from the slug
         if not local_img:
-            prod_dir = "d:/project/Bakery-whiffly-FINAL/whiffle-bakery1/public/product"
+            prod_dir = "d:/project/Bakery-whiffly-FINAL/whiffle-bakery1/public/assets/products"
             if os.path.exists(prod_dir):
+                slug_words = slug.lower().replace("-", " ").split()
                 for f_name in os.listdir(prod_dir):
-                    if f_name.lower().startswith(slug.lower().replace("-", "_")) or f_name.lower().startswith(slug.lower()):
-                        local_img = f"/product/{f_name}"
+                    f_name_lower = f_name.lower().replace("-", " ").replace("_", " ")
+                    # Check if all words from the slug are present in the filename
+                    if all(word in f_name_lower for word in slug_words):
+                        local_img = f"/assets/products/{f_name}"
                         break
         
+        # If still no match, do the loose match of name words
+        if not local_img:
+            prod_dir = "d:/project/Bakery-whiffly-FINAL/whiffle-bakery1/public/assets/products"
+            if os.path.exists(prod_dir):
+                name_words = name.lower().replace("&", " ").replace("-", " ").split()
+                # Exclude common small words
+                filtered_words = [w for w in name_words if w not in ["and", "with", "of", "set", "x4", "x2", "1kg", "500g", "250g", "200g", "75g", "300g", "150g", "1.5kg", "250ml", "100ml"]]
+                if filtered_words:
+                    for f_name in os.listdir(prod_dir):
+                        f_name_lower = f_name.lower().replace("-", " ").replace("_", " ")
+                        if all(word in f_name_lower for word in filtered_words):
+                            local_img = f"/assets/products/{f_name}"
+                            break
+
         final_image = image_url or local_img
         
         # Determine some nice mock properties for the frontend
@@ -129,7 +146,7 @@ export const products: Product[] = [
     with open(target_path, "w", encoding="utf-8") as f:
         f.write(ts_content)
         
-    print(f"Successfully generated products.ts with {len(PRODUCTS)} products synced from seed.py (with smart image checking)!")
+    print(f"Successfully generated products.ts with {len(PRODUCTS)} products synced (perfect word matching)!")
 
 if __name__ == "__main__":
     main()
