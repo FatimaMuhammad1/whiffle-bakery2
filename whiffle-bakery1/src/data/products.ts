@@ -1,25 +1,7 @@
 // ==================== PRODUCT DATA ====================
-// Contains all 100 products organized by category with brand info
+// Generated automatically from seed.py. DO NOT EDIT BY HAND.
 // ===========================================================
 
-// ---- Product Image Imports ----
-const img_angelfoodcakepan = "/assets/products/angel-food-cake-pan.jpeg";
-const img_beginnerbakingkit = "/assets/products/complete-beginner-baking-kit.jpg";
-const img_breadlame = "/assets/products/bread-lame-and-cover.jpeg";
-const img_chocolateloverbundle = "/assets/products/chocolate-lover-bundle.jpg";
-const img_cookiebakingbundle = "/assets/products/cookie-baking-bundle.jpg";
-const img_cookiecutterset20pc = "/assets/products/cookie-cutter-set-20pcs.jpg";
-const img_cupcakestarterkit = "/assets/products/cupcake-starter-kit.jpg";
-const img_doughscraper = "/assets/products/dough-scraper-plastic.jpeg";
-const img_loafpan = "/assets/products/mini-loaf-pan-set.jpeg";
-const img_madelinepan = "/assets/products/madeline-pan.jpeg";
-const img_ovenmittspair = "/assets/products/oven-mitts.jpg";
-const img_pullmanloafpan = "/assets/products/pullman-loaf-pan-lid.jpeg";
-const img_rollingpin = "/assets/products/rolling-pin-french-tapered.jpg";
-const img_siliconebakingmat = "/assets/products/silicone-baking-mat-set.jpg";
-const img_sourdoughstarterkit = "/assets/products/sourdough-starter-kit.jpg";
-
-// ---- Product Type Definition ----
 export type Product = {
   id: string;
   backendId?: number;
@@ -61,117 +43,1750 @@ export const brands = [
   "CakeMaster",
 ];
 
-// ==================== PRODUCT CATALOG (100 items) ====================
 export const products: Product[] = [
-  // ===== BAKEWARE (30) — IDs 1-30 =====
-  { id: "1", name: "Round Cake Pan", image: "/product/round-cake-tin-8inch.jpeg", price: 8.99, category: "Bakeware", brand: "BakeRight", rating: 4.5, reviews: 124, description: "Professional-grade non-stick round cake pan. Perfect for layered cakes and even baking every time.", difficulty: "beginner", tags: ["beginner", "essential"], inStock: true },
-  { id: "2", name: "Muffin & Cupcake Tray", image: "/product/muffin-tray-12cup.jpeg", price: 14.99, category: "Bakeware", brand: "BakeRight", rating: 4.7, reviews: 89, description: "12-cup non-stick muffin tray ideal for cupcakes, muffins, and mini quiches.", difficulty: "beginner", tags: ["beginner", "popular"], inStock: true },
-  { id: "3", name: "Springform Pan Set", image: "/product/springform-pan-9inch.jpeg", price: 22.99, category: "Bakeware", brand: "ProBake", rating: 4.8, reviews: 67, description: "Set of 3 springform pans for cheesecakes, tortes, and deep-dish desserts.", difficulty: "intermediate", tags: ["pro", "set"], inStock: true },
-  { id: "4", name: "Bundt Cake Pan", image: "/product/angel-food-cake-pan.jpeg", price: 16.99, originalPrice: 21.99, category: "Bakeware", brand: "BakeRight", rating: 4.4, reviews: 56, description: "Elegant fluted bundt cake pan for stunning ring-shaped cakes.", difficulty: "intermediate", tags: ["decorative"], inStock: true },
-  { id: "5", name: "Loaf Pan", price: 9.99, image: "/product/mini-loaf-pan-set.jpeg", category: "Bakeware", brand: "KitchenPro", rating: 4.3, reviews: 78, description: "Non-stick loaf pan perfect for bread, pound cake, and meatloaf.", difficulty: "beginner", tags: ["beginner", "essential"], inStock: true },
-  { id: "6", name: "Square Cake Pan", image: "/product/square-brownie-pan.jpeg", price: 10.99, category: "Bakeware", brand: "BakeRight", rating: 4.6, reviews: 95, description: "8-inch square cake pan with non-stick coating for brownies and sheet cakes.", difficulty: "beginner", tags: ["beginner", "essential"], inStock: true },
-  { id: "7", name: "Rectangle Baking Sheet", image: "/product/silicone-baking-mat-set.jpg", price: 12.99, category: "Bakeware", brand: "ProBake", rating: 4.5, reviews: 210, description: "Heavy-duty baking sheet for cookies, pastries, and roasting vegetables.", difficulty: "beginner", tags: ["beginner", "essential"], inStock: true },
-  { id: "8", name: "Mini Tart Pan Set", image: "/product/mini-loaf-pan-set.jpeg", price: 18.99, category: "Bakeware", brand: "ArtisanBake", rating: 4.7, reviews: 43, description: "Set of 6 mini tart pans with removable bottoms for elegant individual desserts.", difficulty: "intermediate", tags: ["decorative", "set"], inStock: true },
-  { id: "9", name: "Pie Dish (9-inch)", image: "/product/ceramic-pie-dish.jpeg", price: 11.99, category: "Bakeware", brand: "KitchenPro", rating: 4.4, reviews: 134, description: "Classic ceramic pie dish for fruit pies, quiches, and savory bakes.", difficulty: "beginner", tags: ["beginner", "essential"], inStock: true },
-  { id: "10", name: "Angel Food Cake Pan", price: 19.99, image: "/product/angel-food-cake-pan.jpeg", category: "Bakeware", brand: "ProBake", rating: 4.6, reviews: 52, description: "Tube pan with removable bottom, perfect for angel food and chiffon cakes.", difficulty: "intermediate", tags: ["specialty"], inStock: true },
-  { id: "11", name: "Deep Dish Pizza Pan", image: "/product/pizza-stone.jpeg", price: 13.99, category: "Bakeware", brand: "BakeRight", rating: 4.3, reviews: 87, description: "14-inch deep dish pan for Chicago-style pizza and focaccia.", difficulty: "beginner", tags: ["beginner"], inStock: true },
-  { id: "12", name: "Fluted Tart Pan", image: "/product/gluten-free-starter-kit.jpeg", price: 14.99, category: "Bakeware", brand: "ArtisanBake", rating: 4.5, reviews: 62, description: "11-inch fluted tart pan with removable bottom for French-style tarts.", difficulty: "intermediate", tags: ["decorative"], inStock: true },
-  { id: "13", name: "Popover Pan", image: "/product/dough-scraper-plastic.jpeg", price: 17.99, category: "Bakeware", brand: "ProBake", rating: 4.2, reviews: 38, description: "6-cup popover pan for light, airy popovers and Yorkshire puddings.", difficulty: "intermediate", tags: ["specialty"], inStock: true },
-  { id: "14", name: "Madeline Pan", price: 15.99, image: "/product/madeline-pan.jpeg", category: "Bakeware", brand: "ArtisanBake", rating: 4.8, reviews: 71, description: "12-cavity madeline pan for classic shell-shaped French cookies.", difficulty: "intermediate", tags: ["decorative", "specialty"], inStock: true },
-  { id: "15", name: "Cannoli Tubes Set", image: "/product/cooling-rack-set-x2.jpeg", price: 12.99, category: "Bakeware", brand: "ArtisanBake", rating: 4.4, reviews: 45, description: "Set of 12 stainless steel cannoli tubes for homemade Italian pastries.", difficulty: "pro", tags: ["specialty", "pro"], inStock: true },
-  { id: "16", name: "Half Sheet Pan", image: "/product/sheet-pan-half-size.jpeg", price: 15.99, category: "Bakeware", brand: "ProBake", rating: 4.7, reviews: 198, description: "Commercial-grade half sheet pan for professional baking results.", difficulty: "beginner", tags: ["beginner", "essential"], inStock: true },
-  { id: "17", name: "Donut Pan", image: "/product/madeline-pan.jpeg", price: 13.99, category: "Bakeware", brand: "BakeRight", rating: 4.5, reviews: 112, description: "6-cavity non-stick donut pan for baked donuts without the fryer.", difficulty: "beginner", tags: ["beginner", "fun"], inStock: true },
-  { id: "18", name: "Cake Pop Mold", image: "/product/cupcake-party-bundle.jpeg", price: 11.99, category: "Bakeware", brand: "Whiffle", rating: 4.3, reviews: 76, description: "Silicone cake pop mold for making perfectly round cake pops.", difficulty: "beginner", tags: ["fun", "beginner"], inStock: true },
-  { id: "19", name: "Bread Banneton Basket", image: "/product/Tart_pan_removable_base_202605091300.jpeg", price: 16.99, category: "Bakeware", brand: "ArtisanBake", rating: 4.9, reviews: 145, description: "Natural rattan proofing basket for artisan bread with beautiful spiral pattern.", difficulty: "intermediate", tags: ["artisan"], inStock: true },
-  { id: "20", name: "Pullman Loaf Pan", price: 24.99, image: "/product/pullman-loaf-pan-lid.jpeg", category: "Bakeware", brand: "ProBake", rating: 4.6, reviews: 33, description: "13-inch Pullman pan with lid for perfectly square sandwich bread.", difficulty: "pro", tags: ["pro", "artisan"], inStock: true },
-  { id: "21", name: "Baguette Pan", image: "/product/madeline-pan.jpeg", price: 14.99, category: "Bakeware", brand: "ArtisanBake", rating: 4.4, reviews: 58, description: "Perforated 3-loaf baguette pan for crispy French bread at home.", difficulty: "intermediate", tags: ["artisan"], inStock: true },
-  { id: "22", name: "Scone Pan", image: "/product/square-brownie-pan.jpeg", price: 16.99, category: "Bakeware", brand: "BakeRight", rating: 4.5, reviews: 42, description: "8-wedge scone pan for perfectly shaped traditional scones.", difficulty: "beginner", tags: ["beginner"], inStock: true },
-  { id: "23", name: "Mini Cheesecake Pan", image: "/product/cheesecake-starter-kit.jpeg", price: 19.99, category: "Bakeware", brand: "ProBake", rating: 4.7, reviews: 89, description: "12-cup mini cheesecake pan with removable bottoms for individual servings.", difficulty: "intermediate", tags: ["specialty", "decorative"], inStock: true },
-  { id: "24", name: "Brioche Mold", image: "/product/silicone-mould-roses.jpeg", price: 8.99, category: "Bakeware", brand: "ArtisanBake", rating: 4.3, reviews: 27, description: "Classic fluted brioche mold for traditional French brioche.", difficulty: "pro", tags: ["pro", "specialty"], inStock: true },
-  { id: "25", name: "Focaccia Pan", image: "/product/angel-food-cake-pan.jpeg", price: 17.99, category: "Bakeware", brand: "KitchenPro", rating: 4.6, reviews: 64, description: "Rectangular deep pan ideal for thick, fluffy focaccia bread.", difficulty: "beginner", tags: ["beginner", "artisan"], inStock: true },
-  { id: "26", name: "Silicone Muffin Pan", image: "/product/silicone-muffin-mould.jpeg", price: 12.99, category: "Bakeware", brand: "Whiffle", rating: 4.4, reviews: 156, description: "Flexible silicone 12-cup muffin pan - no greasing needed.", difficulty: "beginner", tags: ["beginner", "eco"], inStock: true },
-  { id: "27", name: "Ramekin Set (6pc)", image: "/product/ramekins-set-6.jpeg", price: 19.99, category: "Bakeware", brand: "KitchenPro", rating: 4.8, reviews: 203, description: "Set of 6 ceramic ramekins for creme brulee, souffles, and individual bakes.", difficulty: "beginner", tags: ["essential", "set"], inStock: true },
-  { id: "28", name: "Savarin Mold", image: "/product/silicone-mould-roses.jpeg", price: 14.99, category: "Bakeware", brand: "ArtisanBake", rating: 4.2, reviews: 19, description: "Ring-shaped savarin mold for rum babas and gelatin desserts.", difficulty: "pro", tags: ["pro", "specialty"], inStock: true },
-  { id: "29", name: "Cake Ring Set", image: "/product/cake-decorating-comb-set.jpeg", price: 21.99, originalPrice: 27.99, category: "Bakeware", brand: "ProBake", rating: 4.5, reviews: 47, description: "Set of 4 adjustable cake rings for layered mousse cakes and entremets.", difficulty: "pro", tags: ["pro", "set"], inStock: true },
-  { id: "30", name: "Non-Stick Cookie Sheet", image: "/product/non-stick-loaf-pan.jpeg", price: 11.99, category: "Bakeware", brand: "BakeRight", rating: 4.6, reviews: 267, description: "Insulated non-stick cookie sheet prevents burning for perfect cookies.", difficulty: "beginner", tags: ["beginner", "essential"], inStock: true },
-
-  // ===== INGREDIENTS (20) — IDs 31-50 =====
-  { id: "31", name: "All-Purpose Flour (5lb)", image: "/product/almond-flour-500g.jpeg", price: 6.99, category: "Ingredients", brand: "Baker's Choice", rating: 4.8, reviews: 312, description: "Premium unbleached all-purpose flour for everyday baking.", difficulty: "beginner", tags: ["essential", "staple"], inStock: true },
-  { id: "32", name: "Semi-Sweet Chocolate Chips", image: "/product/White_Chocolate_Chips_300g_logo_202605091240.jpeg", price: 5.99, category: "Ingredients", brand: "SweetCraft", rating: 4.9, reviews: 445, description: "Rich semi-sweet chocolate chips perfect for cookies, brownies, and melting.", difficulty: "beginner", tags: ["essential", "popular"], inStock: true },
-  { id: "33", name: "Pure Vanilla Extract", image: "/product/vanilla-bean-paste-100ml.jpeg", price: 7.99, category: "Ingredients", brand: "Baker's Choice", rating: 4.8, reviews: 167, description: "Premium pure vanilla extract for authentic flavor in all your baked goods.", difficulty: "beginner", tags: ["essential"], inStock: true },
-  { id: "34", name: "Food Coloring Gel Set", image: "/product/food-colouring-gel-set-12.jpg", price: 12.99, category: "Ingredients", brand: "SweetCraft", rating: 4.7, reviews: 198, description: "12-color gel food coloring set for vibrant icings and batters.", difficulty: "beginner", tags: ["decorating", "fun"], inStock: true },
-  { id: "35", name: "Bread Flour (5lb)", image: "/product/almond-flour-500g.jpeg", price: 7.49, category: "Ingredients", brand: "Baker's Choice", rating: 4.7, reviews: 156, description: "High-protein bread flour for chewy artisan loaves and pizza dough.", difficulty: "intermediate", tags: ["artisan", "staple"], inStock: true },
-  { id: "36", name: "Dark Cocoa Powder", image: "/product/cocoa-powder-250g.jpeg", price: 8.99, category: "Ingredients", brand: "SweetCraft", rating: 4.8, reviews: 234, description: "Dutch-process dark cocoa powder for rich chocolate flavor.", difficulty: "beginner", tags: ["essential", "chocolate"], inStock: true },
-  { id: "37", name: "Active Dry Yeast (3-pack)", image: "/product/active-dry-yeast-100g.jpeg", price: 4.99, category: "Ingredients", brand: "Baker's Choice", rating: 4.6, reviews: 289, description: "Reliable active dry yeast for bread, rolls, and pizza dough.", difficulty: "beginner", tags: ["essential", "staple"], inStock: true },
-  { id: "38", name: "Almond Flour (2lb)", image: "/product/almond-flour-500g.jpeg", price: 11.99, category: "Ingredients", brand: "Whiffle", rating: 4.7, reviews: 123, description: "Finely ground blanched almond flour for macarons and gluten-free baking.", difficulty: "intermediate", tags: ["specialty", "gluten-free"], inStock: true },
-  { id: "39", name: "Powdered Sugar (2lb)", image: "/product/Dark_Muscovado_Sugar_500g_202605091238.jpeg", price: 3.99, category: "Ingredients", brand: "Baker's Choice", rating: 4.5, reviews: 178, description: "Ultra-fine powdered sugar for frostings, glazes, and dusting.", difficulty: "beginner", tags: ["essential", "staple"], inStock: true },
-  { id: "40", name: "Baking Powder (8oz)", image: "/product/Baking_Powder_200g_logo_202605091239.jpeg", price: 3.49, category: "Ingredients", brand: "Baker's Choice", rating: 4.6, reviews: 201, description: "Double-acting baking powder for fluffy cakes and biscuits.", difficulty: "beginner", tags: ["essential", "staple"], inStock: true },
-  { id: "41", name: "Cream of Tartar", image: "/product/Cream_of_Tartar_75g_logo_202605091241.jpeg", price: 4.99, category: "Ingredients", brand: "Baker's Choice", rating: 4.4, reviews: 87, description: "Essential for stabilizing egg whites and making snickerdoodles.", difficulty: "beginner", tags: ["essential"], inStock: true },
-  { id: "42", name: "Pumpkin Pie Spice", image: "/product/ceramic-pie-dish.jpeg", price: 5.49, category: "Ingredients", brand: "SweetCraft", rating: 4.7, reviews: 156, description: "Warm blend of cinnamon, ginger, nutmeg, and cloves for fall baking.", difficulty: "beginner", tags: ["seasonal", "spice"], inStock: true },
-  { id: "43", name: "White Chocolate Chips", image: "/product/White_Chocolate_Chips_300g_logo_202605091240.jpeg", price: 6.49, category: "Ingredients", brand: "SweetCraft", rating: 4.5, reviews: 134, description: "Creamy white chocolate chips for cookies, blondies, and candy.", difficulty: "beginner", tags: ["chocolate"], inStock: true },
-  { id: "44", name: "Sprinkles Assortment", image: "/product/springform-pan-9inch.jpeg", price: 8.99, category: "Ingredients", brand: "SweetCraft", rating: 4.9, reviews: 378, description: "6-jar sprinkle set with jimmies, nonpareils, and sugar pearls.", difficulty: "beginner", tags: ["decorating", "fun", "popular"], inStock: true },
-  { id: "45", name: "Coconut Flour (1lb)", image: "/product/chocolate-lover-bundle.jpg", price: 6.99, category: "Ingredients", brand: "Whiffle", rating: 4.3, reviews: 67, description: "Organic coconut flour for grain-free and keto baking.", difficulty: "intermediate", tags: ["specialty", "gluten-free"], inStock: true },
-  { id: "46", name: "Fondant (White, 2lb)", image: "/product/fondant-smoother.jpg", price: 14.99, category: "Ingredients", brand: "CakeMaster", rating: 4.6, reviews: 89, description: "Smooth rolled fondant for professional cake covering and decorating.", difficulty: "pro", tags: ["decorating", "pro"], inStock: true },
-  { id: "47", name: "Meringue Powder", image: "/product/measuring-cups.jpg", price: 9.99, category: "Ingredients", brand: "Baker's Choice", rating: 4.7, reviews: 145, description: "Shelf-stable meringue powder for royal icing and Swiss meringue.", difficulty: "intermediate", tags: ["decorating"], inStock: true },
-  { id: "48", name: "Cake Flour (4lb)", image: "/product/almond-flour-500g.jpeg", price: 5.99, category: "Ingredients", brand: "Baker's Choice", rating: 4.8, reviews: 267, description: "Finely milled cake flour for tender, delicate cake crumb.", difficulty: "beginner", tags: ["essential", "staple"], inStock: true },
-  { id: "49", name: "Luster Dust Set", image: "/product/Nozzle_tip_set_24pcs_202605091246.jpeg", price: 11.99, category: "Ingredients", brand: "CakeMaster", rating: 4.5, reviews: 56, description: "6-color edible luster dust set for shimmering cake and cookie decorations.", difficulty: "intermediate", tags: ["decorating", "specialty"], inStock: true },
-  { id: "50", name: "Glucose Syrup", image: "/product/Maple_syrup_250ml_logo_202605091241.jpeg", price: 7.49, category: "Ingredients", brand: "SweetCraft", rating: 4.4, reviews: 34, description: "Pure glucose syrup for candy making, ganache, and preventing crystallization.", difficulty: "pro", tags: ["pro", "specialty"], inStock: true },
-
-  // ===== DECORATING TOOLS (20) — IDs 51-70 =====
-  { id: "51", name: "Cookie Cutter Set (20pc)", price: 12.99, image: "/product/cookie-cutter-set-20pcs.jpg", category: "Decorating Tools", brand: "CakeMaster", rating: 4.9, reviews: 312, description: "Set of 20 stainless steel cookie cutters in various fun shapes.", difficulty: "beginner", tags: ["beginner", "fun", "popular"], inStock: true },
-  { id: "52", name: "Piping Bag & Tips Set", image: "/product/piping-bag-set-20pcs.jpg", price: 16.99, category: "Decorating Tools", brand: "CakeMaster", rating: 4.8, reviews: 234, description: "Complete piping set with reusable bags, 24 tips, and couplers.", difficulty: "intermediate", tags: ["decorating", "essential"], inStock: true },
-  { id: "53", name: "Fondant Tool Kit", image: "/product/fondant-smoother.jpg", price: 14.99, category: "Decorating Tools", brand: "CakeMaster", rating: 4.6, reviews: 87, description: "14-piece fondant sculpting tool set for professional cake decorating.", difficulty: "pro", tags: ["pro", "decorating"], inStock: true },
-  { id: "54", name: "Decorating Turntable", image: "/product/decoration-starter-kit.jpg", price: 18.99, category: "Decorating Tools", brand: "Whiffle", rating: 4.7, reviews: 178, description: "Smooth-rotating cake decorating turntable for professional icing results.", difficulty: "intermediate", tags: ["decorating", "popular"], inStock: true },
-  { id: "55", name: "Offset Spatula Set", image: "/product/8-inch_offset_spatula_decorating_202605091243.jpeg", price: 11.99, category: "Decorating Tools", brand: "KitchenPro", rating: 4.8, reviews: 267, description: "Set of 3 offset spatulas for smooth frosting and spreading.", difficulty: "beginner", tags: ["essential", "decorating"], inStock: true },
-  { id: "56", name: "Cake Leveler", image: "/product/Cake_Leveller_decorating_tool_202605091246.jpeg", price: 8.99, category: "Decorating Tools", brand: "ProBake", rating: 4.5, reviews: 134, description: "Adjustable wire cake leveler for perfectly even cake layers.", difficulty: "beginner", tags: ["essential"], inStock: true },
-  { id: "57", name: "Bench Scraper Set", image: "/product/dough-scraper-plastic.jpeg", price: 9.99, category: "Decorating Tools", brand: "KitchenPro", rating: 4.6, reviews: 156, description: "Set of 3 bench scrapers for smooth sides on buttercream cakes.", difficulty: "beginner", tags: ["essential", "decorating"], inStock: true },
-  { id: "58", name: "Cake Stencil Set", image: "/product/cake-decorating-comb-set.jpeg", price: 13.99, category: "Decorating Tools", brand: "CakeMaster", rating: 4.4, reviews: 67, description: "10-piece cake stencil set for beautiful patterns with powdered sugar or cocoa.", difficulty: "beginner", tags: ["decorating", "fun"], inStock: true },
-  { id: "59", name: "Letter & Number Stamps", image: "/product/cookie-cutter-set-20pcs.jpg", price: 15.99, category: "Decorating Tools", brand: "CakeMaster", rating: 4.7, reviews: 98, description: "Alphabet and number fondant stamp set for personalized cake messages.", difficulty: "beginner", tags: ["decorating", "fun"], inStock: true },
-  { id: "60", name: "Flower Nail Set", image: "/product/food-colouring-gel-set-12.jpg", price: 7.99, category: "Decorating Tools", brand: "CakeMaster", rating: 4.5, reviews: 56, description: "Set of 4 flower nails for piping buttercream roses and flowers.", difficulty: "pro", tags: ["pro", "decorating"], inStock: true },
-  { id: "61", name: "Airbrush Kit", image: "/product/Pastry_brush_silicone_decorating…_202605091247.jpeg", price: 49.99, originalPrice: 64.99, category: "Decorating Tools", brand: "ProBake", rating: 4.6, reviews: 45, description: "Complete cake airbrush kit with compressor and 8 food-safe colors.", difficulty: "pro", tags: ["pro", "decorating"], inStock: true },
-  { id: "62", name: "Cake Comb Set", image: "/product/cake-decorating-comb-set.jpeg", price: 10.99, category: "Decorating Tools", brand: "CakeMaster", rating: 4.4, reviews: 89, description: "Set of 4 decorating combs for textured buttercream finishes.", difficulty: "intermediate", tags: ["decorating"], inStock: true },
-  { id: "63", name: "Russian Piping Tips (12pc)", image: "/product/piping-bag-set-20pcs.jpg", price: 14.99, category: "Decorating Tools", brand: "CakeMaster", rating: 4.7, reviews: 167, description: "12 Russian piping tips for instant buttercream flowers.", difficulty: "intermediate", tags: ["decorating", "popular"], inStock: true },
-  { id: "64", name: "Silicone Mold Set", image: "/product/silicone-mould-roses.jpeg", price: 16.99, category: "Decorating Tools", brand: "Whiffle", rating: 4.5, reviews: 123, description: "Assorted silicone molds for fondant flowers, leaves, and borders.", difficulty: "intermediate", tags: ["decorating"], inStock: true },
-  { id: "65", name: "Parchment Piping Triangles", image: "/product/piping-bag-set-20pcs.jpg", price: 6.99, category: "Decorating Tools", brand: "ProBake", rating: 4.3, reviews: 78, description: "100-count parchment triangles for making custom piping bags.", difficulty: "pro", tags: ["pro"], inStock: true },
-  { id: "66", name: "Cake Dowel Kit", image: "/product/cupcake-starter-kit.jpg", price: 8.99, category: "Decorating Tools", brand: "ProBake", rating: 4.6, reviews: 112, description: "Cake support dowels and boards for multi-tier cake construction.", difficulty: "intermediate", tags: ["essential"], inStock: true },
-  { id: "67", name: "Edible Ink Markers", image: "/product/silicone-baking-mat-set.jpg", price: 9.99, category: "Decorating Tools", brand: "SweetCraft", rating: 4.5, reviews: 145, description: "10-color edible ink marker set for drawing directly on fondant and icing.", difficulty: "beginner", tags: ["fun", "decorating"], inStock: true },
-  { id: "68", name: "Impression Mat Set", image: "/product/silicone-baking-mat-set.jpg", price: 12.99, category: "Decorating Tools", brand: "CakeMaster", rating: 4.4, reviews: 34, description: "4-pattern impression mat set for textured fondant designs.", difficulty: "intermediate", tags: ["decorating"], inStock: true },
-  { id: "69", name: "Modeling Tool Set (8pc)", image: "/product/food-colouring-gel-set-12.jpg", price: 11.99, category: "Decorating Tools", brand: "CakeMaster", rating: 4.6, reviews: 67, description: "8-piece gum paste and fondant modeling tool set.", difficulty: "pro", tags: ["pro", "decorating"], inStock: true },
-  { id: "70", name: "Cake Smoother", image: "/product/fondant-smoother.jpg", price: 6.99, category: "Decorating Tools", brand: "Whiffle", rating: 4.7, reviews: 198, description: "Ergonomic cake smoother for flawless fondant and buttercream finishes.", difficulty: "beginner", tags: ["essential", "decorating"], inStock: true },
-
-  // ===== ACCESSORIES (20) — IDs 71-90 =====
-  { id: "71", name: "Rolling Pin", price: 11.99, image: "/product/rolling-pin-french-tapered.jpg", category: "Accessories", brand: "KitchenPro", rating: 4.5, reviews: 145, description: "Classic wooden rolling pin for dough, pastry, and fondant.", difficulty: "beginner", tags: ["beginner", "essential"], inStock: true },
-  { id: "72", name: "Oven Mitts (Pair)", price: 12.99, image: "/product/oven-mitts.jpg", category: "Accessories", brand: "KitchenPro", rating: 4.6, reviews: 234, description: "Heat-resistant quilted oven mitts for safe handling of hot bakeware.", difficulty: "beginner", tags: ["essential"], inStock: true },
-  { id: "73", name: "Cooling Rack (3-Tier)", image: "/product/cooling-rack-set-x2.jpeg", price: 15.99, category: "Accessories", brand: "ProBake", rating: 4.7, reviews: 178, description: "Stackable 3-tier cooling rack for efficient cooling of multiple batches.", difficulty: "beginner", tags: ["essential"], inStock: true },
-  { id: "74", name: "Mixing Bowl Set (5pc)", image: "/product/mixing-bowls.jpg", price: 24.99, category: "Accessories", brand: "KitchenPro", rating: 4.8, reviews: 312, description: "Nesting stainless steel mixing bowl set with non-slip bases.", difficulty: "beginner", tags: ["essential", "set"], inStock: true },
-  { id: "75", name: "Measuring Cup Set", image: "/product/measuring-cups.jpg", price: 9.99, category: "Accessories", brand: "KitchenPro", rating: 4.6, reviews: 267, description: "Stainless steel measuring cups and spoons, dishwasher safe.", difficulty: "beginner", tags: ["essential"], inStock: true },
-  { id: "76", name: "Whisk & Spatula Set", image: "/product/whisks-set-of-3.jpg", price: 13.99, category: "Accessories", brand: "KitchenPro", rating: 4.5, reviews: 189, description: "Stainless steel whisk with silicone spatula for mixing and folding.", difficulty: "beginner", tags: ["essential"], inStock: true },
-  { id: "77", name: "Baking Apron", image: "/product/bakers-apron-canvas.jpg", price: 16.99, category: "Accessories", brand: "Whiffle", rating: 4.4, reviews: 123, description: "Cotton canvas baking apron with adjustable neck and pockets.", difficulty: "beginner", tags: ["essential"], inStock: true },
-  { id: "78", name: "Silicone Baking Mat", price: 10.99, image: "/product/silicone-baking-mat-set.jpg", category: "Accessories", brand: "Whiffle", rating: 4.6, reviews: 203, description: "Reusable non-stick silicone baking mat. Eco-friendly alternative to parchment.", difficulty: "beginner", tags: ["beginner", "eco"], inStock: true },
-  { id: "79", name: "Digital Kitchen Scale", image: "/product/Digital_kitchen_scale_5kg_202605091251.jpeg", price: 19.99, category: "Accessories", brand: "ProBake", rating: 4.8, reviews: 356, description: "Precision digital scale with tare function for accurate baking measurements.", difficulty: "beginner", tags: ["essential"], inStock: true },
-  { id: "80", name: "Kitchen Timer (Digital)", image: "/product/Kitchen_Timer_Mechanical_Accesso…_202605091251.jpeg", price: 7.99, category: "Accessories", brand: "KitchenPro", rating: 4.5, reviews: 198, description: "Loud digital kitchen timer with magnetic back and easy-read display.", difficulty: "beginner", tags: ["essential"], inStock: true },
-  { id: "81", name: "Pastry Brush Set", image: "/product/Pastry_brush_silicone_decorating…_202605091247.jpeg", price: 6.99, category: "Accessories", brand: "KitchenPro", rating: 4.4, reviews: 134, description: "Set of 3 silicone pastry brushes for egg wash, butter, and glazing.", difficulty: "beginner", tags: ["essential"], inStock: true },
-  { id: "82", name: "Dough Scraper", price: 5.99, image: "/product/dough-scraper-plastic.jpeg", category: "Accessories", brand: "ProBake", rating: 4.6, reviews: 156, description: "Stainless steel dough scraper with comfortable grip for cutting and portioning.", difficulty: "beginner", tags: ["essential"], inStock: true },
-  { id: "83", name: "Oven Thermometer", image: "/product/thermometer.jpeg", price: 8.99, category: "Accessories", brand: "ProBake", rating: 4.7, reviews: 245, description: "Accurate oven thermometer to ensure your oven runs at the right temperature.", difficulty: "beginner", tags: ["essential"], inStock: true },
-  { id: "84", name: "Parchment Paper Roll", image: "/product/Tart_pan_removable_base_202605091300.jpeg", price: 5.99, category: "Accessories", brand: "Baker's Choice", rating: 4.5, reviews: 312, description: "Non-stick parchment paper roll, pre-cut sheets for easy use.", difficulty: "beginner", tags: ["essential", "eco"], inStock: true },
-  { id: "85", name: "Cake Carrier", image: "/product/cupcake-starter-kit.jpg", price: 22.99, category: "Accessories", brand: "Whiffle", rating: 4.6, reviews: 87, description: "Round cake carrier with locking lid for safe transport of cakes.", difficulty: "beginner", tags: ["transport"], inStock: true },
-  { id: "86", name: "Flour Sifter", image: "/product/fondant-smoother.jpg", price: 9.99, category: "Accessories", brand: "KitchenPro", rating: 4.4, reviews: 134, description: "Hand-crank flour sifter for lump-free flour, cocoa, and powdered sugar.", difficulty: "beginner", tags: ["essential"], inStock: true },
-  { id: "87", name: "Pastry Blender", image: "/product/Pastry_brush_silicone_decorating…_202605091247.jpeg", price: 8.99, category: "Accessories", brand: "KitchenPro", rating: 4.3, reviews: 78, description: "Stainless steel pastry blender for cutting butter into flour for pie crusts.", difficulty: "beginner", tags: ["essential"], inStock: true },
-  { id: "88", name: "Cookie Scoop Set", image: "/product/cookie-cutter-set-20pcs.jpg", price: 11.99, category: "Accessories", brand: "ProBake", rating: 4.7, reviews: 234, description: "Set of 3 spring-loaded cookie scoops in small, medium, and large sizes.", difficulty: "beginner", tags: ["essential", "set"], inStock: true },
-  { id: "89", name: "Cake Tester", image: "/product/cupcake-starter-kit.jpg", price: 3.99, category: "Accessories", brand: "KitchenPro", rating: 4.5, reviews: 167, description: "Reusable stainless steel cake tester for checking doneness.", difficulty: "beginner", tags: ["essential"], inStock: true },
-  { id: "90", name: "Bread Lame", price: 10.99, image: "/product/bread-lame-and-cover.jpeg", category: "Accessories", brand: "ArtisanBake", rating: 4.8, reviews: 98, description: "Scoring lame with 5 replacement blades for artisan bread scoring.", difficulty: "intermediate", tags: ["artisan"], inStock: true },
-
-  // ===== BUNDLES (5) — IDs 91-95 =====
-  { id: "91", name: "Pro Decorating Bundle", image: "/product/cookie-baking-bundle.jpg", price: 49.99, originalPrice: 65.99, category: "Bundles", brand: "Whiffle", rating: 4.7, reviews: 89, description: "Complete decorating set with piping bags, tips, spatulas, and turntable.", difficulty: "pro", tags: ["pro", "bundle"], inStock: true },
-  { id: "92", name: "Cookie Baking Bundle", price: 34.99, originalPrice: 44.99, image: "/product/cookie-baking-bundle.jpg", category: "Bundles", brand: "Whiffle", rating: 4.8, reviews: 156, description: "Everything for cookies: sheets, cutters, scoops, cooling rack, and mat.", difficulty: "beginner", tags: ["beginner", "bundle"], inStock: true },
-  { id: "93", name: "Bread Baker Bundle", image: "/product/bread-bakers-bundle.jpg", price: 44.99, originalPrice: 59.99, category: "Bundles", brand: "Whiffle", rating: 4.6, reviews: 67, description: "Artisan bread bundle: banneton, lame, loaf pans, and bread flour.", difficulty: "intermediate", tags: ["artisan", "bundle"], inStock: true },
-  { id: "94", name: "Chocolate Lover Bundle", price: 29.99, originalPrice: 39.99, image: "/product/chocolate-lover-bundle.jpg", category: "Bundles", brand: "Whiffle", rating: 4.9, reviews: 234, description: "Chocolate chips, cocoa powder, melting tools, and molds for chocoholics.", difficulty: "beginner", tags: ["chocolate", "bundle"], inStock: true },
-  { id: "95", name: "Cake Boss Bundle", image: "/product/cupcake-party-bundle.jpeg", price: 59.99, originalPrice: 79.99, category: "Bundles", brand: "Whiffle", rating: 4.7, reviews: 112, description: "Ultimate cake bundle: pans, turntable, piping set, fondant tools, and more.", difficulty: "pro", tags: ["pro", "bundle"], inStock: true },
-
-  // ===== STARTER KITS (5) — IDs 96-100 =====
-  { id: "96", name: "Beginner Baking Kit", price: 39.99, originalPrice: 54.99, image: "/product/complete-beginner-baking-kit.jpg", category: "Starter Kits", brand: "Whiffle", rating: 4.9, reviews: 345, description: "Everything you need to start baking: cake pan, muffin tray, rolling pin, and mixing bowls.", difficulty: "beginner", tags: ["beginner", "kit", "popular"], inStock: true },
-  { id: "97", name: "Kids Baking Kit", image: "/product/kids-baking-starter-kit.jpg", price: 29.99, originalPrice: 39.99, category: "Starter Kits", brand: "Whiffle", rating: 4.8, reviews: 198, description: "Fun and safe baking kit for kids with cookie cutters, apron, and recipe cards.", difficulty: "beginner", tags: ["beginner", "kit", "fun"], inStock: true },
-  { id: "98", name: "Cupcake Starter Kit", price: 34.99, originalPrice: 44.99, image: "/product/cupcake-starter-kit.jpg", category: "Starter Kits", brand: "Whiffle", rating: 4.7, reviews: 156, description: "Cupcake essentials: tray, liners, piping bags, tips, and sprinkles.", difficulty: "beginner", tags: ["beginner", "kit"], inStock: true },
-  { id: "99", name: "Pie Making Kit", image: "/product/Cookie_Baking_Starter_Kit_202605091258.jpeg", price: 32.99, originalPrice: 42.99, category: "Starter Kits", brand: "Whiffle", rating: 4.6, reviews: 87, description: "Pie starter kit with dish, pastry blender, rolling pin, and pie weights.", difficulty: "beginner", tags: ["beginner", "kit"], inStock: true },
-  { id: "100", name: "Sourdough Starter Kit", price: 36.99, originalPrice: 47.99, image: "/product/sourdough-starter-kit.jpg", category: "Starter Kits", brand: "Whiffle", rating: 4.8, reviews: 123, description: "Complete sourdough kit: jar, banneton, lame, thermometer, and guide.", difficulty: "intermediate", tags: ["artisan", "kit"], inStock: true },
+  {
+  "id": "non-stick-loaf-pan",
+  "backendId": 2,
+  "name": "Non-Stick Loaf Pan",
+  "price": 12.99,
+  "image": "/assets/products/non-stick-loaf-pan.jpg",
+  "category": "Bakeware",
+  "brand": "Whiffle",
+  "rating": 4.0,
+  "reviews": 13,
+  "description": "Perfect for sourdough and banana bread.",
+  "difficulty": "beginner",
+  "tags": [
+    "essential",
+    "popular",
+    "recommend"
+  ],
+  "inStock": true
+},
+  {
+  "id": "round-cake-tin-8inch",
+  "backendId": 3,
+  "name": "Round Cake Tin 8-inch",
+  "price": 9.99,
+  "image": "/assets/products/round-cake-tin-8inch.jpg",
+  "category": "Bakeware",
+  "brand": "BakeRight",
+  "rating": 4.1,
+  "reviews": 20,
+  "description": "Classic round tin for layer cakes.",
+  "difficulty": "intermediate",
+  "tags": [
+    "essential"
+  ],
+  "inStock": true
+},
+  {
+  "id": "muffin-tray-12cup",
+  "backendId": 4,
+  "name": "Muffin Tray 12-Cup",
+  "price": 14.49,
+  "image": "/assets/products/muffin-tray-12cup.jpg",
+  "category": "Bakeware",
+  "brand": "SweetCraft",
+  "rating": 4.2,
+  "reviews": 27,
+  "description": "Heavy-gauge steel, non-stick coating.",
+  "difficulty": "pro",
+  "tags": [
+    "essential"
+  ],
+  "inStock": true
+},
+  {
+  "id": "square-brownie-pan",
+  "backendId": 5,
+  "name": "Square Brownie Pan",
+  "price": 11.99,
+  "image": "/assets/products/square-brownie-pan.jpeg",
+  "category": "Bakeware",
+  "brand": "ProBake",
+  "rating": 4.3,
+  "reviews": 34,
+  "description": "Even heat distribution for fudgy brownies.",
+  "difficulty": "beginner",
+  "tags": [
+    "essential"
+  ],
+  "inStock": true
+},
+  {
+  "id": "springform-pan-9inch",
+  "backendId": 6,
+  "name": "Springform Pan 9-inch",
+  "price": 15.99,
+  "image": "/assets/products/springform-pan-9inch.jpg",
+  "category": "Bakeware",
+  "brand": "KitchenPro",
+  "rating": 4.4,
+  "reviews": 41,
+  "description": "Easy release for cheesecakes and tarts.",
+  "difficulty": "intermediate",
+  "tags": [
+    "essential",
+    "popular"
+  ],
+  "inStock": true
+},
+  {
+  "id": "bundt-pan-classic",
+  "backendId": 7,
+  "name": "Bundt Pan Classic",
+  "price": 18.99,
+  "image": "/assets/products/bundt-pan-classic.jpg",
+  "category": "Bakeware",
+  "brand": "ArtisanBake",
+  "rating": 4.5,
+  "reviews": 48,
+  "description": "Intricate pattern for stunning ring cakes.",
+  "difficulty": "pro",
+  "tags": [
+    "essential",
+    "recommend"
+  ],
+  "inStock": true
+},
+  {
+  "id": "sheet-pan-half-size",
+  "backendId": 8,
+  "name": "Sheet Pan Half-Size",
+  "price": 10.99,
+  "image": "/assets/products/sheet-pan-half-size.jpeg",
+  "category": "Bakeware",
+  "brand": "Baker's Choice",
+  "rating": 4.6,
+  "reviews": 55,
+  "description": "Commercial-grade aluminium baking sheet.",
+  "difficulty": "beginner",
+  "tags": [
+    "essential"
+  ],
+  "inStock": true
+},
+  {
+  "id": "mini-loaf-pan-set",
+  "backendId": 9,
+  "name": "Mini Loaf Pan Set x4",
+  "price": 16.99,
+  "image": "/assets/products/mini-loaf-pan-set.jpeg",
+  "category": "Bakeware",
+  "brand": "CakeMaster",
+  "rating": 4.7,
+  "reviews": 62,
+  "description": "Four mini loaf tins in one set.",
+  "difficulty": "intermediate",
+  "tags": [
+    "essential"
+  ],
+  "inStock": true
+},
+  {
+  "id": "tart-pan-removable-base",
+  "backendId": 10,
+  "name": "Tart Pan with Removable Base",
+  "price": 13.49,
+  "image": "/product/tart-pan-removable-base.jpeg",
+  "category": "Bakeware",
+  "brand": "Whiffle",
+  "rating": 4.8,
+  "reviews": 69,
+  "description": "11-inch fluted tart tin.",
+  "difficulty": "pro",
+  "tags": [
+    "essential",
+    "popular"
+  ],
+  "inStock": true
+},
+  {
+  "id": "silicone-muffin-mould",
+  "backendId": 11,
+  "name": "Silicone Muffin Mould",
+  "price": 8.99,
+  "image": "/assets/products/silicone-muffin-mould.jpeg",
+  "category": "Bakeware",
+  "brand": "BakeRight",
+  "rating": 4.9,
+  "reviews": 76,
+  "description": "Flexible silicone \u2014 no greasing needed.",
+  "difficulty": "beginner",
+  "tags": [
+    "essential"
+  ],
+  "inStock": true
+},
+  {
+  "id": "pizza-stone",
+  "backendId": 12,
+  "name": "Pizza Stone",
+  "price": 24.99,
+  "image": "/assets/products/pizza-stone.jpeg",
+  "category": "Bakeware",
+  "brand": "SweetCraft",
+  "rating": 5.0,
+  "reviews": 83,
+  "description": "Crispy crusts every time.",
+  "difficulty": "intermediate",
+  "tags": [
+    "essential",
+    "recommend"
+  ],
+  "inStock": true
+},
+  {
+  "id": "bread-cloche",
+  "backendId": 13,
+  "name": "Bread Cloche",
+  "price": 34.99,
+  "image": "/product/bread-cloche.jpeg",
+  "category": "Bakeware",
+  "brand": "ProBake",
+  "rating": 4.0,
+  "reviews": 90,
+  "description": "Steam-trap lid for artisan loaves.",
+  "difficulty": "pro",
+  "tags": [
+    "essential"
+  ],
+  "inStock": true
+},
+  {
+  "id": "cast-iron-skillet-10inch",
+  "backendId": 14,
+  "name": "Cast Iron Skillet 10-inch",
+  "price": 29.99,
+  "image": "/product/cast-iron-skillet-10inch.jpeg",
+  "category": "Bakeware",
+  "brand": "KitchenPro",
+  "rating": 4.1,
+  "reviews": 97,
+  "description": "Pre-seasoned for cornbread and skillets.",
+  "difficulty": "beginner",
+  "tags": [
+    "essential",
+    "popular"
+  ],
+  "inStock": true
+},
+  {
+  "id": "pullman-loaf-pan-lid",
+  "backendId": 15,
+  "name": "Pullman Loaf Pan with Lid",
+  "price": 22.99,
+  "image": "/assets/products/pullman-loaf-pan-lid.jpeg",
+  "category": "Bakeware",
+  "brand": "ArtisanBake",
+  "rating": 4.2,
+  "reviews": 104,
+  "description": "Produces perfectly square sandwich loaves.",
+  "difficulty": "intermediate",
+  "tags": [
+    "essential"
+  ],
+  "inStock": true
+},
+  {
+  "id": "ceramic-pie-dish",
+  "backendId": 16,
+  "name": "Ceramic Pie Dish",
+  "price": 17.49,
+  "image": "/assets/products/ceramic-pie-dish.jpeg",
+  "category": "Bakeware",
+  "brand": "Baker's Choice",
+  "rating": 4.3,
+  "reviews": 111,
+  "description": "Deep dish for generous fruit pies.",
+  "difficulty": "pro",
+  "tags": [
+    "essential"
+  ],
+  "inStock": true
+},
+  {
+  "id": "angel-food-cake-pan",
+  "backendId": 17,
+  "name": "Angel Food Cake Pan",
+  "price": 14.99,
+  "image": "/assets/products/angel-food-cake-pan.jpeg",
+  "category": "Bakeware",
+  "brand": "CakeMaster",
+  "rating": 4.4,
+  "reviews": 118,
+  "description": "Tall centre tube for light sponge cakes.",
+  "difficulty": "beginner",
+  "tags": [
+    "essential",
+    "recommend"
+  ],
+  "inStock": true
+},
+  {
+  "id": "ramekins-set-6",
+  "backendId": 18,
+  "name": "Ramekins Set of 6",
+  "price": 19.99,
+  "image": "/assets/products/ramekins-set-6.jpeg",
+  "category": "Bakeware",
+  "brand": "Whiffle",
+  "rating": 4.5,
+  "reviews": 125,
+  "description": "Oven-safe ramekins for souffl\u00e9s and cr\u00e8me br\u00fbl\u00e9e.",
+  "difficulty": "intermediate",
+  "tags": [
+    "essential",
+    "popular"
+  ],
+  "inStock": true
+},
+  {
+  "id": "madeline-pan",
+  "backendId": 19,
+  "name": "Madeline Pan",
+  "price": 12.49,
+  "image": "/assets/products/madeline-pan.jpeg",
+  "category": "Bakeware",
+  "brand": "BakeRight",
+  "rating": 4.6,
+  "reviews": 132,
+  "description": "Classic shell-shaped French madeleine mould.",
+  "difficulty": "pro",
+  "tags": [
+    "essential"
+  ],
+  "inStock": true
+},
+  {
+  "id": "strong-white-bread-flour-1kg",
+  "backendId": 20,
+  "name": "Strong White Bread Flour 1kg",
+  "price": 3.49,
+  "image": "/assets/products/strong-white-bread-flour-1kg.jpeg",
+  "category": "Ingredients",
+  "brand": "SweetCraft",
+  "rating": 4.7,
+  "reviews": 139,
+  "description": "High-protein flour ideal for yeast breads.",
+  "difficulty": "beginner",
+  "tags": [
+    "essential"
+  ],
+  "inStock": true
+},
+  {
+  "id": "self-raising-flour-1-5kg",
+  "backendId": 21,
+  "name": "Self-Raising Flour 1.5kg",
+  "price": 3.29,
+  "image": "/assets/products/self-raising-flour-1-5kg.jpg",
+  "category": "Ingredients",
+  "brand": "ProBake",
+  "rating": 4.8,
+  "reviews": 146,
+  "description": "Pre-mixed with raising agents.",
+  "difficulty": "intermediate",
+  "tags": [
+    "essential"
+  ],
+  "inStock": true
+},
+  {
+  "id": "caster-sugar-1kg",
+  "backendId": 22,
+  "name": "Caster Sugar 1kg",
+  "price": 2.49,
+  "image": "/product/caster-sugar-1kg.jpeg",
+  "category": "Ingredients",
+  "brand": "KitchenPro",
+  "rating": 4.9,
+  "reviews": 153,
+  "description": "Fine-grain for light sponges and meringues.",
+  "difficulty": "pro",
+  "tags": [
+    "essential",
+    "popular",
+    "recommend"
+  ],
+  "inStock": true
+},
+  {
+  "id": "dark-muscovado-sugar-500g",
+  "backendId": 23,
+  "name": "Dark Muscovado Sugar 500g",
+  "price": 2.99,
+  "image": "/product/dark-muscovado-sugar-500g.jpeg",
+  "category": "Ingredients",
+  "brand": "ArtisanBake",
+  "rating": 5.0,
+  "reviews": 160,
+  "description": "Rich, molasses-heavy sugar for deep flavour.",
+  "difficulty": "beginner",
+  "tags": [
+    "essential"
+  ],
+  "inStock": true
+},
+  {
+  "id": "unsalted-butter-250g",
+  "backendId": 24,
+  "name": "Unsalted Butter Blocks 250g",
+  "price": 2.79,
+  "image": "/product/unsalted-butter-250g.jpeg",
+  "category": "Ingredients",
+  "brand": "Baker's Choice",
+  "rating": 4.0,
+  "reviews": 167,
+  "description": "Pure cream butter for baking.",
+  "difficulty": "intermediate",
+  "tags": [
+    "essential"
+  ],
+  "inStock": true
+},
+  {
+  "id": "cocoa-powder-250g",
+  "backendId": 25,
+  "name": "Cocoa Powder 250g",
+  "price": 3.99,
+  "image": "/assets/products/cocoa-powder-250g.jpeg",
+  "category": "Ingredients",
+  "brand": "CakeMaster",
+  "rating": 4.1,
+  "reviews": 174,
+  "description": "Dutch-processed, intense chocolate flavour.",
+  "difficulty": "pro",
+  "tags": [
+    "essential"
+  ],
+  "inStock": true
+},
+  {
+  "id": "vanilla-bean-paste-100ml",
+  "backendId": 26,
+  "name": "Vanilla Bean Paste 100ml",
+  "price": 6.99,
+  "image": "/assets/products/vanilla-bean-paste-100ml.jpeg",
+  "category": "Ingredients",
+  "brand": "Whiffle",
+  "rating": 4.2,
+  "reviews": 181,
+  "description": "Real vanilla seeds in a convenient paste.",
+  "difficulty": "beginner",
+  "tags": [
+    "essential",
+    "popular"
+  ],
+  "inStock": true
+},
+  {
+  "id": "active-dry-yeast-100g",
+  "backendId": 27,
+  "name": "Active Dry Yeast 100g",
+  "price": 3.49,
+  "image": "/assets/products/active-dry-yeast-100g.jpeg",
+  "category": "Ingredients",
+  "brand": "BakeRight",
+  "rating": 4.3,
+  "reviews": 188,
+  "description": "Reliable leavening for breads and rolls.",
+  "difficulty": "intermediate",
+  "tags": [
+    "essential",
+    "recommend"
+  ],
+  "inStock": true
+},
+  {
+  "id": "baking-powder-200g",
+  "backendId": 28,
+  "name": "Baking Powder 200g",
+  "price": 2.19,
+  "image": "/product/baking-powder-200g.jpeg",
+  "category": "Ingredients",
+  "brand": "SweetCraft",
+  "rating": 4.4,
+  "reviews": 195,
+  "description": "Aluminium-free, double-acting raising agent.",
+  "difficulty": "pro",
+  "tags": [
+    "essential"
+  ],
+  "inStock": true
+},
+  {
+  "id": "bicarbonate-of-soda-200g",
+  "backendId": 29,
+  "name": "Bicarbonate of Soda 200g",
+  "price": 1.99,
+  "image": "/product/bicarbonate-of-soda-200g.jpeg",
+  "category": "Ingredients",
+  "brand": "ProBake",
+  "rating": 4.5,
+  "reviews": 202,
+  "description": "Essential for quick breads and cookies.",
+  "difficulty": "beginner",
+  "tags": [
+    "essential"
+  ],
+  "inStock": true
+},
+  {
+  "id": "almond-flour-500g",
+  "backendId": 30,
+  "name": "Almond Flour 500g",
+  "price": 7.99,
+  "image": "/assets/products/almond-flour-500g.jpeg",
+  "category": "Ingredients",
+  "brand": "KitchenPro",
+  "rating": 4.6,
+  "reviews": 209,
+  "description": "Blanched and finely ground for macarons.",
+  "difficulty": "intermediate",
+  "tags": [
+    "essential",
+    "popular"
+  ],
+  "inStock": true
+},
+  {
+  "id": "dark-chocolate-chips-300g",
+  "backendId": 31,
+  "name": "Dark Chocolate Chips 300g",
+  "price": 4.49,
+  "image": "/assets/products/dark-chocolate-chips-300g.jpg",
+  "category": "Ingredients",
+  "brand": "ArtisanBake",
+  "rating": 4.7,
+  "reviews": 216,
+  "description": "70% cocoa, perfect for cookies and muffins.",
+  "difficulty": "pro",
+  "tags": [
+    "essential"
+  ],
+  "inStock": true
+},
+  {
+  "id": "white-chocolate-chips-300g",
+  "backendId": 32,
+  "name": "White Chocolate Chips 300g",
+  "price": 4.49,
+  "image": "/product/white-chocolate-chips-300g.jpeg",
+  "category": "Ingredients",
+  "brand": "Baker's Choice",
+  "rating": 4.8,
+  "reviews": 223,
+  "description": "Creamy white chocolate for baking.",
+  "difficulty": "beginner",
+  "tags": [
+    "essential",
+    "recommend"
+  ],
+  "inStock": true
+},
+  {
+  "id": "honey-500g",
+  "backendId": 33,
+  "name": "Honey 500g",
+  "price": 5.99,
+  "image": "/product/honey-500g.jpeg",
+  "category": "Ingredients",
+  "brand": "CakeMaster",
+  "rating": 4.9,
+  "reviews": 230,
+  "description": "Raw wildflower honey for natural sweetness.",
+  "difficulty": "intermediate",
+  "tags": [
+    "essential"
+  ],
+  "inStock": true
+},
+  {
+  "id": "maple-syrup-250ml",
+  "backendId": 34,
+  "name": "Maple Syrup 250ml",
+  "price": 6.49,
+  "image": "/product/maple-syrup-250ml.jpeg",
+  "category": "Ingredients",
+  "brand": "Whiffle",
+  "rating": 5.0,
+  "reviews": 237,
+  "description": "Grade A dark amber syrup.",
+  "difficulty": "pro",
+  "tags": [
+    "essential",
+    "popular"
+  ],
+  "inStock": true
+},
+  {
+  "id": "cream-of-tartar-75g",
+  "backendId": 35,
+  "name": "Cream of Tartar 75g",
+  "price": 2.49,
+  "image": "/product/cream-of-tartar-75g.jpeg",
+  "category": "Ingredients",
+  "brand": "BakeRight",
+  "rating": 4.0,
+  "reviews": 244,
+  "description": "Stabilises egg whites and prevents sugar crystallisation.",
+  "difficulty": "beginner",
+  "tags": [
+    "essential"
+  ],
+  "inStock": true
+},
+  {
+  "id": "flaked-almonds-200g",
+  "backendId": 36,
+  "name": "Flaked Almonds 200g",
+  "price": 3.29,
+  "image": "/product/flaked-almonds-200g.jpeg",
+  "category": "Ingredients",
+  "brand": "SweetCraft",
+  "rating": 4.1,
+  "reviews": 1,
+  "description": "Toasted for decoration or baked in.",
+  "difficulty": "intermediate",
+  "tags": [
+    "essential"
+  ],
+  "inStock": true
+},
+  {
+  "id": "desiccated-coconut-200g",
+  "backendId": 37,
+  "name": "Desiccated Coconut 200g",
+  "price": 2.49,
+  "image": "/product/desiccated-coconut-200g.jpeg",
+  "category": "Ingredients",
+  "brand": "ProBake",
+  "rating": 4.2,
+  "reviews": 8,
+  "description": "Fine-shredded for texture and flavour.",
+  "difficulty": "pro",
+  "tags": [
+    "essential",
+    "recommend"
+  ],
+  "inStock": true
+},
+  {
+  "id": "offset-spatula-8inch",
+  "backendId": 38,
+  "name": "Offset Spatula 8-inch",
+  "price": 7.99,
+  "image": "/product/offset-spatula-8inch.jpeg",
+  "category": "Decorating Tools",
+  "brand": "KitchenPro",
+  "rating": 4.3,
+  "reviews": 15,
+  "description": "Angled blade for smooth frosting.",
+  "difficulty": "beginner",
+  "tags": [
+    "essential",
+    "popular"
+  ],
+  "inStock": true
+},
+  {
+  "id": "piping-bag-set-20pcs",
+  "backendId": 39,
+  "name": "Piping Bag Set 20pcs",
+  "price": 9.99,
+  "image": "/assets/products/piping-bag-set-20pcs.jpg",
+  "category": "Decorating Tools",
+  "brand": "ArtisanBake",
+  "rating": 4.4,
+  "reviews": 22,
+  "description": "Disposable bags with 10 nozzle tips.",
+  "difficulty": "intermediate",
+  "tags": [
+    "essential"
+  ],
+  "inStock": true
+},
+  {
+  "id": "turntable-cake-stand",
+  "backendId": 40,
+  "name": "Turntable Cake Stand",
+  "price": 19.99,
+  "image": "/assets/products/turntable-cake-stand.jpg",
+  "category": "Decorating Tools",
+  "brand": "Baker's Choice",
+  "rating": 4.5,
+  "reviews": 29,
+  "description": "Smooth 360\u00b0 rotating stand.",
+  "difficulty": "pro",
+  "tags": [
+    "essential"
+  ],
+  "inStock": true
+},
+  {
+  "id": "bench-scraper-stainless",
+  "backendId": 41,
+  "name": "Bench Scraper Stainless",
+  "price": 5.99,
+  "image": "/product/bench-scraper-stainless.jpeg",
+  "category": "Decorating Tools",
+  "brand": "CakeMaster",
+  "rating": 4.6,
+  "reviews": 36,
+  "description": "Sharp edge for perfectly smooth sides.",
+  "difficulty": "beginner",
+  "tags": [
+    "essential"
+  ],
+  "inStock": true
+},
+  {
+  "id": "fondant-smoother",
+  "backendId": 42,
+  "name": "Fondant Smoother",
+  "price": 6.49,
+  "image": "/assets/products/fondant-smoother.jpg",
+  "category": "Decorating Tools",
+  "brand": "Whiffle",
+  "rating": 4.7,
+  "reviews": 43,
+  "description": "Dual-sided paddle for flawless fondant.",
+  "difficulty": "intermediate",
+  "tags": [
+    "essential",
+    "popular",
+    "recommend"
+  ],
+  "inStock": true
+},
+  {
+  "id": "cookie-cutter-set-20pcs",
+  "backendId": 43,
+  "name": "Cookie Cutter Set 20pcs",
+  "price": 12.99,
+  "image": "/assets/products/cookie-cutter-set-20pcs.jpg",
+  "category": "Decorating Tools",
+  "brand": "BakeRight",
+  "rating": 4.8,
+  "reviews": 50,
+  "description": "Stainless steel seasonal shapes.",
+  "difficulty": "pro",
+  "tags": [
+    "essential"
+  ],
+  "inStock": true
+},
+  {
+  "id": "nozzle-tip-set-24pcs",
+  "backendId": 44,
+  "name": "Nozzle Tip Set 24pcs",
+  "price": 14.99,
+  "image": "/product/nozzle-tip-set-24pcs.jpeg",
+  "category": "Decorating Tools",
+  "brand": "SweetCraft",
+  "rating": 4.9,
+  "reviews": 57,
+  "description": "Stainless steel piping tips, all shapes.",
+  "difficulty": "beginner",
+  "tags": [
+    "essential"
+  ],
+  "inStock": true
+},
+  {
+  "id": "cake-leveller",
+  "backendId": 45,
+  "name": "Cake Leveller",
+  "price": 8.49,
+  "image": "/product/cake-leveller.jpeg",
+  "category": "Decorating Tools",
+  "brand": "ProBake",
+  "rating": 5.0,
+  "reviews": 64,
+  "description": "Adjustable wire to slice even layers.",
+  "difficulty": "intermediate",
+  "tags": [
+    "essential"
+  ],
+  "inStock": true
+},
+  {
+  "id": "food-colouring-gel-set-12",
+  "backendId": 46,
+  "name": "Food Colouring Gel Set 12",
+  "price": 15.99,
+  "image": "/assets/products/food-colouring-gel-set-12.jpg",
+  "category": "Decorating Tools",
+  "brand": "KitchenPro",
+  "rating": 4.0,
+  "reviews": 71,
+  "description": "Vibrant, concentrated gel colours.",
+  "difficulty": "pro",
+  "tags": [
+    "essential",
+    "popular"
+  ],
+  "inStock": true
+},
+  {
+  "id": "edible-gold-dust-5g",
+  "backendId": 47,
+  "name": "Edible Gold Dust 5g",
+  "price": 4.99,
+  "image": "/product/edible-gold-dust-5g.jpeg",
+  "category": "Decorating Tools",
+  "brand": "ArtisanBake",
+  "rating": 4.1,
+  "reviews": 78,
+  "description": "FDA-approved shimmer for luxury finishes.",
+  "difficulty": "beginner",
+  "tags": [
+    "essential",
+    "recommend"
+  ],
+  "inStock": true
+},
+  {
+  "id": "cake-decorating-comb-set",
+  "backendId": 48,
+  "name": "Cake Decorating Comb Set",
+  "price": 7.99,
+  "image": "/assets/products/cake-decorating-comb-set.jpeg",
+  "category": "Decorating Tools",
+  "brand": "Baker's Choice",
+  "rating": 4.2,
+  "reviews": 85,
+  "description": "Textured combs for stripe patterns.",
+  "difficulty": "intermediate",
+  "tags": [
+    "essential"
+  ],
+  "inStock": true
+},
+  {
+  "id": "palette-knife-straight",
+  "backendId": 49,
+  "name": "Palette Knife Straight",
+  "price": 5.49,
+  "image": "/product/palette-knife-straight.jpeg",
+  "category": "Decorating Tools",
+  "brand": "CakeMaster",
+  "rating": 4.3,
+  "reviews": 92,
+  "description": "Flexible steel for spreading and lifting.",
+  "difficulty": "pro",
+  "tags": [
+    "essential"
+  ],
+  "inStock": true
+},
+  {
+  "id": "silicone-mould-roses",
+  "backendId": 50,
+  "name": "Silicone Mould Roses",
+  "price": 6.99,
+  "image": "/assets/products/silicone-mould-roses.jpeg",
+  "category": "Decorating Tools",
+  "brand": "Whiffle",
+  "rating": 4.4,
+  "reviews": 99,
+  "description": "Detailed rose cavity mould for fondant.",
+  "difficulty": "beginner",
+  "tags": [
+    "essential",
+    "popular"
+  ],
+  "inStock": true
+},
+  {
+  "id": "stencil-set-geometric",
+  "backendId": 51,
+  "name": "Stencil Set Geometric",
+  "price": 8.99,
+  "image": "/product/stencil-set-geometric.jpeg",
+  "category": "Decorating Tools",
+  "brand": "BakeRight",
+  "rating": 4.5,
+  "reviews": 106,
+  "description": "Reusable stencils for dusting patterns.",
+  "difficulty": "intermediate",
+  "tags": [
+    "essential"
+  ],
+  "inStock": true
+},
+  {
+  "id": "pastry-brush-silicone",
+  "backendId": 52,
+  "name": "Pastry Brush Silicone",
+  "price": 4.99,
+  "image": "/product/pastry-brush-silicone.jpeg",
+  "category": "Decorating Tools",
+  "brand": "SweetCraft",
+  "rating": 4.6,
+  "reviews": 113,
+  "description": "Heat-resistant, easy-clean silicone.",
+  "difficulty": "pro",
+  "tags": [
+    "essential",
+    "recommend"
+  ],
+  "inStock": true
+},
+  {
+  "id": "cake-drum-10inch",
+  "backendId": 53,
+  "name": "Cake Drum 10-inch",
+  "price": 3.99,
+  "image": "/product/cake-drum-10inch.jpeg",
+  "category": "Decorating Tools",
+  "brand": "ProBake",
+  "rating": 4.7,
+  "reviews": 120,
+  "description": "Thick, sturdy board for tiered cakes.",
+  "difficulty": "beginner",
+  "tags": [
+    "essential"
+  ],
+  "inStock": true
+},
+  {
+  "id": "ribbon-crimper-tool",
+  "backendId": 54,
+  "name": "Ribbon Crimper Tool",
+  "price": 5.49,
+  "image": "/product/ribbon-crimper-tool.jpeg",
+  "category": "Decorating Tools",
+  "brand": "KitchenPro",
+  "rating": 4.8,
+  "reviews": 127,
+  "description": "Creates crimped patterns in fondant strips.",
+  "difficulty": "intermediate",
+  "tags": [
+    "essential",
+    "popular"
+  ],
+  "inStock": true
+},
+  {
+  "id": "lustre-spray-silver",
+  "backendId": 55,
+  "name": "Lustre Spray Silver",
+  "price": 6.99,
+  "image": "/product/lustre-spray-silver.jpeg",
+  "category": "Decorating Tools",
+  "brand": "ArtisanBake",
+  "rating": 4.9,
+  "reviews": 134,
+  "description": "Metallic sheen in seconds.",
+  "difficulty": "pro",
+  "tags": [
+    "essential"
+  ],
+  "inStock": true
+},
+  {
+  "id": "bakers-apron-canvas",
+  "backendId": 56,
+  "name": "Baker's Apron Canvas",
+  "price": 24.99,
+  "image": "/assets/products/bakers-apron-canvas.jpg",
+  "category": "Accessories",
+  "brand": "Baker's Choice",
+  "rating": 5.0,
+  "reviews": 141,
+  "description": "Cross-back, heavy-duty canvas apron.",
+  "difficulty": "beginner",
+  "tags": [
+    "essential"
+  ],
+  "inStock": true
+},
+  {
+  "id": "digital-kitchen-scale-5kg",
+  "backendId": 57,
+  "name": "Digital Kitchen Scale 5kg",
+  "price": 19.99,
+  "image": "/product/digital-kitchen-scale-5kg.jpeg",
+  "category": "Accessories",
+  "brand": "CakeMaster",
+  "rating": 4.0,
+  "reviews": 148,
+  "description": "0.1g precision, tare function.",
+  "difficulty": "intermediate",
+  "tags": [
+    "essential",
+    "recommend"
+  ],
+  "inStock": true
+},
+  {
+  "id": "kitchen-timer-mechanical",
+  "backendId": 58,
+  "name": "Kitchen Timer Mechanical",
+  "price": 8.99,
+  "image": "/product/kitchen-timer-mechanical.jpeg",
+  "category": "Accessories",
+  "brand": "Whiffle",
+  "rating": 4.1,
+  "reviews": 155,
+  "description": "60-minute wind-up, no batteries needed.",
+  "difficulty": "pro",
+  "tags": [
+    "essential",
+    "popular"
+  ],
+  "inStock": true
+},
+  {
+  "id": "oven-thermometer",
+  "backendId": 59,
+  "name": "Oven Thermometer",
+  "price": 7.49,
+  "image": "/product/oven-thermometer.jpeg",
+  "category": "Accessories",
+  "brand": "BakeRight",
+  "rating": 4.2,
+  "reviews": 162,
+  "description": "Accurate to \u00b11\u00b0C for consistent bakes.",
+  "difficulty": "beginner",
+  "tags": [
+    "essential"
+  ],
+  "inStock": true
+},
+  {
+  "id": "stand-mixer-splash-guard",
+  "backendId": 60,
+  "name": "Stand Mixer Splash Guard",
+  "price": 14.99,
+  "image": "/product/stand-mixer-splash-guard.jpeg",
+  "category": "Accessories",
+  "brand": "SweetCraft",
+  "rating": 4.3,
+  "reviews": 169,
+  "description": "Fits KitchenAid 5-6qt bowls.",
+  "difficulty": "intermediate",
+  "tags": [
+    "essential"
+  ],
+  "inStock": true
+},
+  {
+  "id": "silicone-baking-mat-set",
+  "backendId": 61,
+  "name": "Silicone Baking Mat Set x2",
+  "price": 12.99,
+  "image": "/src/assets/products/silicone-baking-mat-set.jpg",
+  "category": "Accessories",
+  "brand": "ProBake",
+  "rating": 4.4,
+  "reviews": 176,
+  "description": "Non-stick, reusable, half-sheet size.",
+  "difficulty": "pro",
+  "tags": [
+    "essential"
+  ],
+  "inStock": true
+},
+  {
+  "id": "dough-scraper-plastic",
+  "backendId": 62,
+  "name": "Dough Scraper Plastic",
+  "price": 3.49,
+  "image": "/src/assets/products/dough-scraper-plastic.jpeg",
+  "category": "Accessories",
+  "brand": "KitchenPro",
+  "rating": 4.5,
+  "reviews": 183,
+  "description": "Flexible, comfortable grip.",
+  "difficulty": "beginner",
+  "tags": [
+    "essential",
+    "popular",
+    "recommend"
+  ],
+  "inStock": true
+},
+  {
+  "id": "rolling-pin-french-tapered",
+  "backendId": 63,
+  "name": "Rolling Pin French Tapered",
+  "price": 11.99,
+  "image": "/src/assets/products/rolling-pin-french-tapered.jpg",
+  "category": "Accessories",
+  "brand": "ArtisanBake",
+  "rating": 4.6,
+  "reviews": 190,
+  "description": "Classic tapered hardwood pin.",
+  "difficulty": "intermediate",
+  "tags": [
+    "essential"
+  ],
+  "inStock": true
+},
+  {
+  "id": "whisks-set-of-3",
+  "backendId": 64,
+  "name": "Whisks Set of 3",
+  "price": 13.99,
+  "image": "/src/assets/products/whisks-set-of-3.jpg",
+  "category": "Accessories",
+  "brand": "Baker's Choice",
+  "rating": 4.7,
+  "reviews": 197,
+  "description": "Balloon, french, and mini whisks.",
+  "difficulty": "pro",
+  "tags": [
+    "essential"
+  ],
+  "inStock": true
+},
+  {
+  "id": "cooling-rack-set-x2",
+  "backendId": 65,
+  "name": "Cooling Rack Set x2",
+  "price": 11.49,
+  "image": "/src/assets/products/cooling-rack-set-x2.jpg",
+  "category": "Accessories",
+  "brand": "CakeMaster",
+  "rating": 4.8,
+  "reviews": 204,
+  "description": "Stackable chrome-plated racks.",
+  "difficulty": "beginner",
+  "tags": [
+    "essential"
+  ],
+  "inStock": true
+},
+  {
+  "id": "dough-proofer-box",
+  "backendId": 66,
+  "name": "Dough Proofer Box",
+  "price": 39.99,
+  "image": "/product/dough-proofer-box.jpeg",
+  "category": "Accessories",
+  "brand": "Whiffle",
+  "rating": 4.9,
+  "reviews": 211,
+  "description": "Collapsible, maintains humidity for proofing.",
+  "difficulty": "intermediate",
+  "tags": [
+    "essential",
+    "popular"
+  ],
+  "inStock": true
+},
+  {
+  "id": "bench-flour-duster",
+  "backendId": 67,
+  "name": "Bench Flour Duster",
+  "price": 9.99,
+  "image": "/product/bench-flour-duster.jpeg",
+  "category": "Accessories",
+  "brand": "BakeRight",
+  "rating": 5.0,
+  "reviews": 218,
+  "description": "Spring-loaded, even flour distribution.",
+  "difficulty": "pro",
+  "tags": [
+    "essential",
+    "recommend"
+  ],
+  "inStock": true
+},
+  {
+  "id": "instant-read-thermometer",
+  "backendId": 68,
+  "name": "Instant-Read Thermometer",
+  "price": 19.99,
+  "image": "/product/instant-read-thermometer.jpeg",
+  "category": "Accessories",
+  "brand": "SweetCraft",
+  "rating": 4.0,
+  "reviews": 225,
+  "description": "3-second read for bread and caramel.",
+  "difficulty": "beginner",
+  "tags": [
+    "essential"
+  ],
+  "inStock": true
+},
+  {
+  "id": "pastry-mat-silicone-xl",
+  "backendId": 69,
+  "name": "Pastry Mat Silicone XL",
+  "price": 14.49,
+  "image": "/product/pastry-mat-silicone-xl.jpeg",
+  "category": "Accessories",
+  "brand": "ProBake",
+  "rating": 4.1,
+  "reviews": 232,
+  "description": "Non-stick, measurement guides printed on.",
+  "difficulty": "intermediate",
+  "tags": [
+    "essential"
+  ],
+  "inStock": true
+},
+  {
+  "id": "bread-lame-and-cover",
+  "backendId": 70,
+  "name": "Bread Lame & Cover",
+  "price": 11.99,
+  "image": "/src/assets/products/bread-lame-and-cover.jpeg",
+  "category": "Accessories",
+  "brand": "KitchenPro",
+  "rating": 4.2,
+  "reviews": 239,
+  "description": "Razor-sharp scoring tool for artisan loaves.",
+  "difficulty": "pro",
+  "tags": [
+    "essential",
+    "popular"
+  ],
+  "inStock": true
+},
+  {
+  "id": "cake-box-set-10pcs",
+  "backendId": 71,
+  "name": "Cake Box Set 10pcs",
+  "price": 8.99,
+  "image": "/product/cake-box-set-10pcs.jpeg",
+  "category": "Accessories",
+  "brand": "ArtisanBake",
+  "rating": 4.3,
+  "reviews": 246,
+  "description": "White kraft boxes, assorted sizes.",
+  "difficulty": "beginner",
+  "tags": [
+    "essential"
+  ],
+  "inStock": true
+},
+  {
+  "id": "bread-bakers-bundle",
+  "backendId": 72,
+  "name": "Bread Baker's Bundle",
+  "price": 49.99,
+  "image": "/src/assets/products/bread-bakers-bundle.jpg",
+  "category": "Bundles",
+  "brand": "Baker's Choice",
+  "rating": 4.4,
+  "reviews": 3,
+  "description": "Pullman pan, lame, thermometer, and flour.",
+  "difficulty": "intermediate",
+  "tags": [
+    "essential",
+    "recommend"
+  ],
+  "inStock": true
+},
+  {
+  "id": "cake-decorator-bundle",
+  "backendId": 73,
+  "name": "Cake Decorator Bundle",
+  "price": 54.99,
+  "image": "/product/cake-decorator-bundle.jpeg",
+  "category": "Bundles",
+  "brand": "CakeMaster",
+  "rating": 4.5,
+  "reviews": 10,
+  "description": "Turntable, offset spatula, piping set, and nozzles.",
+  "difficulty": "pro",
+  "tags": [
+    "essential"
+  ],
+  "inStock": true
+},
+  {
+  "id": "weekend-baker-bundle",
+  "backendId": 74,
+  "name": "Weekend Baker Bundle",
+  "price": 44.99,
+  "image": "/product/weekend-baker-bundle.jpeg",
+  "category": "Bundles",
+  "brand": "Whiffle",
+  "rating": 4.6,
+  "reviews": 17,
+  "description": "Sheet pan, muffin tray, silicone mat, and scale.",
+  "difficulty": "beginner",
+  "tags": [
+    "essential",
+    "popular"
+  ],
+  "inStock": true
+},
+  {
+  "id": "chocolate-lover-bundle",
+  "backendId": 75,
+  "name": "Chocolate Lover Bundle",
+  "price": 29.99,
+  "image": "/src/assets/products/chocolate-lover-bundle.jpg",
+  "category": "Bundles",
+  "brand": "BakeRight",
+  "rating": 4.7,
+  "reviews": 24,
+  "description": "Cocoa, dark chips, white chips, and fondant mould.",
+  "difficulty": "intermediate",
+  "tags": [
+    "essential"
+  ],
+  "inStock": true
+},
+  {
+  "id": "cookie-baking-bundle",
+  "backendId": 76,
+  "name": "Cookie Baking Bundle",
+  "price": 34.99,
+  "image": "/src/assets/products/cookie-baking-bundle.jpg",
+  "category": "Bundles",
+  "brand": "SweetCraft",
+  "rating": 4.8,
+  "reviews": 31,
+  "description": "Cutters, parchment, silicone mat, and spatula.",
+  "difficulty": "pro",
+  "tags": [
+    "essential"
+  ],
+  "inStock": true
+},
+  {
+  "id": "sourdough-starter-bundle",
+  "backendId": 77,
+  "name": "Sourdough Starter Bundle",
+  "price": 89.99,
+  "image": "/product/sourdough-starter-bundle.jpeg",
+  "category": "Bundles",
+  "brand": "ProBake",
+  "rating": 4.9,
+  "reviews": 38,
+  "description": "Cloche, dough scraper, lame, thermometer, and proofer.",
+  "difficulty": "beginner",
+  "tags": [
+    "essential",
+    "recommend"
+  ],
+  "inStock": true
+},
+  {
+  "id": "cupcake-party-bundle",
+  "backendId": 78,
+  "name": "Cupcake Party Bundle",
+  "price": 39.99,
+  "image": "/src/assets/products/cupcake-party-bundle.jpeg",
+  "category": "Bundles",
+  "brand": "KitchenPro",
+  "rating": 5.0,
+  "reviews": 45,
+  "description": "Muffin tray, piping bags, nozzles, and colours.",
+  "difficulty": "intermediate",
+  "tags": [
+    "essential",
+    "popular"
+  ],
+  "inStock": true
+},
+  {
+  "id": "french-patisserie-bundle",
+  "backendId": 79,
+  "name": "French Patisserie Bundle",
+  "price": 59.99,
+  "image": "/product/french-patisserie-bundle.jpeg",
+  "category": "Bundles",
+  "brand": "ArtisanBake",
+  "rating": 4.0,
+  "reviews": 52,
+  "description": "Madeline pan, tart tin, almond flour, and piping set.",
+  "difficulty": "pro",
+  "tags": [
+    "essential"
+  ],
+  "inStock": true
+},
+  {
+  "id": "gluten-free-baking-bundle",
+  "backendId": 80,
+  "name": "Gluten-Free Baking Bundle",
+  "price": 49.99,
+  "image": "/product/gluten-free-baking-bundle.jpeg",
+  "category": "Bundles",
+  "brand": "Baker's Choice",
+  "rating": 4.1,
+  "reviews": 59,
+  "description": "Almond flour, xanthan stand-in, and GF bakeware set.",
+  "difficulty": "beginner",
+  "tags": [
+    "essential"
+  ],
+  "inStock": true
+},
+  {
+  "id": "holiday-baking-bundle",
+  "backendId": 81,
+  "name": "Holiday Baking Bundle",
+  "price": 44.99,
+  "image": "/product/holiday-baking-bundle.jpeg",
+  "category": "Bundles",
+  "brand": "CakeMaster",
+  "rating": 4.2,
+  "reviews": 66,
+  "description": "Christmas cookie cutters, gold dust, and lustre spray.",
+  "difficulty": "intermediate",
+  "tags": [
+    "essential"
+  ],
+  "inStock": true
+},
+  {
+  "id": "pastry-chef-bundle",
+  "backendId": 82,
+  "name": "Pastry Chef Bundle",
+  "price": 52.99,
+  "image": "/product/pastry-chef-bundle.jpeg",
+  "category": "Bundles",
+  "brand": "Whiffle",
+  "rating": 4.3,
+  "reviews": 73,
+  "description": "Offset spatulas, bench scraper, tart pan, and palette knife.",
+  "difficulty": "pro",
+  "tags": [
+    "essential",
+    "popular",
+    "recommend"
+  ],
+  "inStock": true
+},
+  {
+  "id": "everyday-baking-bundle",
+  "backendId": 83,
+  "name": "Everyday Baking Bundle",
+  "price": 38.99,
+  "image": "/product/everyday-baking-bundle.jpeg",
+  "category": "Bundles",
+  "brand": "BakeRight",
+  "rating": 4.4,
+  "reviews": 80,
+  "description": "Loaf pan, round tin, scale, and vanilla paste.",
+  "difficulty": "beginner",
+  "tags": [
+    "essential"
+  ],
+  "inStock": true
+},
+  {
+  "id": "fondant-artist-bundle",
+  "backendId": 84,
+  "name": "Fondant Artist Bundle",
+  "price": 47.99,
+  "image": "/product/fondant-artist-bundle.jpeg",
+  "category": "Bundles",
+  "brand": "SweetCraft",
+  "rating": 4.5,
+  "reviews": 87,
+  "description": "Smoother, rose mould, gel colours, and crimper.",
+  "difficulty": "intermediate",
+  "tags": [
+    "essential"
+  ],
+  "inStock": true
+},
+  {
+  "id": "pizza-night-bundle",
+  "backendId": 85,
+  "name": "Pizza Night Bundle",
+  "price": 59.99,
+  "image": "/product/pizza-night-bundle.jpeg",
+  "category": "Bundles",
+  "brand": "ProBake",
+  "rating": 4.6,
+  "reviews": 94,
+  "description": "Pizza stone, peel, and dough scraper set.",
+  "difficulty": "pro",
+  "tags": [
+    "essential"
+  ],
+  "inStock": true
+},
+  {
+  "id": "gift-baker-bundle",
+  "backendId": 86,
+  "name": "Gift Baker Bundle",
+  "price": 69.99,
+  "image": "/product/gift-baker-bundle.jpeg",
+  "category": "Bundles",
+  "brand": "KitchenPro",
+  "rating": 4.7,
+  "reviews": 101,
+  "description": "Apron, timer, whisk set, and cooling racks in a box.",
+  "difficulty": "beginner",
+  "tags": [
+    "essential",
+    "popular"
+  ],
+  "inStock": true
+},
+  {
+  "id": "complete-beginner-baking-kit",
+  "backendId": 87,
+  "name": "Complete Beginner Baking Kit",
+  "price": 79.99,
+  "image": "/src/assets/products/complete-beginner-baking-kit.jpg",
+  "category": "Starter Kits",
+  "brand": "ArtisanBake",
+  "rating": 4.8,
+  "reviews": 108,
+  "description": "Everything a first-time baker needs.",
+  "difficulty": "intermediate",
+  "tags": [
+    "essential",
+    "recommend"
+  ],
+  "inStock": true
+},
+  {
+  "id": "kids-baking-starter-kit",
+  "backendId": 88,
+  "name": "Kids Baking Starter Kit",
+  "price": 34.99,
+  "image": "/src/assets/products/kids-baking-starter-kit.jpg",
+  "category": "Starter Kits",
+  "brand": "Baker's Choice",
+  "rating": 4.9,
+  "reviews": 115,
+  "description": "Safe, colourful tools sized for little hands.",
+  "difficulty": "pro",
+  "tags": [
+    "essential"
+  ],
+  "inStock": true
+},
+  {
+  "id": "bread-baking-starter-kit",
+  "backendId": 89,
+  "name": "Bread Baking Starter Kit",
+  "price": 44.99,
+  "image": "/product/bread-baking-starter-kit.jpeg",
+  "category": "Starter Kits",
+  "brand": "CakeMaster",
+  "rating": 5.0,
+  "reviews": 122,
+  "description": "Loaf pan, yeast, flour, and lame.",
+  "difficulty": "beginner",
+  "tags": [
+    "essential"
+  ],
+  "inStock": true
+},
+  {
+  "id": "cake-baking-starter-kit",
+  "backendId": 90,
+  "name": "Cake Baking Starter Kit",
+  "price": 39.99,
+  "image": "/product/cake-baking-starter-kit.jpeg",
+  "category": "Starter Kits",
+  "brand": "Whiffle",
+  "rating": 4.0,
+  "reviews": 129,
+  "description": "Round tin, spatula, piping bag, and caster sugar.",
+  "difficulty": "intermediate",
+  "tags": [
+    "essential",
+    "popular"
+  ],
+  "inStock": true
+},
+  {
+  "id": "cookie-baking-starter-kit",
+  "backendId": 91,
+  "name": "Cookie Baking Starter Kit",
+  "price": 29.99,
+  "image": "/product/cookie-baking-starter-kit.jpeg",
+  "category": "Starter Kits",
+  "brand": "BakeRight",
+  "rating": 4.1,
+  "reviews": 136,
+  "description": "Sheet pan, cutters, rolling pin, and flour.",
+  "difficulty": "pro",
+  "tags": [
+    "essential"
+  ],
+  "inStock": true
+},
+  {
+  "id": "sourdough-starter-kit",
+  "backendId": 92,
+  "name": "Sourdough Starter Kit",
+  "price": 59.99,
+  "image": "/src/assets/products/sourdough-starter-kit.jpg",
+  "category": "Starter Kits",
+  "brand": "SweetCraft",
+  "rating": 4.2,
+  "reviews": 143,
+  "description": "Cloche, scoring lame, proofing basket, and flour.",
+  "difficulty": "beginner",
+  "tags": [
+    "essential",
+    "recommend"
+  ],
+  "inStock": true
+},
+  {
+  "id": "cupcake-starter-kit",
+  "backendId": 93,
+  "name": "Cupcake Starter Kit",
+  "price": 34.99,
+  "image": "/src/assets/products/cupcake-starter-kit.jpg",
+  "category": "Starter Kits",
+  "brand": "ProBake",
+  "rating": 4.3,
+  "reviews": 150,
+  "description": "Muffin tray, liners, piping set, and frosting spatula.",
+  "difficulty": "intermediate",
+  "tags": [
+    "essential"
+  ],
+  "inStock": true
+},
+  {
+  "id": "french-pastry-starter-kit",
+  "backendId": 94,
+  "name": "French Pastry Starter Kit",
+  "price": 49.99,
+  "image": "/product/french-pastry-starter-kit.jpeg",
+  "category": "Starter Kits",
+  "brand": "KitchenPro",
+  "rating": 4.4,
+  "reviews": 157,
+  "description": "Almond flour, piping bags, madeline pan, and vanilla paste.",
+  "difficulty": "pro",
+  "tags": [
+    "essential",
+    "popular"
+  ],
+  "inStock": true
+},
+  {
+  "id": "healthy-baking-starter-kit",
+  "backendId": 95,
+  "name": "Healthy Baking Starter Kit",
+  "price": 44.99,
+  "image": "/product/healthy-baking-starter-kit.jpeg",
+  "category": "Starter Kits",
+  "brand": "ArtisanBake",
+  "rating": 4.5,
+  "reviews": 164,
+  "description": "Almond flour, coconut, honey, and loaf pan.",
+  "difficulty": "beginner",
+  "tags": [
+    "essential"
+  ],
+  "inStock": true
+},
+  {
+  "id": "decoration-starter-kit",
+  "backendId": 96,
+  "name": "Decoration Starter Kit",
+  "price": 44.99,
+  "image": "/src/assets/products/decoration-starter-kit.jpg",
+  "category": "Starter Kits",
+  "brand": "Baker's Choice",
+  "rating": 4.6,
+  "reviews": 171,
+  "description": "Piping bags, nozzles, gel colours, and turntable.",
+  "difficulty": "intermediate",
+  "tags": [
+    "essential"
+  ],
+  "inStock": true
+},
+  {
+  "id": "gluten-free-starter-kit",
+  "backendId": 97,
+  "name": "Gluten-Free Starter Kit",
+  "price": 49.99,
+  "image": "/src/assets/products/gluten-free-starter-kit.jpeg",
+  "category": "Starter Kits",
+  "brand": "CakeMaster",
+  "rating": 4.7,
+  "reviews": 178,
+  "description": "GF flour, almond flour, tin, and baking powder.",
+  "difficulty": "pro",
+  "tags": [
+    "essential",
+    "recommend"
+  ],
+  "inStock": true
+},
+  {
+  "id": "cheesecake-starter-kit",
+  "backendId": 98,
+  "name": "Cheesecake Starter Kit",
+  "price": 39.99,
+  "image": "/src/assets/products/cheesecake-starter-kit.jpeg",
+  "category": "Starter Kits",
+  "brand": "Whiffle",
+  "rating": 4.8,
+  "reviews": 185,
+  "description": "Springform pan, ramekins, and vanilla bean paste.",
+  "difficulty": "beginner",
+  "tags": [
+    "essential",
+    "popular"
+  ],
+  "inStock": true
+},
+  {
+  "id": "vegan-baking-starter-kit",
+  "backendId": 99,
+  "name": "Vegan Baking Starter Kit",
+  "price": 44.99,
+  "image": "/src/assets/products/vegan-baking-starter-kit.jpeg",
+  "category": "Starter Kits",
+  "brand": "BakeRight",
+  "rating": 4.9,
+  "reviews": 192,
+  "description": "Plant-based essentials: flax, coconut oil, maple syrup.",
+  "difficulty": "intermediate",
+  "tags": [
+    "essential"
+  ],
+  "inStock": true
+},
+  {
+  "id": "pizza-starter-kit",
+  "backendId": 100,
+  "name": "Pizza Starter Kit",
+  "price": 49.99,
+  "image": "/product/pizza-starter-kit.jpeg",
+  "category": "Starter Kits",
+  "brand": "SweetCraft",
+  "rating": 5.0,
+  "reviews": 199,
+  "description": "Pizza stone, dough scraper, and strong flour.",
+  "difficulty": "pro",
+  "tags": [
+    "essential"
+  ],
+  "inStock": true
+},
+  {
+  "id": "gift-wrapped-starter-kit",
+  "backendId": 101,
+  "name": "Gift-Wrapped Starter Kit",
+  "price": 89.99,
+  "image": "/product/gift-wrapped-starter-kit.jpeg",
+  "category": "Starter Kits",
+  "brand": "ProBake",
+  "rating": 4.0,
+  "reviews": 206,
+  "description": "Beautifully boxed beginner kit \u2014 perfect present.",
+  "difficulty": "beginner",
+  "tags": [
+    "essential"
+  ],
+  "inStock": true
+},
 ];

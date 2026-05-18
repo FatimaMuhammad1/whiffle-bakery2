@@ -5,9 +5,9 @@ import { useNavigate, Link } from "react-router-dom";
 import { toast } from "sonner";
 import { api } from "@/lib/api";
 import { useAuth } from "@/context/AuthContext";
-import { 
-  loadStripe, 
-  StripeElementsOptions 
+import {
+  loadStripe,
+  StripeElementsOptions
 } from "@stripe/stripe-js";
 import {
   Elements,
@@ -107,7 +107,7 @@ const CheckoutForm = ({ amount, formData }: { amount: number; formData: any }) =
       >
         {isProcessing ? "Processing Payment..." : `Pay $${amount.toFixed(2)} Now`}
       </button>
-      
+
       <p className="text-[10px] text-center text-muted-foreground font-body uppercase tracking-widest">
         Secure checkout powered by Stripe
       </p>
@@ -120,12 +120,12 @@ const Checkout = () => {
   const { items, totalPrice } = useCart();
   const { isAuthenticated, loading, user } = useAuth();
   const [clientSecret, setClientSecret] = useState<string | null>(null);
-  const [formData, setFormData] = useState({ 
-    name: user?.full_name || "", 
-    email: user?.email || "", 
-    address: user?.address || "", 
-    city: user?.city || "", 
-    zip: user?.zip || "" 
+  const [formData, setFormData] = useState({
+    name: user?.full_name || "",
+    email: user?.email || "",
+    address: user?.address || "",
+    city: user?.city || "",
+    zip: user?.zip || ""
   });
 
   // Update form data if user loads later
@@ -251,10 +251,10 @@ const Checkout = () => {
           <div className="lg:col-span-5">
             <div className="bg-chocolate text-cream rounded-[3rem] p-10 shadow-2xl sticky top-24 overflow-hidden border border-chocolate-light">
               <div className="absolute top-0 right-0 w-32 h-32 bg-primary/20 rounded-full -mr-16 -mt-16 blur-3xl opacity-50" />
-              
+
               <div className="relative z-10">
                 <h2 className="font-heading font-bold text-2xl mb-8 border-b border-cream/10 pb-4">Order Summary</h2>
-                
+
                 <div className="space-y-6 mb-10 max-h-[30vh] overflow-y-auto pr-2 custom-scrollbar">
                   {items.map(item => (
                     <div key={item.product.id} className="flex justify-between gap-4 items-start">
