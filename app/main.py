@@ -78,9 +78,14 @@ app = FastAPI(
 # ── CORS ──────────────────────────────────────────────────────────────────────
 # WHY: CORSMiddleware should be added as the LAST middleware (so it's the FIRST 
 # to run on the request) to handle preflight OPTIONS requests correctly.
+allowed_origins = list(settings.cors_origins)
+production_frontend = "https://whiffle-bakery-frontend.vercel.app"
+if production_frontend not in allowed_origins:
+    allowed_origins.append(production_frontend)
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.cors_origins,
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
