@@ -7,6 +7,9 @@ from typing import Optional
 from pydantic import BaseModel, EmailStr
 
 
+from app.schemas.user import UserRead
+
+
 class LoginRequest(BaseModel):
     email: EmailStr
     password: str
@@ -31,6 +34,12 @@ class LoginResponse(BaseModel):
     message: str
     two_factor_required: bool = False
     email: Optional[EmailStr] = None
+    user: Optional[UserRead] = None
+
+
+class Verify2FAResponse(BaseModel):
+    message: str
+    user: Optional[UserRead] = None
 
 
 class ForgotPasswordRequest(BaseModel):

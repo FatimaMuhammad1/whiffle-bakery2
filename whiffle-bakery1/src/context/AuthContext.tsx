@@ -8,6 +8,7 @@ type AuthContextType = {
   signup: (email: string, username: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
   refreshUser: () => Promise<void>;
+  setUser: (user: BackendUser | null) => void;
   isAuthenticated: boolean;
 };
 
@@ -37,7 +38,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const login = async (email: string, password: string, rememberMe?: boolean) => {
     const res = await api.login({ email, password, remember_me: rememberMe });
     if (!res.two_factor_required) {
-      await refreshUser();
+      if (res.user) {
+        setUser(res.user);
+      } else {
+        await refreshUser();
+      }
     }
     return res;
   };
@@ -59,6 +64,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       signup,
       logout,
       refreshUser,
+      setUser,
       isAuthenticated: !!user,
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps

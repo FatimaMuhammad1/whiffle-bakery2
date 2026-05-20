@@ -11,7 +11,7 @@ from app.database import get_db
 from app.config import settings
 from app.services.auth_service import AuthService
 from app.schemas.user import UserCreate, UserRead, UserUpdate
-from app.schemas.auth import LoginRequest, MessageResponse, LoginResponse, Token, TokenPayload, ForgotPasswordRequest, ResetPasswordRequest
+from app.schemas.auth import LoginRequest, MessageResponse, LoginResponse, Token, TokenPayload, ForgotPasswordRequest, ResetPasswordRequest, Verify2FAResponse
 from app.schemas.otp import OTPVerifyRequest, OTPResponse, ResendOTPRequest
 from app.models.otp import OTPPurpose
 from app.services.otp_service import OTPService
@@ -159,10 +159,14 @@ async def login(
         path="/",
     )
     
-    return {"message": "Successfully logged in", "two_factor_required": False}
+    return {
+        "message": "Successfully logged in",
+        "two_factor_required": False,
+        "user": UserRead.model_validate(user)
+    }
 
 
-@router.post("/verify-2fa", response_model=MessageResponse)
+@router.post("/verify-2fa", response_model=Verify2FAResponse)
 async def verify_2fa(
     schema: OTPVerifyRequest, 
     response: Response,
@@ -207,7 +211,10 @@ async def verify_2fa(
         path="/",
     )
     
-    return {"message": "Two-factor authentication successful"}
+    return {
+        "message": "Two-factor authentication successful",
+        "user": UserRead.model_validate(user)
+    }
 
 
 @router.post("/logout", response_model=MessageResponse)

@@ -14,7 +14,7 @@ import { api } from "@/lib/api";
 // ---- Login Page Component ----
 const Login = () => {
   const navigate = useNavigate();
-  const { login, signup, refreshUser } = useAuth();
+  const { login, signup, refreshUser, setUser } = useAuth();
   const [isSignup, setIsSignup] = useState(false);
   const [show2FA, setShow2FA] = useState(false);
   const [twoFactorEmail, setTwoFactorEmail] = useState("");
@@ -54,11 +54,15 @@ const Login = () => {
         toast.success("Account created! Check your email for the OTP code.");
         navigate(`/verify-otp?email=${encodeURIComponent(email)}`);
       } else if (show2FA) {
-        await api.verify2fa({ email: twoFactorEmail, code: otpCode, remember_me: rememberMe });
-        await refreshUser();
-        const me = await api.getMe();
+        const res = await api.verify2fa({ email: twoFactorEmail, code: otpCode, remember_me: rememberMe });
+        if (res.user) {
+          setUser(res.user);
+        } else {
+          await refreshUser();
+        }
         toast.success("2FA Verified! Welcome back.");
-        if (me.role === "admin") {
+        const me = res.user;
+        if (me?.role === "admin") {
           navigate("/admin");
         } else {
           navigate("/profile");
@@ -71,8 +75,8 @@ const Login = () => {
           toast.info("Please enter the 2FA code sent to your email.");
         } else {
           toast.success("Logged in successfully.");
-          const me = await api.getMe();
-          if (me.role === "admin") {
+          const me = res.user;
+          if (me?.role === "admin") {
             navigate("/admin");
           } else {
             navigate("/profile");

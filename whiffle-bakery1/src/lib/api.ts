@@ -54,6 +54,12 @@ export type LoginResponse = {
   message: string;
   two_factor_required: boolean;
   email?: string;
+  user?: BackendUser | null;
+};
+
+export type Verify2FAResponse = {
+  message: string;
+  user?: BackendUser | null;
 };
 
 type ProductListResponse = {
@@ -179,7 +185,7 @@ export const api = {
     }),
 
   verify2fa: (payload: { email: string; code: string; remember_me?: boolean }) =>
-    requestJson<MessageResponse>("/auth/verify-2fa", {
+    requestJson<Verify2FAResponse>("/auth/verify-2fa", {
       method: "POST",
       body: JSON.stringify(payload),
     }),
