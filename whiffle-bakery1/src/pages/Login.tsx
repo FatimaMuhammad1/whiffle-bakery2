@@ -37,8 +37,13 @@ const Login = () => {
       } else if (show2FA) {
         await api.verify2fa({ email: twoFactorEmail, code: otpCode });
         await refreshUser();
+        const me = await api.getMe();
         toast.success("2FA Verified! Welcome back.");
-        navigate("/profile");
+        if (me.role === "admin") {
+          navigate("/admin");
+        } else {
+          navigate("/profile");
+        }
       } else {
         const res = await login(email, password);
         if (res.two_factor_required) {
@@ -47,7 +52,12 @@ const Login = () => {
           toast.info("Please enter the 2FA code sent to your email.");
         } else {
           toast.success("Logged in successfully.");
-          navigate("/profile");
+          const me = await api.getMe();
+          if (me.role === "admin") {
+            navigate("/admin");
+          } else {
+            navigate("/profile");
+          }
         }
       }
     } catch (error) {
