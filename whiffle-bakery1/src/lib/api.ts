@@ -244,6 +244,23 @@ export const api = {
   getRecipes: () => requestJson<BackendRecipe[]>("/recipes/"),
   getRecipeBySlug: (slug: string) => requestJson<BackendRecipe>(`/recipes/${slug}`),
 
+  createRecipe: (recipe: Partial<BackendRecipe>) =>
+    requestJson<BackendRecipe>("/recipes/", {
+      method: "POST",
+      body: JSON.stringify(recipe),
+    }),
+
+  updateRecipe: (id: number, recipe: Partial<BackendRecipe>) =>
+    requestJson<BackendRecipe>(`/recipes/${id}`, {
+      method: "PATCH",
+      body: JSON.stringify(recipe),
+    }),
+
+  deleteRecipe: (id: number) =>
+    requestJson<void>(`/recipes/${id}`, {
+      method: "DELETE",
+    }),
+
   subscribeNewsletter: (email: string) =>
     requestJson<{ message: string }>("/newsletter/subscribe", {
       method: "POST",

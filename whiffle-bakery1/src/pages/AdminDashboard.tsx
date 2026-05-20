@@ -23,14 +23,16 @@ import {
   X,
   Sun,
   Moon,
-  LogOut
+  LogOut,
+  BookOpen
 } from "lucide-react";
-import { api, type BackendProduct, type BackendOrder, type BackendUser } from "@/lib/api";
+import { api, type BackendProduct, type BackendOrder, type BackendUser, type BackendRecipe } from "@/lib/api";
 import { format } from "date-fns";
 import { toast } from "sonner";
 import { Tabs, TabsContent } from "@/components/ui/tabs";
 import ProductModal from "@/components/ProductModal";
 import OrderDetailsModal from "@/components/OrderDetailsModal";
+import RecipeModal from "@/components/RecipeModal";
 import WhiffleLogo from "@/components/WhiffleLogo";
 import { useAuth } from "@/context/AuthContext";
 import { useTheme } from "@/context/ThemeContext";
@@ -55,13 +57,28 @@ const AdminDashboard = () => {
   const [products, setProducts] = useState<BackendProduct[]>([]);
   const [orders, setOrders] = useState<BackendOrder[]>([]);
   const [users, setUsers] = useState<BackendUser[]>([]);
+  const [recipes, setRecipes] = useState<BackendRecipe[]>([]);
   const [categories, setCategories] = useState<{ id: number; name: string }[]>([]);
   const [loading, setLoading] = useState(true);
+  
+  // Search & Filter state for Products
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategoryFilter, setSelectedCategoryFilter] = useState<number | null>(null);
+  const [showFilterArea, setShowFilterArea] = useState(false);
+
+  // Search & Filter state for Recipes
+  const [recipeSearchQuery, setRecipeSearchQuery] = useState("");
+  const [selectedDifficultyFilter, setSelectedDifficultyFilter] = useState<string | null>(null);
+  const [showRecipeFilterArea, setShowRecipeFilterArea] = useState(false);
+
+  // Modals state
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<BackendProduct | null>(null);
   const [selectedOrder, setSelectedOrder] = useState<BackendOrder | null>(null);
   const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
+
+  const [isRecipeModalOpen, setIsRecipeModalOpen] = useState(false);
+  const [selectedRecipe, setSelectedRecipe] = useState<BackendRecipe | null>(null);
 
   // SaaS sidebar state
   const [activeTab, setActiveTab] = useState<string>("overview");
@@ -110,16 +127,18 @@ const AdminDashboard = () => {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const [prodRes, orderRes, catRes, userRes] = await Promise.all([
+      const [prodRes, orderRes, catRes, userRes, recipeRes] = await Promise.all([
         api.getProducts({ limit: 100 }),
         api.getOrders(), 
         api.getCategories(),
         api.getUsers(),
+        api.getRecipes()
       ]);
       setProducts(prodRes.items);
       setOrders(orderRes);
       setCategories(catRes);
       setUsers(userRes);
+      setRecipes(recipeRes);
     } catch (error) {
       console.error("Dashboard fetch error:", error);
       toast.error("Failed to load dashboard data");
@@ -160,6 +179,17 @@ const AdminDashboard = () => {
     }
   };
 
+  const handleDeleteRecipe = async (recipeId: number) => {
+    if (!confirm("Are you sure you want to delete this recipe?")) return;
+    try {
+      await api.deleteRecipe(recipeId);
+      setRecipes(prev => prev.filter(r => r.id !== recipeId));
+      toast.success("Recipe deleted successfully");
+    } catch {
+      toast.error("Failed to delete recipe");
+    }
+  };
+
   const handleLogout = async () => {
     try {
       await logout();
@@ -184,6 +214,7 @@ const AdminDashboard = () => {
   const sidebarItems = [
     { id: "overview", label: "Overview", icon: LayoutDashboard },
     { id: "products", label: "Inventory", icon: Package },
+    { id: "recipes", label: "Recipes", icon: BookOpen },
     { id: "orders", label: "Orders", icon: ShoppingBag },
     { id: "customers", label: "Customers", icon: Users },
   ];
@@ -336,12 +367,21 @@ const AdminDashboard = () => {
             >
               <RefreshCcw size={16} />
             </button>
-            <button 
-              onClick={() => { setSelectedProduct(null); setIsModalOpen(true); }}
-              className="flex items-center gap-2 bg-chocolate dark:bg-primary text-cream dark:text-primary-foreground px-5 py-3 rounded-2xl font-heading font-bold hover:opacity-90 transition-all shadow-xl shadow-chocolate/10 dark:shadow-primary/10 text-sm"
-            >
-              <Plus size={18} /> New Product
-            </button>
+            {activeTab === "recipes" ? (
+              <button 
+                onClick={() => { setSelectedRecipe(null); setIsRecipeModalOpen(true); }}
+                className="flex items-center gap-2 bg-chocolate dark:bg-primary text-cream dark:text-primary-foreground px-5 py-3 rounded-2xl font-heading font-bold hover:opacity-90 transition-all shadow-xl shadow-chocolate/10 dark:shadow-primary/10 text-sm"
+              >
+                <Plus size={18} /> New Recipe
+              </button>
+            ) : (
+              <button 
+                onClick={() => { setSelectedProduct(null); setIsModalOpen(true); }}
+                className="flex items-center gap-2 bg-chocolate dark:bg-primary text-cream dark:text-primary-foreground px-5 py-3 rounded-2xl font-heading font-bold hover:opacity-90 transition-all shadow-xl shadow-chocolate/10 dark:shadow-primary/10 text-sm"
+              >
+                <Plus size={18} /> New Product
+              </button>
+            )}
           </div>
         </header>
 
@@ -458,8 +498,8 @@ const AdminDashboard = () => {
 
             {/* 2. INVENTORY WORKSPACE */}
             <TabsContent value="products" className="mt-0 animate-in fade-in slide-in-from-bottom-4 duration-300">
-              <div className="bg-card p-6 rounded-[2rem] border border-border shadow-sm">
-                <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-6">
+              <div className="bg-card p-6 rounded-[2rem] border border-border shadow-sm space-y-4">
+                <div className="flex flex-col md:flex-row justify-between items-center gap-4">
                   <div className="relative w-full md:max-w-md">
                     <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" size={16} />
                     <input 
@@ -472,13 +512,55 @@ const AdminDashboard = () => {
                   </div>
                   <div className="flex gap-2 w-full md:w-auto">
                     <button 
-                      onClick={() => toast.info("Filter parameters will release with the spring catalogue update!")}
-                      className="flex-1 md:flex-none flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl border border-border font-heading font-bold text-chocolate dark:text-cream hover:bg-secondary/40 dark:hover:bg-secondary/20 transition-all text-sm"
+                      onClick={() => setShowFilterArea(!showFilterArea)}
+                      className={`flex-1 md:flex-none flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl border font-heading font-bold text-sm transition-all ${
+                        showFilterArea || selectedCategoryFilter !== null
+                          ? "bg-chocolate text-cream dark:bg-primary dark:text-primary-foreground border-chocolate dark:border-primary"
+                          : "border-border text-chocolate dark:text-cream hover:bg-secondary/40 dark:hover:bg-secondary/20"
+                      }`}
                     >
-                      <Filter size={16} /> Filters
+                      <Filter size={16} /> {selectedCategoryFilter !== null ? "Filtered" : "Filters"}
                     </button>
                   </div>
                 </div>
+
+                {/* Collapsible Category Filter Panel */}
+                {showFilterArea && (
+                  <div className="flex flex-wrap gap-2 py-3 px-4 rounded-xl bg-secondary/10 dark:bg-secondary/5 border border-border/50 animate-in slide-in-from-top-2 duration-200">
+                    <span className="text-xs font-heading font-bold text-chocolate dark:text-cream flex items-center mr-2">
+                      Category Filter:
+                    </span>
+                    <button
+                      onClick={() => {
+                        setSelectedCategoryFilter(null);
+                        setShowFilterArea(false);
+                      }}
+                      className={`px-3 py-1.5 rounded-full text-xs font-heading font-bold transition-all ${
+                        selectedCategoryFilter === null
+                          ? "bg-chocolate text-cream dark:bg-primary dark:text-primary-foreground"
+                          : "bg-card border border-border text-muted-foreground hover:text-chocolate dark:hover:text-cream"
+                      }`}
+                    >
+                      All Categories
+                    </button>
+                    {categories.map(cat => (
+                      <button
+                        key={cat.id}
+                        onClick={() => {
+                          setSelectedCategoryFilter(cat.id);
+                          setShowFilterArea(false);
+                        }}
+                        className={`px-3 py-1.5 rounded-full text-xs font-heading font-bold transition-all ${
+                          selectedCategoryFilter === cat.id
+                            ? "bg-chocolate text-cream dark:bg-primary dark:text-primary-foreground"
+                            : "bg-card border border-border text-muted-foreground hover:text-chocolate dark:hover:text-cream"
+                        }`}
+                      >
+                        {cat.name}
+                      </button>
+                    ))}
+                  </div>
+                )}
 
                 <div className="overflow-x-auto custom-scrollbar">
                   <table className="w-full text-left border-collapse min-w-[600px]">
@@ -492,64 +574,219 @@ const AdminDashboard = () => {
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-border/40">
-                      {products.filter(p => p.name.toLowerCase().includes(searchQuery.toLowerCase())).map((product) => (
-                        <tr key={product.id} className="group hover:bg-secondary/5 dark:hover:bg-secondary/3 transition-colors">
-                          <td className="py-4 px-4">
-                            <div className="flex items-center gap-4">
-                              <div className="w-12 h-12 rounded-xl overflow-hidden border border-border/80 bg-secondary/30 shrink-0">
-                                <img 
-                                  src={product.image_url || "/placeholder.jpg"} 
-                                  alt={product.name} 
-                                  className="w-full h-full object-cover"
-                                />
+                      {products
+                        .filter(p => p.name.toLowerCase().includes(searchQuery.toLowerCase()))
+                        .filter(p => selectedCategoryFilter === null ? true : (p.category_id === selectedCategoryFilter || p.category?.id === selectedCategoryFilter))
+                        .map((product) => (
+                          <tr key={product.id} className="group hover:bg-secondary/5 dark:hover:bg-secondary/3 transition-colors">
+                            <td className="py-4 px-4">
+                              <div className="flex items-center gap-4">
+                                <div className="w-12 h-12 rounded-xl overflow-hidden border border-border/80 bg-secondary/30 shrink-0">
+                                  <img 
+                                    src={product.image_url || "/placeholder.jpg"} 
+                                    alt={product.name} 
+                                    className="w-full h-full object-cover"
+                                  />
+                                </div>
+                                <div className="min-w-0">
+                                  <p className="font-body font-bold text-chocolate dark:text-cream text-sm leading-tight truncate">{product.name}</p>
+                                  <p className="text-[10px] text-muted-foreground font-mono uppercase mt-0.5">#{product.slug}</p>
+                                </div>
                               </div>
-                              <div className="min-w-0">
-                                <p className="font-body font-bold text-chocolate dark:text-cream text-sm leading-tight truncate">{product.name}</p>
-                                <p className="text-[10px] text-muted-foreground font-mono uppercase mt-0.5">#{product.slug}</p>
+                            </td>
+                            <td className="py-4">
+                              <span className="px-2.5 py-0.5 rounded-full bg-primary/5 text-primary text-[10px] font-bold border border-primary/10">
+                                {product.category?.name || "Uncategorized"}
+                              </span>
+                            </td>
+                            <td className="py-4 font-heading font-bold text-chocolate dark:text-cream text-sm">
+                              ${Number(product.price).toFixed(2)}
+                            </td>
+                            <td className="py-4">
+                              <div className="flex items-center gap-2">
+                                <div className={`w-2 h-2 rounded-full ${product.stock_quantity > 10 ? 'bg-emerald-500' : 'bg-amber-500'}`} />
+                                <span className="font-body text-xs text-chocolate dark:text-cream">{product.stock_quantity} available</span>
                               </div>
-                            </div>
-                          </td>
-                          <td className="py-4">
-                            <span className="px-2.5 py-0.5 rounded-full bg-primary/5 text-primary text-[10px] font-bold border border-primary/10">
-                              {product.category?.name || "Uncategorized"}
-                            </span>
-                          </td>
-                          <td className="py-4 font-heading font-bold text-chocolate dark:text-cream text-sm">
-                            ${Number(product.price).toFixed(2)}
-                          </td>
-                          <td className="py-4">
-                            <div className="flex items-center gap-2">
-                              <div className={`w-2 h-2 rounded-full ${product.stock_quantity > 10 ? 'bg-emerald-500' : 'bg-amber-500'}`} />
-                              <span className="font-body text-xs text-chocolate dark:text-cream">{product.stock_quantity} available</span>
-                            </div>
-                          </td>
-                          <td className="py-4 px-4 text-right">
-                            <div className="flex items-center justify-end gap-2 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity">
-                              <button 
-                                onClick={() => { setSelectedProduct(product); setIsModalOpen(true); }}
-                                className="p-2 rounded-lg bg-card border border-border text-chocolate dark:text-cream hover:bg-primary hover:text-white dark:hover:bg-primary dark:hover:text-primary-foreground transition-all shadow-sm"
-                                title="Edit Product details"
-                              >
-                                <Edit size={14} />
-                              </button>
-                              <button 
-                                onClick={() => handleDeleteProduct(product.id)}
-                                className="p-2 rounded-lg bg-card border border-border text-rose-500 hover:bg-rose-500 hover:text-white transition-all shadow-sm"
-                                title="Remove Product from inventory"
-                              >
-                                <Trash2 size={14} />
-                              </button>
-                            </div>
-                          </td>
+                            </td>
+                            <td className="py-4 px-4 text-right">
+                              <div className="flex items-center justify-end gap-2 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity">
+                                <button 
+                                  onClick={() => { setSelectedProduct(product); setIsModalOpen(true); }}
+                                  className="p-2 rounded-lg bg-card border border-border text-chocolate dark:text-cream hover:bg-primary hover:text-white dark:hover:bg-primary dark:hover:text-primary-foreground transition-all shadow-sm"
+                                  title="Edit Product details"
+                                >
+                                  <Edit size={14} />
+                                </button>
+                                <button 
+                                  onClick={() => handleDeleteProduct(product.id)}
+                                  className="p-2 rounded-lg bg-card border border-border text-rose-500 hover:bg-rose-500 hover:text-white transition-all shadow-sm"
+                                  title="Remove Product from inventory"
+                                >
+                                  <Trash2 size={14} />
+                                </button>
+                              </div>
+                            </td>
+                          </tr>
+                        ))}
+                      {products.filter(p => p.name.toLowerCase().includes(searchQuery.toLowerCase())).filter(p => selectedCategoryFilter === null ? true : (p.category_id === selectedCategoryFilter || p.category?.id === selectedCategoryFilter)).length === 0 && (
+                        <tr>
+                          <td colSpan={5} className="py-8 text-center text-sm text-muted-foreground font-body">No products matched the filter parameters.</td>
                         </tr>
-                      ))}
+                      )}
                     </tbody>
                   </table>
                 </div>
               </div>
             </TabsContent>
 
-            {/* 3. ORDERS VIEW */}
+            {/* 3. RECIPES WORKSPACE */}
+            <TabsContent value="recipes" className="mt-0 animate-in fade-in slide-in-from-bottom-4 duration-300">
+              <div className="bg-card p-6 rounded-[2rem] border border-border shadow-sm space-y-4">
+                <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+                  <div className="relative w-full md:max-w-md">
+                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" size={16} />
+                    <input 
+                      type="text" 
+                      placeholder="Search recipe catalog..." 
+                      className="w-full pl-11 pr-4 py-2.5 rounded-xl border border-border bg-secondary/10 dark:bg-secondary/5 focus:outline-none focus:ring-2 focus:ring-primary/20 font-body transition-all text-sm"
+                      value={recipeSearchQuery}
+                      onChange={e => setRecipeSearchQuery(e.target.value)}
+                    />
+                  </div>
+                  <div className="flex gap-2 w-full md:w-auto">
+                    <button 
+                      onClick={() => setShowRecipeFilterArea(!showRecipeFilterArea)}
+                      className={`flex-1 md:flex-none flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl border font-heading font-bold text-sm transition-all ${
+                        showRecipeFilterArea || selectedDifficultyFilter !== null
+                          ? "bg-chocolate text-cream dark:bg-primary dark:text-primary-foreground border-chocolate dark:border-primary"
+                          : "border-border text-chocolate dark:text-cream hover:bg-secondary/40 dark:hover:bg-secondary/20"
+                      }`}
+                    >
+                      <Filter size={16} /> {selectedDifficultyFilter !== null ? "Filtered" : "Filters"}
+                    </button>
+                  </div>
+                </div>
+
+                {/* Collapsible Recipe Difficulty Filter Panel */}
+                {showRecipeFilterArea && (
+                  <div className="flex flex-wrap gap-2 py-3 px-4 rounded-xl bg-secondary/10 dark:bg-secondary/5 border border-border/50 animate-in slide-in-from-top-2 duration-200">
+                    <span className="text-xs font-heading font-bold text-chocolate dark:text-cream flex items-center mr-2">
+                      Difficulty Filter:
+                    </span>
+                    <button
+                      onClick={() => {
+                        setSelectedDifficultyFilter(null);
+                        setShowRecipeFilterArea(false);
+                      }}
+                      className={`px-3 py-1.5 rounded-full text-xs font-heading font-bold transition-all ${
+                        selectedDifficultyFilter === null
+                          ? "bg-chocolate text-cream dark:bg-primary dark:text-primary-foreground"
+                          : "bg-card border border-border text-muted-foreground hover:text-chocolate dark:hover:text-cream"
+                      }`}
+                    >
+                      All Difficulties
+                    </button>
+                    {['beginner', 'intermediate', 'advanced'].map(diff => (
+                      <button
+                        key={diff}
+                        onClick={() => {
+                          setSelectedDifficultyFilter(diff);
+                          setShowRecipeFilterArea(false);
+                        }}
+                        className={`px-3 py-1.5 rounded-full text-xs font-heading font-bold transition-all capitalize ${
+                          selectedDifficultyFilter === diff
+                            ? "bg-chocolate text-cream dark:bg-primary dark:text-primary-foreground"
+                            : "bg-card border border-border text-muted-foreground hover:text-chocolate dark:hover:text-cream"
+                        }`}
+                      >
+                        {diff}
+                      </button>
+                    ))}
+                  </div>
+                )}
+
+                <div className="overflow-x-auto custom-scrollbar">
+                  <table className="w-full text-left border-collapse min-w-[600px]">
+                    <thead>
+                      <tr className="border-b border-border/80">
+                        <th className="pb-3.5 font-heading font-bold text-chocolate dark:text-cream text-sm px-4">Recipe Details</th>
+                        <th className="pb-3.5 font-heading font-bold text-chocolate dark:text-cream text-sm">Difficulty</th>
+                        <th className="pb-3.5 font-heading font-bold text-chocolate dark:text-cream text-sm">Prep/Cook Time</th>
+                        <th className="pb-3.5 font-heading font-bold text-chocolate dark:text-cream text-sm">Servings</th>
+                        <th className="pb-3.5 font-heading font-bold text-chocolate dark:text-cream text-sm text-right px-4">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-border/40">
+                      {recipes
+                        .filter(r => r.title.toLowerCase().includes(recipeSearchQuery.toLowerCase()))
+                        .filter(r => selectedDifficultyFilter === null ? true : r.difficulty === selectedDifficultyFilter)
+                        .map((recipe) => (
+                          <tr key={recipe.id} className="group hover:bg-secondary/5 dark:hover:bg-secondary/3 transition-colors">
+                            <td className="py-4 px-4">
+                              <div className="flex items-center gap-4">
+                                <div className="w-12 h-12 rounded-xl overflow-hidden border border-border/80 bg-secondary/30 shrink-0">
+                                  <img 
+                                    src={recipe.image_url || "/placeholder.jpg"} 
+                                    alt={recipe.title} 
+                                    className="w-full h-full object-cover"
+                                  />
+                                </div>
+                                <div className="min-w-0">
+                                  <p className="font-body font-bold text-chocolate dark:text-cream text-sm leading-tight truncate">{recipe.title}</p>
+                                  <p className="text-[10px] text-muted-foreground font-mono uppercase mt-0.5">/{recipe.slug}</p>
+                                </div>
+                              </div>
+                            </td>
+                            <td className="py-4">
+                              <span className={`
+                                px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider border
+                                ${
+                                  recipe.difficulty === 'beginner' ? 'bg-emerald-500/5 text-emerald-600 dark:text-emerald-400 border-emerald-500/10' :
+                                  recipe.difficulty === 'advanced' ? 'bg-rose-500/5 text-rose-600 dark:text-rose-400 border-rose-500/10' :
+                                  'bg-amber-500/5 text-amber-600 dark:text-amber-400 border-amber-500/10'
+                                }
+                              `}>
+                                {recipe.difficulty}
+                              </span>
+                            </td>
+                            <td className="py-4 font-body text-xs text-muted-foreground">
+                              {recipe.prep_time || "10m"} / {recipe.cook_time || "30m"}
+                            </td>
+                            <td className="py-4 font-body text-xs text-chocolate dark:text-cream">
+                              {recipe.servings || "4"} servings
+                            </td>
+                            <td className="py-4 px-4 text-right">
+                              <div className="flex items-center justify-end gap-2 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity">
+                                <button 
+                                  onClick={() => { setSelectedRecipe(recipe); setIsRecipeModalOpen(true); }}
+                                  className="p-2 rounded-lg bg-card border border-border text-chocolate dark:text-cream hover:bg-primary hover:text-white dark:hover:bg-primary dark:hover:text-primary-foreground transition-all shadow-sm"
+                                  title="Edit Recipe Details"
+                                >
+                                  <Edit size={14} />
+                                </button>
+                                <button 
+                                  onClick={() => handleDeleteRecipe(recipe.id)}
+                                  className="p-2 rounded-lg bg-card border border-border text-rose-500 hover:bg-rose-500 hover:text-white transition-all shadow-sm"
+                                  title="Remove Recipe Listing"
+                                >
+                                  <Trash2 size={14} />
+                                </button>
+                              </div>
+                            </td>
+                          </tr>
+                        ))}
+                      {recipes.filter(r => r.title.toLowerCase().includes(recipeSearchQuery.toLowerCase())).filter(r => selectedDifficultyFilter === null ? true : r.difficulty === selectedDifficultyFilter).length === 0 && (
+                        <tr>
+                          <td colSpan={5} className="py-8 text-center text-sm text-muted-foreground font-body">No recipes found.</td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </TabsContent>
+
+            {/* 4. ORDERS VIEW */}
             <TabsContent value="orders" className="mt-0 animate-in fade-in slide-in-from-bottom-4 duration-300">
               <div className="bg-card p-6 rounded-[2rem] border border-border shadow-sm">
                 <div className="overflow-x-auto custom-scrollbar">
@@ -633,7 +870,7 @@ const AdminDashboard = () => {
               </div>
             </TabsContent>
 
-            {/* 4. CUSTOMERS VIEW */}
+            {/* 5. CUSTOMERS VIEW */}
             <TabsContent value="customers" className="mt-0 animate-in fade-in slide-in-from-bottom-4 duration-300">
               <div className="bg-card p-6 rounded-[2rem] border border-border shadow-sm">
                 <div className="overflow-x-auto custom-scrollbar">
@@ -694,6 +931,13 @@ const AdminDashboard = () => {
         isOpen={isOrderModalOpen}
         onClose={() => setIsOrderModalOpen(false)}
         order={selectedOrder}
+      />
+
+      <RecipeModal 
+        isOpen={isRecipeModalOpen}
+        onClose={() => setIsRecipeModalOpen(false)}
+        onSave={fetchData}
+        recipe={selectedRecipe}
       />
     </div>
   );
