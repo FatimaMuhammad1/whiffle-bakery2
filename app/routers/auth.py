@@ -11,7 +11,7 @@ from app.database import get_db
 from app.config import settings
 from app.services.auth_service import AuthService
 from app.schemas.user import UserCreate, UserRead, UserUpdate
-from app.schemas.auth import LoginRequest, MessageResponse, LoginResponse, Token, TokenPayload
+from app.schemas.auth import LoginRequest, MessageResponse, LoginResponse, Token, TokenPayload, ForgotPasswordRequest, ResetPasswordRequest
 from app.schemas.otp import OTPVerifyRequest, OTPResponse, ResendOTPRequest
 from app.models.otp import OTPPurpose
 from app.services.otp_service import OTPService
@@ -137,17 +137,23 @@ async def login(
         }
 
     # Normal Login
-    access_token_expires = timedelta(minutes=settings.JWT_ACCESS_EXPIRE_MINUTES)
+    access_token_expires = (
+        timedelta(days=settings.JWT_REFRESH_EXPIRE_DAYS)
+        if schema.remember_me
+        else timedelta(minutes=settings.JWT_ACCESS_EXPIRE_MINUTES)
+    )
     access_token = create_access_token(
         subject=user.id, expires_delta=access_token_expires
     )
+    
+    cookie_max_age = int(access_token_expires.total_seconds())
     
     response.set_cookie(
         key=COOKIE_NAME,
         value=f"Bearer {access_token}",
         httponly=True,
-        max_age=settings.JWT_ACCESS_EXPIRE_MINUTES * 60,
-        expires=settings.JWT_ACCESS_EXPIRE_MINUTES * 60,
+        max_age=cookie_max_age,
+        expires=cookie_max_age,
         samesite=settings.COOKIE_SAMESITE,
         secure=settings.COOKIE_SECURE,
         path="/",
@@ -179,17 +185,23 @@ async def verify_2fa(
     await OTPService.verify_otp(db, user.id, schema.code, OTPPurpose.login_2fa)
     
     # 3. Create session
-    access_token_expires = timedelta(minutes=settings.JWT_ACCESS_EXPIRE_MINUTES)
+    access_token_expires = (
+        timedelta(days=settings.JWT_REFRESH_EXPIRE_DAYS)
+        if schema.remember_me
+        else timedelta(minutes=settings.JWT_ACCESS_EXPIRE_MINUTES)
+    )
     access_token = create_access_token(
         subject=user.id, expires_delta=access_token_expires
     )
+    
+    cookie_max_age = int(access_token_expires.total_seconds())
     
     response.set_cookie(
         key=COOKIE_NAME,
         value=f"Bearer {access_token}",
         httponly=True,
-        max_age=settings.JWT_ACCESS_EXPIRE_MINUTES * 60,
-        expires=settings.JWT_ACCESS_EXPIRE_MINUTES * 60,
+        max_age=cookie_max_age,
+        expires=cookie_max_age,
         samesite=settings.COOKIE_SAMESITE,
         secure=settings.COOKIE_SECURE,
         path="/",
@@ -243,4 +255,65 @@ async def verify_otp(schema: OTPVerifyRequest, db: AsyncSession = Depends(get_db
     await db.commit()
     
     return {"message": "Email verified successfully"}
+
+
+@router.post("/forgot-password", response_model=MessageResponse)
+async def forgot_password(
+    schema: ForgotPasswordRequest,
+    background_tasks: BackgroundTasks,
+    db: AsyncSession = Depends(get_db),
+    _ = Depends(rate_limit)
+):
+    """
+    Send an OTP for password reset to the specified email address.
+    
+    WHY: To prevent user enumeration attacks, we return a successful message
+    regardless of whether the email exists in our system. But we only send the email
+    if the user is found.
+    """
+    from app.models.user import User
+    from sqlalchemy import select
+    
+    result = await db.execute(select(User).where(User.email == schema.email))
+    user = result.scalar_one_or_none()
+    
+    if user:
+        # Generate reset password OTP
+        otp = await OTPService.create_otp(db, user.id, OTPPurpose.password_reset)
+        # Send password reset email in the background
+        background_tasks.add_task(EmailService.send_password_reset_email, user.email, otp)
+        
+    return {"message": "If a matching account is found, an OTP code has been sent to that email address."}
+
+
+@router.post("/reset-password", response_model=MessageResponse)
+async def reset_password(
+    schema: ResetPasswordRequest,
+    db: AsyncSession = Depends(get_db),
+    _ = Depends(rate_limit)
+):
+    """
+    Verify the reset password OTP and update user's password.
+    """
+    from app.models.user import User
+    from sqlalchemy import select
+    from app.utils.security import get_password_hash
+    
+    # 1. Find user by email
+    result = await db.execute(select(User).where(User.email == schema.email))
+    user = result.scalar_one_or_none()
+    
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+        
+    # 2. Verify OTP
+    await OTPService.verify_otp(db, user.id, schema.code, OTPPurpose.password_reset)
+    
+    # 3. Hash new password and save
+    hashed_password = get_password_hash(schema.new_password)
+    user.hashed_password = hashed_password
+    await db.commit()
+    
+    return {"message": "Password reset successfully. You can now log in with your new password."}
+
 

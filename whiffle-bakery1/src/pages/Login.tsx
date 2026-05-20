@@ -25,17 +25,36 @@ const Login = () => {
   const [submitting, setSubmitting] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
+  // Password Reset states
+  const [rememberMe, setRememberMe] = useState(false);
+  const [showForgotPassword, setShowForgotPassword] = useState(false);
+  const [showResetPassword, setShowResetPassword] = useState(false);
+  const [resetEmail, setResetEmail] = useState("");
+  const [resetCode, setResetCode] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+
   // ---- Form Submit Handler ----
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
     try {
-      if (isSignup) {
+      if (showForgotPassword) {
+        await api.forgotPassword({ email });
+        setResetEmail(email);
+        setShowForgotPassword(false);
+        setShowResetPassword(true);
+        toast.success("If a matching account is found, a reset code has been sent!");
+      } else if (showResetPassword) {
+        await api.resetPassword({ email: resetEmail, code: resetCode, new_password: newPassword });
+        setShowResetPassword(false);
+        setPassword("");
+        toast.success("Password reset successfully! You can now log in.");
+      } else if (isSignup) {
         await signup(email, fullName.trim().toLowerCase().replace(/\s+/g, "_"), password);
         toast.success("Account created! Check your email for the OTP code.");
         navigate(`/verify-otp?email=${encodeURIComponent(email)}`);
       } else if (show2FA) {
-        await api.verify2fa({ email: twoFactorEmail, code: otpCode });
+        await api.verify2fa({ email: twoFactorEmail, code: otpCode, remember_me: rememberMe });
         await refreshUser();
         const me = await api.getMe();
         toast.success("2FA Verified! Welcome back.");
@@ -45,7 +64,7 @@ const Login = () => {
           navigate("/profile");
         }
       } else {
-        const res = await login(email, password);
+        const res = await login(email, password, rememberMe);
         if (res.two_factor_required) {
           setShow2FA(true);
           setTwoFactorEmail(res.email || email);
@@ -93,14 +112,26 @@ const Login = () => {
           </div>
 
           <h1 className="font-heading text-3xl font-bold text-foreground text-center mb-2">
-            {show2FA ? "Security Verification" : isSignup ? "Create Account" : "Welcome Back"}
+            {show2FA 
+              ? "Security Verification" 
+              : showResetPassword 
+                ? "Reset Password" 
+                : showForgotPassword 
+                  ? "Forgot Password" 
+                  : isSignup 
+                    ? "Create Account" 
+                    : "Welcome Back"}
           </h1>
           <p className="font-body text-muted-foreground text-center mb-8">
             {show2FA 
               ? `Enter the 6-digit code sent to ${twoFactorEmail}` 
-              : isSignup 
-                ? "Join Whiffle and start your baking journey!" 
-                : "Sign in to your Whiffle account"}
+              : showResetPassword 
+                ? `Enter the verification code sent to ${resetEmail} and your new password`
+                : showForgotPassword 
+                  ? "Enter your email address and we'll send you a password reset code"
+                  : isSignup 
+                    ? "Join Whiffle and start your baking journey!" 
+                    : "Sign in to your Whiffle account"}
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-5">
@@ -125,6 +156,84 @@ const Login = () => {
                 >
                   Back to login
                 </button>
+              </div>
+            ) : showForgotPassword ? (
+              <div className="space-y-4">
+                <div>
+                  <label className="font-body text-sm font-medium text-foreground mb-1.5 block">Email</label>
+                  <div className="relative">
+                    <AtSign size={18} strokeWidth={2} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+                    <input 
+                      type="email" 
+                      required 
+                      value={email} 
+                      onChange={e => setEmail(e.target.value)} 
+                      placeholder="you@example.com" 
+                      className="w-full pl-10 pr-4 py-3 rounded-xl border border-border bg-card font-body focus:outline-none focus:ring-2 focus:ring-primary" 
+                    />
+                  </div>
+                </div>
+                <button 
+                  type="button" 
+                  onClick={() => setShowForgotPassword(false)}
+                  className="w-full text-sm text-primary hover:underline font-body text-center block mt-2"
+                >
+                  Back to login
+                </button>
+              </div>
+            ) : showResetPassword ? (
+              <div className="space-y-4">
+                <div>
+                  <label className="font-body text-sm font-medium text-foreground mb-1.5 block">Reset Code</label>
+                  <input 
+                    type="text" 
+                    required 
+                    value={resetCode} 
+                    onChange={e => setResetCode(e.target.value)} 
+                    placeholder="123456" 
+                    className="w-full px-4 py-3 rounded-xl border border-border bg-card font-body text-center text-xl tracking-[0.2em] focus:outline-none focus:ring-2 focus:ring-primary" 
+                    maxLength={10}
+                  />
+                </div>
+                <div>
+                  <label className="font-body text-sm font-medium text-foreground mb-1.5 block">New Password</label>
+                  <div className="relative">
+                    <LockKeyhole size={18} strokeWidth={2} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+                    <input 
+                      type={showPassword ? "text" : "password"} 
+                      required 
+                      value={newPassword} 
+                      onChange={e => setNewPassword(e.target.value)} 
+                      placeholder="Your new password" 
+                      className="w-full pl-10 pr-12 py-3 rounded-xl border border-border bg-card font-body focus:outline-none focus:ring-2 focus:ring-primary" 
+                    />
+                    <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground">
+                      {showPassword ? <EyeOff size={18} strokeWidth={2} /> : <Eye size={18} strokeWidth={2} />}
+                    </button>
+                  </div>
+                </div>
+                <div className="flex gap-4">
+                  <button 
+                    type="button" 
+                    onClick={() => {
+                      setShowResetPassword(false);
+                      setShowForgotPassword(true);
+                    }}
+                    className="w-1/2 text-sm text-muted-foreground hover:underline font-body text-center block mt-2"
+                  >
+                    Resend code
+                  </button>
+                  <button 
+                    type="button" 
+                    onClick={() => {
+                      setShowResetPassword(false);
+                      setShowForgotPassword(false);
+                    }}
+                    className="w-1/2 text-sm text-primary hover:underline font-body text-center block mt-2"
+                  >
+                    Back to login
+                  </button>
+                </div>
               </div>
             ) : (
               <>
@@ -158,21 +267,43 @@ const Login = () => {
                 {!isSignup && (
                   <div className="flex items-center justify-between">
                     <label className="flex items-center gap-2 font-body text-sm text-muted-foreground cursor-pointer">
-                      <input type="checkbox" className="rounded border-border accent-primary" />
+                      <input 
+                        type="checkbox" 
+                        checked={rememberMe} 
+                        onChange={e => setRememberMe(e.target.checked)} 
+                        className="rounded border-border accent-primary" 
+                      />
                       Remember me
                     </label>
-                    <button type="button" className="font-body text-sm text-primary hover:underline">Forgot password?</button>
+                    <button 
+                      type="button" 
+                      onClick={() => {
+                        setShowForgotPassword(true);
+                        setIsSignup(false);
+                      }} 
+                      className="font-body text-sm text-primary hover:underline"
+                    >
+                      Forgot password?
+                    </button>
                   </div>
                 )}
               </>
             )}
 
             <button disabled={submitting} type="submit" className="w-full bg-primary text-primary-foreground px-6 py-3 rounded-xl font-heading font-semibold hover:opacity-90 transition-opacity text-lg disabled:opacity-60">
-              {show2FA ? "Verify & Sign In" : isSignup ? "Create Account" : "Sign In"}
+              {show2FA 
+                ? "Verify & Sign In" 
+                : showResetPassword 
+                  ? "Update Password" 
+                  : showForgotPassword 
+                    ? "Send Reset Code" 
+                    : isSignup 
+                      ? "Create Account" 
+                      : "Sign In"}
             </button>
           </form>
 
-          {!show2FA && (
+          {!show2FA && !showForgotPassword && !showResetPassword && (
             <div className="mt-6 text-center">
               <p className="font-body text-sm text-muted-foreground">
                 {isSignup ? "Already have an account?" : "Don't have an account?"}{" "}

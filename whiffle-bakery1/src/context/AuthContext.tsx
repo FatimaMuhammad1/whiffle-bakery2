@@ -4,7 +4,7 @@ import { api, type BackendUser, type LoginResponse } from "@/lib/api";
 type AuthContextType = {
   user: BackendUser | null;
   loading: boolean;
-  login: (email: string, password: string) => Promise<LoginResponse>;
+  login: (email: string, password: string, rememberMe?: boolean) => Promise<LoginResponse>;
   signup: (email: string, username: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
   refreshUser: () => Promise<void>;
@@ -34,8 +34,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     void boot();
   }, []);
 
-  const login = async (email: string, password: string) => {
-    const res = await api.login({ email, password });
+  const login = async (email: string, password: string, rememberMe?: boolean) => {
+    const res = await api.login({ email, password, remember_me: rememberMe });
     if (!res.two_factor_required) {
       await refreshUser();
     }

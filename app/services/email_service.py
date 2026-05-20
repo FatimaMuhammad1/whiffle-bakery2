@@ -51,6 +51,36 @@ class EmailService:
         await fm.send_message(message)
 
     @staticmethod
+    async def send_password_reset_email(email_to: str, otp_code: str):
+        """
+        Sends a password reset OTP email to the user.
+        """
+        html = f"""
+        <html>
+        <body style="font-family: Arial, sans-serif; background-color: #f9f9f9; padding: 20px;">
+            <div style="max-width: 600px; margin: auto; background: white; padding: 40px; border-radius: 10px; border: 1px solid #ddd;">
+                <h2 style="color: #333; text-align: center;">Reset Your Password 🧁</h2>
+                <p style="color: #555; font-size: 16px;">We received a request to reset your Whiffle Bakery account password. Use the verification code below to reset it:</p>
+                <div style="background: #f0f0f0; padding: 20px; text-align: center; border-radius: 8px; margin: 20px 0;">
+                    <span style="font-size: 32px; font-weight: bold; letter-spacing: 5px; color: #d32f2f;">{otp_code}</span>
+                </div>
+                <p style="color: #888; font-size: 12px; text-align: center;">This code will expire in {settings.OTP_EXPIRE_MINUTES} minutes. If you did not request this, you can safely ignore this email.</p>
+            </div>
+        </body>
+        </html>
+        """
+
+        message = MessageSchema(
+            subject="Whiffle Bakery - Reset Your Password",
+            recipients=[email_to],
+            body=html,
+            subtype=MessageType.html
+        )
+
+        fm = FastMail(conf)
+        await fm.send_message(message)
+
+    @staticmethod
     async def send_order_confirmation(email_to: str, order_id: str, total_amount: float):
         """
         Sends an order confirmation email to the user.

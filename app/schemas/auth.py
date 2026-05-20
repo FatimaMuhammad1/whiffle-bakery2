@@ -10,6 +10,7 @@ from pydantic import BaseModel, EmailStr
 class LoginRequest(BaseModel):
     email: EmailStr
     password: str
+    remember_me: Optional[bool] = False
 
 
 class Token(BaseModel):
@@ -30,3 +31,14 @@ class LoginResponse(BaseModel):
     message: str
     two_factor_required: bool = False
     email: Optional[EmailStr] = None
+
+
+class ForgotPasswordRequest(BaseModel):
+    email: EmailStr
+
+
+class ResetPasswordRequest(BaseModel):
+    email: EmailStr
+    code: str
+    new_password: str
+

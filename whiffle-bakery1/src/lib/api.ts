@@ -172,14 +172,26 @@ export const api = {
       body: JSON.stringify(payload),
     }),
 
-  login: (payload: { email: string; password: string }) =>
+  login: (payload: { email: string; password: string; remember_me?: boolean }) =>
     requestJson<LoginResponse>("/auth/login", {
       method: "POST",
       body: JSON.stringify(payload),
     }),
 
-  verify2fa: (payload: { email: string; code: string }) =>
+  verify2fa: (payload: { email: string; code: string; remember_me?: boolean }) =>
     requestJson<MessageResponse>("/auth/verify-2fa", {
+      method: "POST",
+      body: JSON.stringify(payload),
+    }),
+
+  forgotPassword: (payload: { email: string }) =>
+    requestJson<MessageResponse>("/auth/forgot-password", {
+      method: "POST",
+      body: JSON.stringify(payload),
+    }),
+
+  resetPassword: (payload: { email: string; code: string; new_password: string }) =>
+    requestJson<MessageResponse>("/auth/reset-password", {
       method: "POST",
       body: JSON.stringify(payload),
     }),
