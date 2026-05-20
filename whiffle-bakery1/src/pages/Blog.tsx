@@ -32,7 +32,7 @@ const Blog = () => {
   // Filtered recipes
   const filteredRecipes = useMemo(() => {
     return recipes; // No categories in BackendRecipe yet
-  }, [recipes, selectedCategory]);
+  }, [recipes]);
 
   const featured = recipes.length > 2 ? recipes[2] : recipes[0];
 
